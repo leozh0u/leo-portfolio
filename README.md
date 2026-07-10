@@ -15,7 +15,7 @@ Works as-is on GitHub Pages, Netlify, or Vercel — just serve the folder.
 
 ## Structure
 
-- `index.html` — all content lives here (sections: origin, fencing, skills, experience, projects, contact)
+- `index.html` — all content lives here (sections: origin, fencing, skills, experience, projects, games, contact)
 - `style.css` — theme + animations
 - `script.js` — sparks canvas, typewriter, scroll reveals, counters, tilt cards
 - `LeoZhou_resume.pdf` — linked from the contact section

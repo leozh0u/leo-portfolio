@@ -1,6 +1,6 @@
 # Leo Zhou — Portfolio
 
-Personal portfolio site. Static HTML/CSS/JS — no build step, no dependencies.
+Personal portfolio site. Static HTML/CSS/JS.
 
 ## Run locally
 
@@ -8,11 +8,6 @@ Personal portfolio site. Static HTML/CSS/JS — no build step, no dependencies.
 python3 -m http.server 8080
 # open http://localhost:8080
 ```
-
-## Deploy
-
-Works as-is on GitHub Pages, Netlify, or Vercel — just serve the folder.
-
 ## Structure
 
 - `index.html` — all content, as 8 full-screen "rooms" navigated horizontally (hero, origin, fencing, chess, work, projects, deck, contact); stacks vertically under 900px

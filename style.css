@@ -220,6 +220,26 @@ h3 { font-size: 1.2rem; }
 .b-red { background: #ffd9d6; } .b-blue { background: #d6e4ff; }
 .b-green { background: #d8f3e0; } .b-yellow { background: #fff1c2; }
 .hero-actions { display: flex; gap: 0.9rem; margin-top: 1.7rem; flex-wrap: wrap; }
+.hero-photo {
+  position: absolute; z-index: 3;
+  right: clamp(1.5rem, 6vw, 6rem); top: 50%;
+  transform: translateY(-50%) rotate(4deg);
+  width: clamp(210px, 21vw, 310px);
+  background: #fffdf5; border: var(--border);
+  box-shadow: var(--shadow); padding: 11px 11px 0;
+  margin: 0;
+}
+.hero-photo::before {
+  content: ""; position: absolute; top: -14px; left: 50%;
+  width: 96px; height: 26px; transform: translateX(-50%) rotate(-3deg);
+  background: rgba(230, 57, 47, 0.35);
+  border: 1px solid rgba(230, 57, 47, 0.5);
+}
+.hero-photo img {
+  width: 100%; display: block; aspect-ratio: 3 / 4; object-fit: cover;
+  border: 2px solid var(--ink);
+}
+.hero-photo figcaption { text-align: center; padding: 0.55rem 0 0.6rem; font-weight: 700; }
 
 /* ---------- origin / atlas ---------- */
 .r-geo {
@@ -643,6 +663,9 @@ h3 { font-size: 1.2rem; }
 @keyframes sweep { from { transform: rotate(-14deg); } to { transform: rotate(14deg); } }
 
 /* ---------- responsive: stack vertically on small screens ---------- */
+@media (max-width: 1250px) {
+  .hero-photo { display: none; }
+}
 @media (max-width: 1150px) {
   .chess-layout { grid-template-columns: 1fr; }
   .dossier { flex-direction: row; flex-wrap: wrap; align-items: center; }
@@ -656,6 +679,7 @@ h3 { font-size: 1.2rem; }
   .room { height: auto; min-height: 100svh; overflow: visible; }
   .nav-links a:not(.nav-cta) { display: none; }
   .dots, .edge { display: none; }
+  .hero-photo { display: block; position: static; transform: rotate(-2deg); margin: 1.6rem 0 0; width: 230px; }
   .atlas-layout { grid-template-columns: 1fr; }
   .fencing-stats { grid-template-columns: repeat(2, 1fr); }
   .fencing-grid { grid-template-columns: 1fr; }

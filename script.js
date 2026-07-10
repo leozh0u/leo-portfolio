@@ -224,6 +224,21 @@ const countObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll("[data-count]").forEach(el => countObserver.observe(el));
 
+// geoguessr points bar fills alongside the count
+const ggFill = document.getElementById("gg-fill");
+if (ggFill) {
+  const fillObserver = new IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        ggFill.animate([{ width: "0%" }, { width: "100%" }],
+          { duration: reducedMotion ? 1 : 1400, easing: "cubic-bezier(0.2, 0.7, 0.3, 1)", fill: "forwards" });
+        fillObserver.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.4 });
+  fillObserver.observe(ggFill.closest(".gg-result"));
+}
+
 /* ============================================================
    Atlas — world map of visited countries
    ============================================================ */
@@ -285,7 +300,7 @@ if (mapBox) {
 
       // tooltip — country names from ISO codes via the browser
       const tip = document.getElementById("map-tip");
-      const card = mapBox.closest(".atlas-card");
+      const card = mapBox.closest(".gg-mini");
       let regionNames = null;
       try { regionNames = new Intl.DisplayNames(["en"], { type: "region" }); } catch { /* fallback below */ }
       svg.addEventListener("pointermove", e => {

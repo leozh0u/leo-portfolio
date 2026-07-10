@@ -76,17 +76,64 @@
         <p class="blurb">Cars on the left. Way too many sheep in frame. If you said New Zealand, take the&nbsp;5000&nbsp;points.</p>
       </header>
       <div class="atlas-layout">
-        <div class="atlas-card">
-          <div class="atlas-head mono">
-            <span><span class="atlas-count" data-count="22">0</span> countries pinned</span>
-            <span class="atlas-legend">
-              <i class="chip chip-been"></i> been
-              <i class="chip chip-not"></i> not yet
-            </span>
+        <div class="gg-frame">
+          <div class="gg-compass mono" aria-hidden="true"><span>SW</span><span>W</span><span>NW</span><b>N</b><span>NE</span><span>E</span><span>SE</span></div>
+          <svg class="gg-scene" viewBox="0 0 900 430" preserveAspectRatio="xMidYMid slice" aria-label="a very New Zealand road">
+            <defs>
+              <linearGradient id="gg-sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#a8dcf5"/>
+                <stop offset="0.55" stop-color="#cfeef7"/>
+                <stop offset="1" stop-color="#eaf6e3"/>
+              </linearGradient>
+            </defs>
+            <rect width="900" height="430" fill="url(#gg-sky)"/>
+            <circle cx="170" cy="72" r="34" fill="#fff4c2" opacity="0.9"/>
+            <!-- hills -->
+            <path d="M0,240 Q140,150 300,225 T620,215 T900,230 L900,430 L0,430 Z" fill="#9ccb7a"/>
+            <path d="M0,290 Q200,215 430,275 T900,280 L900,430 L0,430 Z" fill="#7db95e"/>
+            <!-- road -->
+            <path d="M370,430 L448,268 L470,268 L560,430 Z" fill="#8f8f8f"/>
+            <path d="M455,290 l3,0 l1,14 -5,0 Z M451,320 l6,0 l2,22 -10,0 Z M444,360 l10,0 l3,32 -16,0 Z M436,404 l14,0 l3,26 -22,0 Z" fill="#fffdf5"/>
+            <!-- roadside bollard: the NZ meta -->
+            <g transform="translate(340,318)">
+              <rect x="0" y="0" width="14" height="76" rx="3" fill="#fffdf5" stroke="#5c5c5c" stroke-width="1.5"/>
+              <rect x="0" y="10" width="14" height="16" fill="#e6392f"/>
+              <rect x="2.5" y="13.5" width="9" height="9" rx="1.5" fill="#ffd9d6"/>
+            </g>
+            <!-- SH1 shield -->
+            <g transform="translate(520,302)">
+              <rect x="-4" y="18" width="6" height="58" fill="#7a7a7a"/>
+              <path d="M-1,0 L26,0 Q30,0 30,5 L30,26 Q30,40 14,46 Q-2,40 -2,26 L-2,5 Q-2,0 -1,0 Z" fill="#e6392f" stroke="#fff" stroke-width="2.5" transform="translate(-15,-28)"/>
+              <text x="-1" y="4" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="17" fill="#fff">1</text>
+            </g>
+            <!-- power poles -->
+            <g stroke="#6b5b46" stroke-width="4" opacity="0.85">
+              <line x1="120" y1="330" x2="120" y2="215"/><line x1="96" y1="228" x2="144" y2="228"/>
+              <line x1="230" y1="305" x2="230" y2="228"/><line x1="214" y1="236" x2="246" y2="236"/>
+            </g>
+            <path d="M120,222 Q175,242 230,234" fill="none" stroke="#5c5044" stroke-width="1.6" opacity="0.7"/>
+            <!-- sheep. always sheep. -->
+            <text x="180" y="308" font-size="30">🐑</text>
+            <text x="252" y="290" font-size="22">🐑</text>
+            <text x="690" y="345" font-size="34">🐑</text>
+            <text x="770" y="308" font-size="20">🐑</text>
+            <text x="60" y="378" font-size="26">🌿</text>
+            <text x="820" y="392" font-size="26">🌿</text>
+          </svg>
+
+          <div class="gg-mini">
+            <div class="atlas-head mono">
+              <span><span class="atlas-count" data-count="22">0</span> countries</span>
+              <span class="atlas-legend"><i class="chip chip-been"></i> been <i class="chip chip-not"></i> not yet</span>
+            </div>
+            <div id="worldmap" class="worldmap" aria-label="countries visited"></div>
+            <div id="map-tip" class="map-tip mono"></div>
           </div>
-          <div id="worldmap" class="worldmap" aria-label="countries visited"></div>
-          <div id="map-tip" class="map-tip mono"></div>
-          <p class="geo-score mono">Auckland 🇳🇿 <span class="arc-arrow">→</span> Houston 🤠 · currently ~13,000 km from home</p>
+
+          <div class="gg-result">
+            <div class="gg-bar"><span id="gg-fill"></span></div>
+            <p class="mono gg-result-line"><b class="gg-points" data-count="5000">0</b> points · it was <strong>Auckland, New Zealand</strong> · the bollard gave it away</p>
+          </div>
         </div>
         <div class="geo-text">
           <p>
@@ -153,7 +200,7 @@
       <header class="room-head">
         <p class="kicker mono">03 · skills</p>
         <h2>Play me</h2>
-        <p class="blurb">Every white piece is something I work with. You're white — the bot takes whatever it can.</p>
+        <p class="blurb">Every white piece is something I work with. You're white — the bot takes whatever&nbsp;it&nbsp;can.</p>
       </header>
       <div class="chess-layout">
         <div class="board-wrap">
@@ -227,25 +274,28 @@
       <header class="room-head">
         <p class="kicker mono">05 · projects</p>
         <h2>Brick by brick</h2>
-        <p class="blurb">Shipped bricks on the shelf, fresh ones on the workbench.</p>
+        <p class="blurb">Shipped bricks on the shelf, fresh ones on the workbench. Each one gets a ninja — elements assigned by the ninja council.</p>
       </header>
       <div class="lego-grid">
-        <article class="lego-card lego-red" data-tilt>
+        <article class="lego-card lego-blue" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+          <span class="ninja n-jay mono" title="Jay · master of lightning">⚡ JAY</span>
           <h3>SeatLive</h3>
           <p class="lego-sub mono">real-time booking engine</p>
           <p>Stops double-booked seats under real concurrency — atomic conditional <code>UPDATE</code>s with Redis TTL holds, idempotency keys, live seat maps over WebSockets. CI fires 50 simultaneous requests at one seat; exactly one wins.</p>
           <p class="lego-tags mono">FastAPI · PostgreSQL · Redis · React · Docker</p>
         </article>
-        <article class="lego-card lego-yellow" data-tilt>
+        <article class="lego-card lego-white" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+          <span class="ninja n-zane mono" title="Zane · the nindroid">❄ ZANE</span>
           <h3>Edge-ML audio</h3>
           <p class="lego-sub mono">55× smaller, still listening</p>
           <p>A 3.9 MB audio classifier compressed to 71 KB — distillation, INT8 quantization, pruning — running on a $5 microcontroller at ~300 ms per inference in ~300 KB of RAM.</p>
           <p class="lego-tags mono">PyTorch · TFLite Micro · C++ · ESP32-S3</p>
         </article>
-        <article class="lego-card lego-blue" data-tilt>
+        <article class="lego-card lego-red" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+          <span class="ninja n-kai mono" title="Kai · master of fire">🔥 KAI</span>
           <h3>STM32 controller</h3>
           <p class="lego-sub mono">bare metal, no HAL</p>
           <p>Every driver from scratch — GPIO, UART, SPI, I2C, timers. Closed-loop PID speed control under 2% steady-state error, ported to FreeRTOS with live telemetry.</p>
@@ -254,7 +304,7 @@
       </div>
 
       <div class="workbench">
-        <p class="workbench-label mono">🔧 on the workbench</p>
+        <p class="workbench-label mono">🔧 on the workbench <span class="ninja n-lloyd mono" title="Lloyd · still training">🌀 LLOYD — in training</span></p>
         <div class="wip-row">
           <article class="wip">
             <span class="wip-icon">♟️</span>
@@ -277,7 +327,7 @@
             <p class="mono">small tool, does one job</p>
           </article>
         </div>
-        <p class="workbench-quote mono">"I only work in black. And sometimes very, very dark grey."</p>
+        <p class="workbench-quote mono">"I only work in black. And sometimes very, very dark grey." · ninja never quit.</p>
       </div>
     </div>
   </section>
@@ -292,76 +342,67 @@
         <p class="blurb">Current rotation. Tap a card to deploy.</p>
       </header>
       <div class="cr-deck">
+        <div class="cr-tabs">
+          <span class="cr-tab active">Battle Deck</span>
+          <span class="cr-tab">Personalize</span>
+        </div>
+        <div class="cr-toolbar">
+          <span class="cr-tool">👑</span>
+          <span class="cr-slots"><i>1</i><i>2</i><i class="on">3</i></span>
+          <span class="cr-tool">⚔️</span>
+        </div>
         <div class="cr-grid">
           <button class="cr-card rar-epic" data-deploy="🎯" data-cry="clutch or kick">
             <span class="cr-elixir">4</span>
-            <span class="cr-frame">
-              <span class="cr-art">🎯</span>
-            </span>
+            <span class="cr-frame"><span class="cr-art">🎯</span></span>
             <span class="cr-plate"><span class="cr-name">Valorant</span></span>
-            <span class="cr-lv mono">Lv 13</span>
+            <span class="cr-up mono"><i>⬆</i> Lv 13 · 22/50</span>
           </button>
           <button class="cr-card rar-legendary" data-deploy="🏃" data-cry="sub-20 pace">
             <span class="cr-elixir">5</span>
-            <span class="cr-frame">
-              <span class="cr-art">⛏️</span>
-            </span>
+            <span class="cr-frame"><span class="cr-art">⛏️</span></span>
             <span class="cr-plate"><span class="cr-name">MC Speedrun</span></span>
-            <span class="cr-lv mono">Lv 11</span>
+            <span class="cr-up mono"><i>⬆</i> Lv 11 · 1/4</span>
           </button>
           <button class="cr-card rar-rare" data-deploy="🛏️" data-cry="the bed is not safe">
             <span class="cr-elixir">3</span>
-            <span class="cr-frame">
-              <span class="cr-art">🛏️</span>
-            </span>
+            <span class="cr-frame"><span class="cr-art">🛏️</span></span>
             <span class="cr-plate"><span class="cr-name">Bedwars</span></span>
-            <span class="cr-lv mono">Lv 14</span>
+            <span class="cr-up mono"><i>⬆</i> Lv 14 · 43/50</span>
           </button>
           <button class="cr-card rar-epic" data-deploy="⭐" data-cry="three minutes of chaos">
             <span class="cr-elixir">3</span>
-            <span class="cr-frame">
-              <span class="cr-art">🤠</span>
-            </span>
+            <span class="cr-frame"><span class="cr-art">🤠</span></span>
             <span class="cr-plate"><span class="cr-name">Brawl Stars</span></span>
-            <span class="cr-lv mono">Lv 12</span>
+            <span class="cr-up mono"><i>⬆</i> Lv 12 · 4/20</span>
           </button>
           <button class="cr-card rar-common" data-deploy="tetris" data-cry="back-to-back">
             <span class="cr-elixir">2</span>
-            <span class="cr-frame">
-              <span class="cr-art">🕹️</span>
-            </span>
+            <span class="cr-frame"><span class="cr-art">🕹️</span></span>
             <span class="cr-plate"><span class="cr-name">Tetris</span></span>
-            <span class="cr-lv mono">Lv 13</span>
+            <span class="cr-up mono"><i>⬆</i> Lv 13 · 7/20</span>
           </button>
           <button class="cr-card rar-common" data-deploy="🎱" data-cry="called the corner">
             <span class="cr-elixir">2</span>
-            <span class="cr-frame">
-              <span class="cr-art">🎱</span>
-            </span>
+            <span class="cr-frame"><span class="cr-art">🎱</span></span>
             <span class="cr-plate"><span class="cr-name">8-Ball</span></span>
-            <span class="cr-lv mono">Lv 10</span>
+            <span class="cr-up mono"><i>⬆</i> Lv 10 · 0/4</span>
           </button>
           <button class="cr-card rar-rare" data-deploy="🏀" data-cry="heat check">
             <span class="cr-elixir">3</span>
-            <span class="cr-frame">
-              <span class="cr-art">🏀</span>
-            </span>
+            <span class="cr-frame"><span class="cr-art">🏀</span></span>
             <span class="cr-plate"><span class="cr-name">Basketball</span></span>
-            <span class="cr-lv mono">Lv 12</span>
+            <span class="cr-up mono"><i>⬆</i> Lv 12 · 0/4</span>
           </button>
           <button class="cr-card rar-common" data-deploy="🏓" data-cry="spin wins">
             <span class="cr-elixir">1</span>
-            <span class="cr-frame">
-              <span class="cr-art">🏓</span>
-            </span>
+            <span class="cr-frame"><span class="cr-art">🏓</span></span>
             <span class="cr-plate"><span class="cr-name">Table Tennis</span></span>
-            <span class="cr-lv mono">Lv 12</span>
+            <span class="cr-up mono"><i>⬆</i> Lv 12 · 1/4</span>
           </button>
         </div>
-        <div class="cr-footer mono">
-          <span class="cr-avg"><span class="cr-drop"></span> avg elixir <strong>2.9</strong></span>
-          <span id="deploy-line">&nbsp;</span>
-        </div>
+        <p class="cr-avg-line">Average Elixir cost: <b>2.9</b> <span class="cr-drop"></span></p>
+        <p class="mono cr-deploy" id="deploy-line">&nbsp;</p>
       </div>
     </div>
   </section>

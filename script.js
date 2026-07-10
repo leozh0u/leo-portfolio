@@ -4,12 +4,17 @@ const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const desktop = () => matchMedia("(min-width: 901px)").matches;
 
 /* ============================================================
-   World navigation — horizontal rooms
+   World navigation — sliding track, no scroll-jacking.
+   Horizontal trackpad swipe, arrows, keys, dots, nav links.
+   Vertical scrolling inside a room stays native.
    ============================================================ */
-const world = document.getElementById("world");
+const track = document.getElementById("track");
 const rooms = [...document.querySelectorAll(".room")];
 const progressBar = document.getElementById("progress-bar");
 const navLinks = [...document.querySelectorAll(".nav-links a")];
+const edgeL = document.getElementById("edge-l");
+const edgeR = document.getElementById("edge-r");
+let cur = 0;
 
 const dotsBox = document.getElementById("dots");
 rooms.forEach((room, i) => {
@@ -21,31 +26,30 @@ rooms.forEach((room, i) => {
 });
 const dots = [...dotsBox.children];
 
+function paintNav() {
+  dots.forEach((d, j) => d.classList.toggle("active", j === cur));
+  const id = rooms[cur].id;
+  navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+  progressBar.style.width = (cur / (rooms.length - 1)) * 100 + "%";
+  edgeL.classList.toggle("off", cur === 0);
+  edgeR.classList.toggle("off", cur === rooms.length - 1);
+}
+
 function goRoom(i) {
   i = Math.max(0, Math.min(rooms.length - 1, i));
+  cur = i;
   if (desktop()) {
-    world.scrollTo({ left: i * world.clientWidth, behavior: reducedMotion ? "auto" : "smooth" });
+    track.style.transform = `translateX(${-i * 100}vw)`;
   } else {
     rooms[i].scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
   }
+  history.replaceState(null, "", "#" + rooms[i].id);
+  paintNav();
 }
-function curRoom() {
-  return Math.round(world.scrollLeft / world.clientWidth);
-}
-function paintNav() {
-  const i = desktop() ? curRoom() : 0;
-  dots.forEach((d, j) => d.classList.toggle("active", j === i));
-  const id = rooms[i]?.id;
-  navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
-  if (desktop()) {
-    const max = world.scrollWidth - world.clientWidth;
-    progressBar.style.width = max ? (world.scrollLeft / max) * 100 + "%" : "0";
-  }
-}
-world.addEventListener("scroll", paintNav, { passive: true });
-paintNav();
 
-// nav links + in-page anchors jump between rooms
+edgeL.addEventListener("click", () => goRoom(cur - 1));
+edgeR.addEventListener("click", () => goRoom(cur + 1));
+
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener("click", e => {
     const target = document.getElementById(a.getAttribute("href").slice(1));
@@ -54,31 +58,56 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// vertical wheel = next/previous room (unless the room itself can scroll)
-let wheelLock = 0;
+// horizontal trackpad swipe pages between rooms; vertical wheel is untouched
+let swipeAccum = 0, swipeLock = 0, swipeReset = null;
 addEventListener("wheel", e => {
   if (!desktop()) return;
-  if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // native horizontal pan
-  const room = e.target.closest(".room");
-  if (room) {
-    const down = e.deltaY > 0;
-    const canScroll = down
-      ? room.scrollTop + room.clientHeight < room.scrollHeight - 1
-      : room.scrollTop > 0;
-    if (canScroll) return; // let the room scroll vertically
-  }
+  if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
   e.preventDefault();
   const now = Date.now();
-  if (now - wheelLock < 650 || Math.abs(e.deltaY) < 12) return;
-  wheelLock = now;
-  goRoom(curRoom() + (e.deltaY > 0 ? 1 : -1));
+  if (now - swipeLock < 600) return;
+  swipeAccum += e.deltaX;
+  clearTimeout(swipeReset);
+  swipeReset = setTimeout(() => { swipeAccum = 0; }, 180);
+  if (Math.abs(swipeAccum) > 90) {
+    swipeLock = now;
+    goRoom(cur + (swipeAccum > 0 ? 1 : -1));
+    swipeAccum = 0;
+  }
 }, { passive: false });
+
+// touch swipe (tablets)
+let touchX = null;
+addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, { passive: true });
+addEventListener("touchend", e => {
+  if (touchX === null || !desktop()) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 70) goRoom(cur + (dx < 0 ? 1 : -1));
+  touchX = null;
+}, { passive: true });
 
 addEventListener("keydown", e => {
   if (/input|textarea/i.test(document.activeElement?.tagName || "")) return;
-  if (e.key === "ArrowRight") goRoom(curRoom() + 1);
-  if (e.key === "ArrowLeft") goRoom(curRoom() - 1);
+  if (e.key === "ArrowRight") goRoom(cur + 1);
+  if (e.key === "ArrowLeft") goRoom(cur - 1);
 });
+
+addEventListener("resize", () => {
+  if (desktop()) track.style.transform = `translateX(${-cur * 100}vw)`;
+  else track.style.transform = "";
+});
+
+// deep-link on load, without animating there
+(function initRoom() {
+  const idx = rooms.findIndex(r => "#" + r.id === location.hash);
+  if (idx > 0) {
+    track.style.transition = "none";
+    goRoom(idx);
+    requestAnimationFrame(() => requestAnimationFrame(() => { track.style.transition = ""; }));
+  } else {
+    paintNav();
+  }
+})();
 
 const roomVisible = id => {
   const r = document.getElementById(id).getBoundingClientRect();
@@ -178,7 +207,7 @@ if (reducedMotion) typeEl.textContent = roles[0];
 else typeTick();
 
 /* ============================================================
-   Counters + geo map
+   Counters
    ============================================================ */
 function animateCount(el) {
   const target = +el.dataset.count;
@@ -195,33 +224,85 @@ const countObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll("[data-count]").forEach(el => countObserver.observe(el));
 
-const grid = document.querySelector(".geo-grid");
-if (grid) {
-  const NS = "http://www.w3.org/2000/svg";
-  for (let x = 0; x <= 800; x += 80) {
-    const l = document.createElementNS(NS, "line");
-    l.setAttribute("x1", x); l.setAttribute("y1", 0); l.setAttribute("x2", x); l.setAttribute("y2", 400);
-    grid.appendChild(l);
-  }
-  for (let y = 0; y <= 400; y += 80) {
-    const l = document.createElementNS(NS, "line");
-    l.setAttribute("x1", 0); l.setAttribute("y1", y); l.setAttribute("x2", 800); l.setAttribute("y2", y);
-    grid.appendChild(l);
-  }
-}
-const arc = document.getElementById("flight-arc");
-const plane = document.querySelector(".geo-plane");
-if (arc && plane && !reducedMotion) {
-  const total = arc.getTotalLength();
-  let ft = 0;
-  (function fly() {
-    ft = (ft + 0.0012) % 1;
-    const p = arc.getPointAtLength(ft * total);
-    const p2 = arc.getPointAtLength(Math.min(ft + 0.01, 1) * total);
-    const angle = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
-    plane.setAttribute("transform", `translate(${p.x},${p.y}) rotate(${angle})`);
-    requestAnimationFrame(fly);
-  })();
+/* ============================================================
+   Atlas — world map of visited countries
+   ============================================================ */
+const VISITED = ["nz", "au", "sg", "cn", "hk", "tw", "jp", "th", "fr", "it", "gb", "mc", "va", "bg", "cz", "nl", "ch", "us", "ca", "sa", "qa", "ae"];
+const mapBox = document.getElementById("worldmap");
+if (mapBox) {
+  fetch("world.svg")
+    .then(r => r.text())
+    .then(txt => {
+      mapBox.innerHTML = txt;
+      const svg = mapBox.querySelector("svg");
+      const NS = "http://www.w3.org/2000/svg";
+      const overlay = document.createElementNS(NS, "g");
+
+      const center = id => {
+        const p = svg.getElementById(id);
+        if (!p) return null;
+        const b = p.getBBox();
+        return [b.x + b.width / 2, b.y + b.height / 2, b];
+      };
+
+      for (const id of VISITED) {
+        const p = svg.getElementById(id);
+        if (!p) continue;
+        p.classList.add("visited");
+        const [cx, cy, b] = center(id);
+        if (b.width < 8 && b.height < 8) {
+          const c = document.createElementNS(NS, "circle");
+          c.setAttribute("cx", cx); c.setAttribute("cy", cy);
+          c.setAttribute("r", 3.5);
+          c.setAttribute("class", "micro-pin");
+          overlay.appendChild(c);
+        }
+      }
+
+      // Auckland → Houston arc, calibrated from two known countries
+      const cu = center("cu"), qa = center("qa"), nz = center("nz");
+      if (cu && qa && nz) {
+        const ax = (qa[0] - cu[0]) / (51.2 - (-79.4));
+        const bx = cu[0] - ax * (-79.4);
+        const ay = (nz[1] - cu[1]) / (-41.2 - 21.5);
+        const by = cu[1] - ay * 21.5;
+        const pt = (lon, lat) => [ax * lon + bx, ay * lat + by];
+        const [x1, y1] = pt(174.8, -36.9);   // Auckland
+        const [x2, y2] = pt(-95.4, 29.8);    // Houston
+        const arc = document.createElementNS(NS, "path");
+        arc.setAttribute("d", `M ${x1} ${y1} Q ${(x1 + x2) / 2} ${Math.min(y1, y2) - 130} ${x2} ${y2}`);
+        arc.setAttribute("class", "arc-line");
+        overlay.appendChild(arc);
+        for (const [x, y] of [[x1, y1], [x2, y2]]) {
+          const c = document.createElementNS(NS, "circle");
+          c.setAttribute("cx", x); c.setAttribute("cy", y);
+          c.setAttribute("r", 4.5);
+          c.setAttribute("class", "arc-dot");
+          overlay.appendChild(c);
+        }
+      }
+      svg.appendChild(overlay);
+
+      // tooltip — country names from ISO codes via the browser
+      const tip = document.getElementById("map-tip");
+      const card = mapBox.closest(".atlas-card");
+      let regionNames = null;
+      try { regionNames = new Intl.DisplayNames(["en"], { type: "region" }); } catch { /* fallback below */ }
+      svg.addEventListener("pointermove", e => {
+        const t = e.target.closest("path");
+        if (!t) { tip.classList.remove("show"); return; }
+        const code = t.id.toUpperCase();
+        let name = code;
+        if (regionNames) { try { name = regionNames.of(code) || code; } catch { name = code; } }
+        tip.innerHTML = (t.classList.contains("visited") ? '<span class="tick">✓</span> ' : "") + name;
+        const r = card.getBoundingClientRect();
+        tip.style.left = e.clientX - r.left + 14 + "px";
+        tip.style.top = e.clientY - r.top - 10 + "px";
+        tip.classList.add("show");
+      });
+      svg.addEventListener("pointerleave", () => tip.classList.remove("show"));
+    })
+    .catch(() => { mapBox.innerHTML = '<p class="mono">map failed to load</p>'; });
 }
 
 /* ============================================================
@@ -434,7 +515,6 @@ function render() {
 
 function updateRights(from, to) {
   const p = board[to[0]][to[1]];
-  if (p.t === "k" || (p.t === "q" && p.skill === "Git")) { /* king moved (may be promoted glyph) */ }
   if (p.t === "k") rights[p.w ? "w" : "b"] = { k: false, q: false };
   const corners = [[7, 0, "w", "q"], [7, 7, "w", "k"], [0, 0, "b", "q"], [0, 7, "b", "k"]];
   for (const [r, c, side, wing] of corners) {

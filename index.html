@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo Zhou — hi, I build things</title>
+  <meta name="description" content="Leo Zhou. CS at Rice University. Fencer, drummer, builder of small fast software.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,900&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🤺</text></svg>">
+</head>
+<body>
+
+  <!-- ===== Nav ===== -->
+  <nav id="nav">
+    <a href="#top" class="nav-logo">Leo<span>!</span></a>
+    <div class="nav-links">
+      <a href="#origin">Origin</a>
+      <a href="#fencing">Fencing</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#games">Games</a>
+      <a href="#contact" class="nav-cta">Say hi</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header id="top" class="hero">
+    <div class="hero-sky" aria-hidden="true">
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="cloud c3"></div>
+    </div>
+    <div class="float-stickers" aria-hidden="true">
+      <span class="sticker" data-depth="3" style="--x:8%;  --y:18%; --r:-12deg">🤺</span>
+      <span class="sticker" data-depth="2" style="--x:85%; --y:14%; --r:9deg">🥁</span>
+      <span class="sticker" data-depth="4" style="--x:78%; --y:62%; --r:-7deg">🎿</span>
+      <span class="sticker" data-depth="2" style="--x:5%; --y:88%; --r:14deg">♟️</span>
+      <span class="sticker" data-depth="3" style="--x:60%; --y:8%;  --r:-5deg">🌏</span>
+      <span class="sticker" data-depth="5" style="--x:90%; --y:40%; --r:12deg">🧱</span>
+      <span class="sticker" data-depth="4" style="--x:30%; --y:10%; --r:6deg">🦇</span>
+      <span class="sticker" data-depth="3" style="--x:45%; --y:78%; --r:-9deg">⛏️</span>
+    </div>
+
+    <div class="hero-inner">
+      <p class="hero-hello mono">hi, I'm</p>
+      <h1 class="hero-name" id="hero-name" title="click me">
+        <span>L</span><span>e</span><span>o</span>&nbsp;<span>Z</span><span>h</span><span>o</span><span>u</span>
+      </h1>
+      <p class="hero-sub">
+        CS at <strong>Rice University</strong>. Former captain of New Zealand's junior fencing team.
+        These days I mostly build <span id="typewriter" class="type"></span><span class="caret">▍</span>
+      </p>
+      <div class="hero-badges">
+        <span class="badge b-red">🤺 fencer</span>
+        <span class="badge b-blue">🥁 drummer</span>
+        <span class="badge b-green">♟️ ~2000 chess.com</span>
+        <span class="badge b-yellow">🧱 lego believer</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#projects">See my projects</a>
+        <a class="btn btn-ghost" href="#origin">Who is this guy?</a>
+      </div>
+      <p class="hero-hint mono">psst, click my name</p>
+    </div>
+
+    <svg class="divider" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,50 C240,90 480,10 720,45 C960,80 1200,20 1440,55 L1440,90 L0,90 Z" fill="var(--geo-bg)"/>
+    </svg>
+  </header>
+
+  <main>
+
+  <!-- ===== ORIGIN — GeoGuessr ===== -->
+  <section id="origin" class="section sec-geo">
+    <div class="section-head reveal">
+      <p class="kicker mono">01 · origin story, geoguessr rules</p>
+      <h2>Guess where I'm from</h2>
+      <p class="section-blurb">Cars on the left. Way too many sheep in frame. If you said New Zealand, take the 5000 points.</p>
+    </div>
+
+    <div class="geo-card reveal">
+      <div class="geo-map">
+        <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+          <g class="geo-grid"></g>
+          <g class="geo-nz" transform="translate(690,270)">
+            <path d="M18 0 C24 8 20 18 26 26 C30 32 26 40 18 44 C14 40 16 30 10 24 C6 18 12 6 18 0 Z"/>
+            <path d="M6 50 C14 54 18 62 14 72 C10 80 0 84 -6 78 C-10 70 -4 56 6 50 Z"/>
+          </g>
+          <path id="flight-arc" d="M 700 290 C 560 40 320 40 165 205" fill="none"/>
+          <g class="pin pin-nz" transform="translate(700,290)">
+            <circle class="pin-pulse" r="10"/><circle class="pin-dot" r="5"/>
+            <text x="-14" y="5" text-anchor="end" class="pin-label">Auckland, NZ 🇳🇿</text>
+          </g>
+          <g class="pin pin-htx" transform="translate(165,205)">
+            <circle class="pin-pulse" r="10"/><circle class="pin-dot" r="5"/>
+            <text x="14" y="-10" class="pin-label">Houston, TX 🤠</text>
+          </g>
+          <text x="420" y="60" class="geo-plane">✈</text>
+        </svg>
+        <div class="geo-score mono"><span class="geo-score-num" data-count="5000">0</span> pts. It was New Zealand. It's always New Zealand.</div>
+      </div>
+      <div class="geo-text">
+        <p>
+          I grew up in <strong>Auckland</strong> and spent most of my teens holding a sword for the
+          national team (more on that below). Now I'm at <strong>Rice</strong> studying computer science,
+          on track to graduate a semester early in Fall 2028, with a 3.92 GPA so far.
+        </p>
+        <p>
+          I actually started in Electrical and Computer Engineering before switching to CS, so I'm the
+          CS major who has genuinely burned his fingers on a soldering iron. It still shows in what I
+          like to build: firmware, tiny ML models, real-time systems, and lately full products people
+          can actually use.
+        </p>
+        <ul class="geo-facts mono">
+          <li>📍 Auckland → Houston</li>
+          <li>🎓 CS at Rice, 3.92 GPA</li>
+          <li>🌏 English, Mandarin, some Spanish</li>
+          <li>🧭 GeoGuessr phase: intense, currently dormant</li>
+        </ul>
+      </div>
+    </div>
+    <svg class="divider" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,45 C300,85 600,10 900,50 C1100,75 1300,25 1440,50 L1440,90 L0,90 Z" fill="var(--piste-bg)"/>
+    </svg>
+  </section>
+
+  <!-- ===== FENCING ===== -->
+  <section id="fencing" class="section sec-piste">
+    <div class="piste-stripes" aria-hidden="true"></div>
+    <div class="section-head reveal">
+      <p class="kicker mono">02 · the main event</p>
+      <h2>Ten years behind a blade</h2>
+      <p class="section-blurb">Fencing is a physical argument where the point gets decided in about 300 milliseconds. It taught me more about reading a situation, committing, and recovering than anything else I've done.</p>
+    </div>
+
+    <div class="fencing-stats reveal">
+      <div class="stat s-red"><span class="stat-num" data-count="27">0</span><span class="stat-label">national first places</span></div>
+      <div class="stat s-blue"><span class="stat-num" data-count="30">0</span><span class="stat-label">+ NZ &amp; Oceania titles</span></div>
+      <div class="stat s-green"><span class="stat-num" data-count="100">0</span><span class="stat-label">+ young fencers coached</span></div>
+      <div class="stat s-yellow"><span class="stat-num" data-count="2">0</span><span class="stat-label">national teams captained at once</span></div>
+    </div>
+
+    <div class="fencing-grid reveal">
+      <div class="bout-card">
+        <h3>🌍 World stage</h3>
+        <p>Competed for New Zealand at cadet, junior, and senior level, including World Championships, World Cups, and the Junior Commonwealth Games.</p>
+      </div>
+      <div class="bout-card">
+        <h3>🥇 Captaincy</h3>
+        <p>Captained the NZ junior and cadet national teams at the same time, and led the junior team to an Oceania title.</p>
+      </div>
+      <div class="bout-card">
+        <h3>🤝 Giving back</h3>
+        <p>Coached over a hundred young fencers and refereed hundreds of bouts around Oceania. Explaining right-of-way to a nine-year-old is harder than any code review.</p>
+      </div>
+    </div>
+
+    <div class="scoreboard reveal mono" aria-hidden="true">
+      <div class="score-side"><span class="lamp lamp-red"></span> ZHOU <span class="score-pts" id="score-left">14</span></div>
+      <div class="score-time">00:03</div>
+      <div class="score-side"><span class="score-pts" id="score-right">14</span> DOUBT <span class="lamp lamp-green"></span></div>
+    </div>
+    <p class="mono tiny-hint">score's tied. click the board.</p>
+
+    <svg class="divider" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,55 C260,15 520,85 780,45 C1040,10 1240,80 1440,40 L1440,90 L0,90 Z" fill="var(--chess-bg)"/>
+    </svg>
+  </section>
+
+  <!-- ===== SKILLS — Chess ===== -->
+  <section id="skills" class="section sec-chess">
+    <div class="section-head reveal">
+      <p class="kicker mono">03 · skills, pick a piece</p>
+      <h2>The opening repertoire</h2>
+      <p class="section-blurb">I peaked around 2000 on Chess.com, so I can spot an inflated position. This one is honest. Everything here is something I've actually shipped with.</p>
+    </div>
+
+    <div class="chess-board reveal">
+      <div class="chess-square piece" data-tilt>
+        <span class="chess-piece">♛</span>
+        <h3>Languages</h3>
+        <p class="mono">Python · C/C++ · Swift · TypeScript/JS · SQL · HTML/CSS</p>
+      </div>
+      <div class="chess-square" aria-hidden="true"></div>
+      <div class="chess-square piece" data-tilt>
+        <span class="chess-piece">♜</span>
+        <h3>Web &amp; backend</h3>
+        <p class="mono">React · Node · FastAPI · Flask · REST · WebSockets · Redis pub/sub · PostgreSQL</p>
+      </div>
+      <div class="chess-square" aria-hidden="true"></div>
+      <div class="chess-square piece" data-tilt>
+        <span class="chess-piece">♞</span>
+        <h3>Embedded &amp; mobile</h3>
+        <p class="mono">STM32 bare-metal · FreeRTOS · ESP32 · UART/SPI/I2C · SwiftUI · Apple Vision</p>
+      </div>
+      <div class="chess-square" aria-hidden="true"></div>
+      <div class="chess-square piece" data-tilt>
+        <span class="chess-piece">♝</span>
+        <h3>ML on tiny things</h3>
+        <p class="mono">PyTorch · TFLite Micro · quantization (PTQ/QAT) · distillation · pruning</p>
+      </div>
+      <div class="chess-square" aria-hidden="true"></div>
+      <div class="chess-square piece" data-tilt>
+        <span class="chess-piece">♟</span>
+        <h3>Infrastructure</h3>
+        <p class="mono">Docker · GitHub Actions CI/CD · Git · Locust · Sentry</p>
+      </div>
+    </div>
+    <p class="chess-caption mono reveal">* the pawn plans to promote. that's the whole idea with the infra column.</p>
+
+    <svg class="divider" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,40 C200,80 500,15 760,55 C1020,90 1260,20 1440,60 L1440,90 L0,90 Z" fill="var(--ski-bg)"/>
+    </svg>
+  </section>
+
+  <!-- ===== EXPERIENCE — Ski slope ===== -->
+  <section id="experience" class="section sec-ski">
+    <div class="snow" aria-hidden="true"></div>
+    <svg class="mountains" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <path class="mtn mtn-far" d="M0,320 L180,120 L300,220 L470,60 L640,260 L820,90 L1000,240 L1180,110 L1340,230 L1440,150 L1440,320 Z"/>
+      <path class="mtn mtn-near" d="M0,320 L120,200 L320,320 L520,170 L760,320 L980,180 L1200,320 L1360,220 L1440,320 Z"/>
+      <path class="mtn-cap" d="M470,60 L510,110 L470,100 L440,120 Z"/>
+      <path class="mtn-cap" d="M820,90 L860,140 L815,128 L785,150 Z"/>
+    </svg>
+
+    <div class="section-head reveal">
+      <p class="kicker mono">04 · experience, read it like a ski run</p>
+      <h2>Gates cleared so far</h2>
+      <p class="section-blurb">Top to bottom, carving left and right, trying not to catch an edge.</p>
+    </div>
+
+    <div class="slalom">
+      <svg class="slalom-line" viewBox="0 0 100 1200" preserveAspectRatio="none" aria-hidden="true">
+        <path id="slalom-path" d="M 50 0 C 10 150 90 250 50 400 C 10 550 90 650 50 800 C 10 950 90 1050 50 1200" fill="none"/>
+      </svg>
+
+      <article class="gate gate-left reveal">
+        <div class="gate-flag">⛷️</div>
+        <p class="gate-date mono">Jun 2026 → now</p>
+        <h3>CanSemi · Software Engineer Intern</h3>
+        <p class="gate-loc mono">Guangzhou, China</p>
+        <p>Wrote a binary parser that pulls test records out of 500+ chip-tester datalogs, a PostgreSQL pipeline that loads about 12,000 die in under two minutes per lot, a FastAPI backend on top, and a React wafer map that finally let the team stop squinting at Excel heatmaps.</p>
+        <p class="gate-tags mono">Python · FastAPI · PostgreSQL · React</p>
+      </article>
+
+      <article class="gate gate-right reveal">
+        <div class="gate-flag">🚩</div>
+        <p class="gate-date mono">May 2026 → now</p>
+        <h3>ABC Reads · Founder &amp; iOS Engineer</h3>
+        <p class="gate-loc mono">Remote</p>
+        <p>My own iOS app, for heritage Chinese speakers like me. Point the camera at text and it overlays pinyin only on the characters you personally don't know yet, using a per-user model of what you've learned and a 120,000-entry offline dictionary I compiled and frequency-ranked myself.</p>
+        <p class="gate-tags mono">Swift · SwiftUI · Vision OCR · SQLite</p>
+      </article>
+
+      <article class="gate gate-left reveal">
+        <div class="gate-flag">⛷️</div>
+        <p class="gate-date mono">Oct 2025 → Apr 2026</p>
+        <h3>Rice Wind Energy · Firmware Engineer</h3>
+        <p class="gate-loc mono">Controls subteam, Houston</p>
+        <p>ESP32 firmware in C/C++ for a three-phase wind turbine controller. RPM, power, and pitch sensing, a six-state safety state machine with fault latching, and a perturb-and-observe algorithm to track peak power.</p>
+        <p class="gate-tags mono">C/C++ · ESP32 · control systems</p>
+      </article>
+
+      <article class="gate gate-right reveal">
+        <div class="gate-flag">🚩</div>
+        <p class="gate-date mono">Nov 2025 → Feb 2026</p>
+        <h3>A-Lab @ Rice · Undergraduate Researcher</h3>
+        <p class="gate-loc mono">Houston</p>
+        <p>COMSOL simulations for a solar thermal desalination project called STREED. Lots of parameter sweeps, lots of plots, all in service of squeezing more efficiency out of the model.</p>
+        <p class="gate-tags mono">COMSOL · simulation · research</p>
+      </article>
+
+      <div class="gate-finish reveal mono">🏁 next gate: your team?</div>
+    </div>
+
+    <svg class="divider" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,50 C240,10 480,85 720,45 C960,10 1200,80 1440,35 L1440,90 L0,90 Z" fill="var(--lego-bg)"/>
+    </svg>
+  </section>
+
+  <!-- ===== PROJECTS — LEGO ===== -->
+  <section id="projects" class="section sec-lego">
+    <div class="stud-bg" aria-hidden="true"></div>
+    <div class="section-head reveal">
+      <p class="kicker mono">05 · projects, brick by brick</p>
+      <h2>Everything is built from bricks</h2>
+      <p class="section-blurb">Favorite film: Whiplash. Favorite movie: The Lego Batman Movie. Yes, those are different categories. This shelf is still young and I keep snapping on new bricks.</p>
+    </div>
+
+    <div class="lego-grid">
+      <article class="lego-card lego-red reveal" data-tilt>
+        <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+        <h3>SeatLive</h3>
+        <p class="lego-sub mono">real-time booking engine</p>
+        <p>Stops two people from booking the same seat, even under real concurrency: atomic conditional <code>UPDATE</code>s with Redis TTL holds, idempotency keys on confirmation, and live seat maps over WebSockets. CI fires 50 simultaneous requests at one seat and checks that exactly one wins. Load test: 4,459 requests, zero failures.</p>
+        <p class="lego-tags mono">Python · FastAPI · PostgreSQL · Redis · React · Docker</p>
+      </article>
+
+      <article class="lego-card lego-yellow reveal" data-tilt>
+        <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+        <h3>Edge-ML audio benchmark</h3>
+        <p class="lego-sub mono">55× smaller, still listening</p>
+        <p>Took a 3.9 MB audio-classifier network and compressed it to 71 KB through distillation, INT8 quantization, and pruning, then ran it on a five-dollar microcontroller. About 300 ms per inference in roughly 300 KB of RAM, with a PTQ vs QAT comparison to back it up.</p>
+        <p class="lego-tags mono">PyTorch · TFLite Micro · C++ · ESP32-S3</p>
+      </article>
+
+      <article class="lego-card lego-blue reveal" data-tilt>
+        <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+        <h3>STM32 motor controller</h3>
+        <p class="lego-sub mono">bare metal, no training wheels</p>
+        <p>Firmware with every driver written from scratch, no HAL: GPIO, UART, SPI, I2C, timers. Closed-loop PID speed control with under 2% steady-state error, later ported onto FreeRTOS with a telemetry pipeline that plots step responses in Python.</p>
+        <p class="lego-tags mono">Embedded C · STM32 · FreeRTOS · PID</p>
+      </article>
+
+      <article class="lego-card lego-ghost reveal">
+        <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+        <h3>Next brick loading…</h3>
+        <p class="lego-sub mono">under construction</p>
+        <p>This shelf grows every few weeks. As Lego Batman put it: "I only work in black. And sometimes very, very dark grey." The next project might break that palette.</p>
+        <p class="lego-tags mono">🦇 coming soon</p>
+      </article>
+    </div>
+
+    <svg class="divider" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,45 C280,85 560,15 840,55 C1120,90 1300,25 1440,55 L1440,90 L0,90 Z" fill="var(--arena-bg)"/>
+    </svg>
+  </section>
+
+  <!-- ===== GAMES — battle deck ===== -->
+  <section id="games" class="section sec-arena">
+    <div class="section-head reveal">
+      <p class="kicker mono">06 · bonus level</p>
+      <h2>The battle deck</h2>
+      <p class="section-blurb">Off the piste I'm usually in a game. Bedwars and The Bridge in Minecraft, plus the full Supercell rotation: Brawl Stars, Clash Royale, and Clash of Clans. Click a card to deploy it.</p>
+    </div>
+
+    <div class="deck reveal">
+      <button class="gcard g-red" data-deploy="🛏️" data-cry="the bed is NOT safe.">
+        <span class="elixir">3</span>
+        <span class="gcard-art">🛏️</span>
+        <span class="gcard-name">Bedwars</span>
+        <span class="gcard-sub mono">break theirs, guard yours</span>
+      </button>
+      <button class="gcard g-blue" data-deploy="🏃" data-cry="rushed mid. again.">
+        <span class="elixir">2</span>
+        <span class="gcard-art">🌉</span>
+        <span class="gcard-name">The Bridge</span>
+        <span class="gcard-sub mono">minecraft's fastest 1v1</span>
+      </button>
+      <button class="gcard g-yellow" data-deploy="⭐" data-cry="showdown top 1. sometimes.">
+        <span class="elixir">4</span>
+        <span class="gcard-art">🤠</span>
+        <span class="gcard-name">Brawl Stars</span>
+        <span class="gcard-sub mono">three minutes of chaos</span>
+      </button>
+      <button class="gcard g-purple" data-deploy="🐗" data-cry="HOG RIDERRRR!">
+        <span class="elixir">5</span>
+        <span class="gcard-art">👑</span>
+        <span class="gcard-name">Clash Royale</span>
+        <span class="gcard-sub mono">elixir management is a skill</span>
+      </button>
+      <button class="gcard g-green" data-deploy="⚔️" data-cry="raid complete. loot secured.">
+        <span class="elixir">6</span>
+        <span class="gcard-art">🏰</span>
+        <span class="gcard-name">Clash of Clans</span>
+        <span class="gcard-sub mono">the long game</span>
+      </button>
+    </div>
+    <p class="mono deploy-line" id="deploy-line">&nbsp;</p>
+
+    <svg class="divider" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,50 C250,15 520,85 780,40 C1040,10 1250,80 1440,45 L1440,90 L0,90 Z" fill="var(--stage-bg)"/>
+    </svg>
+  </section>
+
+  <!-- ===== CONTACT — Drums ===== -->
+  <section id="contact" class="section sec-stage contact">
+    <div class="stage-lights" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="section-head reveal">
+      <p class="kicker mono">07 · the drum outro</p>
+      <h2>Not quite my tempo?<br>Let's find yours.</h2>
+      <p class="section-blurb">Grade 8 drums with high distinction, plus a Rockschool award. Mostly rock, some jazz. I reply to email faster than a double-stroke roll.</p>
+    </div>
+
+    <div class="drumkit reveal" role="group" aria-label="playable drum kit">
+      <button class="drum" data-drum="kick">🦶<span class="mono">kick</span></button>
+      <button class="drum" data-drum="snare">🥁<span class="mono">snare</span></button>
+      <button class="drum" data-drum="hat">🎩<span class="mono">hi-hat</span></button>
+      <button class="drum" data-drum="crash">💥<span class="mono">crash</span></button>
+    </div>
+    <p class="mono tiny-hint stage-hint">these actually play. try k / s / h / c on your keyboard.</p>
+
+    <div class="hotbar-wrap reveal">
+      <p class="item-name mono" id="item-name">&nbsp;</p>
+      <div class="hotbar" role="group" aria-label="hobby inventory">
+        <button class="slot selected" data-item="Épée of Smiting">🤺</button>
+        <button class="slot" data-item="Drum Kit (Grade 8)">🥁</button>
+        <button class="slot" data-item="Skis of Swift Descent">🎿</button>
+        <button class="slot" data-item="Pawn (promotes eventually)">♟️</button>
+        <button class="slot" data-item="Globe of Guessing">🌏</button>
+        <button class="slot" data-item="Trusty Brick">🧱</button>
+        <button class="slot" data-item="Gold Medal ×27">🥇</button>
+        <button class="slot" data-item="Watercolor Set">🎨</button>
+        <button class="slot" data-item="Debugger Pickaxe">⛏️</button>
+      </div>
+      <p class="mono tiny-hint">the hotbar works too. press 1–9.</p>
+    </div>
+
+    <div class="eq reveal" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="contact-actions reveal">
+      <a class="btn btn-solid btn-big" href="mailto:zhouleo2007@gmail.com">📧 zhouleo2007@gmail.com</a>
+      <div class="contact-links">
+        <a class="btn btn-stage" href="https://linkedin.com/in/leozhou8" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-stage" href="https://github.com/leozh0u" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-stage" href="LeoZhou_resume.pdf" download>Résumé ↓</a>
+      </div>
+    </div>
+
+    <footer class="footer mono">
+      <p>Leo Zhou · Rice University · built brick by brick, no template.</p>
+      <p class="footer-quote">"prêts? allez."</p>
+    </footer>
+  </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

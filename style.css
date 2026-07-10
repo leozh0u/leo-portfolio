@@ -28,6 +28,8 @@
   --font-display: "Bricolage Grotesque", sans-serif;
   --font-body: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --font-cr: "Lilita One", var(--font-display);
+  --font-ninja: "Shojumaru", var(--font-display);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -248,15 +250,17 @@ h3 { font-size: 1.2rem; }
     repeating-radial-gradient(circle at 10% 90%, transparent 0 60px, rgba(34,28,20,0.035) 60px 62px),
     var(--geo-bg);
 }
-.atlas-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.8rem; align-items: start; }
+.atlas-layout { display: grid; grid-template-columns: 2.1fr 1fr; gap: 1.6rem; align-items: start; }
 
 /* geoguessr round frame */
+.r-geo .room-head { margin-bottom: 0.9rem; }
+.r-geo .room-inner { padding-top: 4.6rem; }
 .gg-frame {
-  position: relative;
   border: var(--border); border-radius: var(--radius);
   box-shadow: var(--shadow); overflow: hidden;
   background: #cfeef7;
 }
+.gg-view { position: relative; }
 .gg-scene { display: block; width: 100%; height: auto; }
 .gg-compass {
   position: absolute; top: 0.7rem; left: 50%; transform: translateX(-50%); z-index: 4;
@@ -267,19 +271,19 @@ h3 { font-size: 1.2rem; }
 }
 .gg-compass b { color: #fff; border-bottom: 2px solid #e6392f; }
 .gg-mini {
-  position: absolute; right: 0.8rem; bottom: 3.4rem; z-index: 5;
-  width: 38%;
-  background: rgba(255, 253, 245, 0.96);
+  position: absolute; right: 0.8rem; bottom: 0.8rem; z-index: 5;
+  width: 42%;
+  background: rgba(255, 253, 245, 0.97);
   border: 2.5px solid var(--ink); border-radius: 10px;
   box-shadow: 4px 4px 0 rgba(34, 28, 20, 0.55);
   padding: 0.5rem 0.6rem 0.4rem;
-  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.3, 1);
+  transition: width 0.32s cubic-bezier(0.2, 0.8, 0.3, 1);
 }
-.gg-mini:hover { width: 74%; }
+.gg-mini:hover { width: 92%; }
 .gg-result {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 4;
-  background: rgba(20, 24, 30, 0.82); color: #f2f4f7;
-  padding: 0.45rem 1rem 0.55rem;
+  background: #14181e; color: #f2f4f7;
+  padding: 0.5rem 1rem 0.6rem;
+  border-top: 3px solid var(--ink);
 }
 .gg-bar {
   height: 9px; border-radius: 999px; overflow: hidden;
@@ -456,6 +460,11 @@ h3 { font-size: 1.2rem; }
 
 /* ---------- projects / lego ---------- */
 .r-lego { background: var(--lego-bg); }
+.r-lego h2 {
+  font-family: var(--font-ninja); font-weight: 400;
+  font-size: clamp(1.7rem, 3.4vw, 2.7rem);
+  text-shadow: 3px 3px 0 rgba(230, 57, 47, 0.35);
+}
 .stud-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background-image: radial-gradient(circle at 50% 42%, rgba(34,28,20,0.10) 0 14px, rgba(255,255,255,0.18) 15px 17px, transparent 18px);
@@ -507,21 +516,14 @@ h3 { font-size: 1.2rem; }
 .workbench-quote { margin-top: 0.7rem; opacity: 0.5; font-style: italic; }
 
 /* ---------- deck / arena ---------- */
-.r-arena {
-  background:
-    radial-gradient(ellipse 60% 45% at 50% 118%, rgba(126, 224, 167, 0.35), transparent 70%),
-    repeating-linear-gradient(-35deg, transparent 0 90px, rgba(255,255,255,0.03) 90px 180px),
-    #245a9b;
-  color: #fdf7ea;
+.r-arena { background: #3e7d3a; color: #fdf7ea; }
+.showdown-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.r-arena h2 {
+  font-family: var(--font-cr); font-weight: 400; letter-spacing: 0.02em;
+  color: #fff;
+  text-shadow: 0 3px 0 #1c3a1b, 2px 0 0 #1c3a1b, -2px 0 0 #1c3a1b, 0 -2px 0 #1c3a1b;
 }
-.arena-motif {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background-image: radial-gradient(circle at 20% 30%, rgba(224,122,255,0.14) 0 5px, transparent 6px),
-    radial-gradient(circle at 70% 15%, rgba(224,122,255,0.10) 0 4px, transparent 5px),
-    radial-gradient(circle at 88% 55%, rgba(224,122,255,0.12) 0 6px, transparent 7px),
-    radial-gradient(circle at 40% 75%, rgba(224,122,255,0.08) 0 5px, transparent 6px);
-  background-size: 480px 420px;
-}
+.r-arena .kicker, .r-arena .blurb { text-shadow: 0 1px 0 rgba(0,0,0,0.45); }
 .cr-deck {
   background:
     repeating-linear-gradient(90deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 5px),
@@ -611,10 +613,10 @@ h3 { font-size: 1.2rem; }
   display: flex; align-items: center; justify-content: center;
 }
 .cr-name {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: clamp(0.72rem, 1.5vw, 0.98rem);
+  font-family: var(--font-cr); font-weight: 400;
+  font-size: clamp(0.74rem, 1.5vw, 1rem);
   text-shadow: 0 2px 0 rgba(0,0,0,0.5);
-  letter-spacing: 0.01em; text-align: center;
+  letter-spacing: 0.03em; text-align: center;
 }
 .cr-elixir {
   position: absolute; top: -10px; left: -10px; z-index: 3;
@@ -702,6 +704,11 @@ h3 { font-size: 1.2rem; }
   width: 90vmin; height: 90vmin; border-radius: 50%; z-index: 0;
   background:
     radial-gradient(circle, transparent 0 30%, rgba(255,233,201,0.05) 30% 31%, transparent 31% 46%, rgba(255,233,201,0.05) 46% 47%, transparent 47% 62%, rgba(255,233,201,0.05) 62% 63%, transparent 63%);
+}
+.kit-silhouette {
+  position: absolute; left: 50%; bottom: -2%; transform: translateX(-50%);
+  width: min(64vmin, 560px); z-index: 0;
+  color: rgba(255, 233, 201, 0.12);
 }
 .contact-inner { align-items: center; text-align: center; }
 .contact-inner .room-head { margin-left: auto; margin-right: auto; }

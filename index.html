@@ -7,7 +7,7 @@
   <meta name="description" content="Leo Zhou. CS at Rice University. Fencer, drummer, builder of small fast software.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=Lilita+One&family=Shojumaru&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🤺</text></svg>">
 </head>
@@ -77,6 +77,7 @@
       </header>
       <div class="atlas-layout">
         <div class="gg-frame">
+          <div class="gg-view">
           <div class="gg-compass mono" aria-hidden="true"><span>SW</span><span>W</span><span>NW</span><b>N</b><span>NE</span><span>E</span><span>SE</span></div>
           <svg class="gg-scene" viewBox="0 0 900 430" preserveAspectRatio="xMidYMid slice" aria-label="a very New Zealand road">
             <defs>
@@ -94,14 +95,14 @@
             <!-- road -->
             <path d="M370,430 L448,268 L470,268 L560,430 Z" fill="#8f8f8f"/>
             <path d="M455,290 l3,0 l1,14 -5,0 Z M451,320 l6,0 l2,22 -10,0 Z M444,360 l10,0 l3,32 -16,0 Z M436,404 l14,0 l3,26 -22,0 Z" fill="#fffdf5"/>
-            <!-- roadside bollard: the NZ meta -->
-            <g transform="translate(340,318)">
+            <!-- roadside bollard: the NZ meta, left verge -->
+            <g transform="translate(305,288) scale(1.4)">
               <rect x="0" y="0" width="14" height="76" rx="3" fill="#fffdf5" stroke="#5c5c5c" stroke-width="1.5"/>
               <rect x="0" y="10" width="14" height="16" fill="#e6392f"/>
               <rect x="2.5" y="13.5" width="9" height="9" rx="1.5" fill="#ffd9d6"/>
             </g>
-            <!-- SH1 shield -->
-            <g transform="translate(520,302)">
+            <!-- SH1 shield, right verge -->
+            <g transform="translate(592,308)">
               <rect x="-4" y="18" width="6" height="58" fill="#7a7a7a"/>
               <path d="M-1,0 L26,0 Q30,0 30,5 L30,26 Q30,40 14,46 Q-2,40 -2,26 L-2,5 Q-2,0 -1,0 Z" fill="#e6392f" stroke="#fff" stroke-width="2.5" transform="translate(-15,-28)"/>
               <text x="-1" y="4" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="17" fill="#fff">1</text>
@@ -128,6 +129,7 @@
             </div>
             <div id="worldmap" class="worldmap" aria-label="countries visited"></div>
             <div id="map-tip" class="map-tip mono"></div>
+          </div>
           </div>
 
           <div class="gg-result">
@@ -283,7 +285,7 @@
           <h3>SeatLive</h3>
           <p class="lego-sub mono">real-time booking engine</p>
           <p>Stops double-booked seats under real concurrency — atomic conditional <code>UPDATE</code>s with Redis TTL holds, idempotency keys, live seat maps over WebSockets. CI fires 50 simultaneous requests at one seat; exactly one wins.</p>
-          <p class="lego-tags mono">FastAPI · PostgreSQL · Redis · React · Docker</p>
+          <p class="lego-tags mono">FastAPI · PostgreSQL · Redis · React · Docker · Sentry</p>
         </article>
         <article class="lego-card lego-white" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
@@ -334,7 +336,42 @@
 
   <!-- ═══ 07 · DECK ═══ -->
   <section id="deck" class="room r-arena">
-    <div class="arena-motif" aria-hidden="true"></div>
+    <svg class="showdown-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <!-- showdown grass field -->
+      <rect width="1440" height="900" fill="#3e7d3a"/>
+      <g fill="#357034">
+        <rect x="0" y="0" width="1440" height="900" opacity="0"/>
+        <path d="M0 0h120v120H0zM240 120h120v120H240zM480 0h120v120H480zM720 120h120v120H720zM960 0h120v120H960zM1200 120h120v120H1200zM120 240h120v120H120zM360 360h120v120H360zM600 240h120v120H600zM840 360h120v120H840zM1080 240h120v120H1080zM1320 360h120v120H1320zM0 480h120v120H0zM240 600h120v120H240zM480 480h120v120H480zM720 600h120v120H720zM960 480h120v120H960zM1200 600h120v120H1200zM120 720h120v120H120zM360 840h120v60H360zM600 720h120v120H600zM840 840h120v60H840zM1080 720h120v120H1080zM1320 840h120v60H1320z"/>
+      </g>
+      <!-- bushes -->
+      <g fill="#2c5e2b">
+        <ellipse cx="150" cy="180" rx="70" ry="46"/><ellipse cx="210" cy="150" rx="52" ry="38"/><ellipse cx="95" cy="150" rx="48" ry="34"/>
+        <ellipse cx="1290" cy="700" rx="76" ry="50"/><ellipse cx="1355" cy="665" rx="54" ry="40"/><ellipse cx="1230" cy="665" rx="50" ry="36"/>
+        <ellipse cx="1310" cy="170" rx="60" ry="40"/><ellipse cx="1370" cy="140" rx="46" ry="34"/>
+        <ellipse cx="130" cy="740" rx="64" ry="42"/><ellipse cx="70" cy="705" rx="46" ry="34"/>
+      </g>
+      <g fill="#377338">
+        <ellipse cx="150" cy="168" rx="46" ry="30"/><ellipse cx="1290" cy="688" rx="50" ry="32"/>
+        <ellipse cx="1310" cy="158" rx="38" ry="26"/><ellipse cx="130" cy="728" rx="40" ry="27"/>
+      </g>
+      <!-- power cubes -->
+      <g transform="translate(320,760) rotate(-8)">
+        <rect width="34" height="34" rx="6" fill="#a44df0" stroke="#6b1fb8" stroke-width="3"/>
+        <path d="M17 6 L26 17 L17 28 L8 17 Z" fill="#e2b6ff"/>
+      </g>
+      <g transform="translate(1120,150) rotate(10)">
+        <rect width="28" height="28" rx="5" fill="#a44df0" stroke="#6b1fb8" stroke-width="3"/>
+        <path d="M14 5 L21 14 L14 23 L7 14 Z" fill="#e2b6ff"/>
+      </g>
+      <!-- poison gas creeping at the edges -->
+      <rect width="1440" height="900" fill="url(#gas)" opacity="0.5"/>
+      <defs>
+        <radialGradient id="gas" cx="0.5" cy="0.5" r="0.72">
+          <stop offset="0.75" stop-color="transparent"/>
+          <stop offset="1" stop-color="#7a3fc9"/>
+        </radialGradient>
+      </defs>
+    </svg>
     <div class="room-inner">
       <header class="room-head">
         <p class="kicker mono">06 · off hours</p>
@@ -410,6 +447,20 @@
   <!-- ═══ 08 · CONTACT ═══ -->
   <section id="contact" class="room r-stage">
     <div class="stage-lights" aria-hidden="true"><span></span><span></span><span></span></div>
+    <svg class="kit-silhouette" viewBox="0 0 520 300" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round">
+        <circle cx="260" cy="200" r="86"/>
+        <circle cx="150" cy="120" r="46"/>
+        <circle cx="330" cy="105" r="40"/>
+        <ellipse cx="70" cy="82" rx="52" ry="10"/>
+        <line x1="70" y1="92" x2="70" y2="270"/>
+        <ellipse cx="450" cy="66" rx="58" ry="11"/>
+        <line x1="450" y1="77" x2="440" y2="270"/>
+        <line x1="205" y1="270" x2="315" y2="270"/>
+        <ellipse cx="410" cy="180" rx="42" ry="30"/>
+        <line x1="410" y1="210" x2="410" y2="272"/>
+      </g>
+    </svg>
     <div class="room-inner contact-inner">
       <header class="room-head">
         <p class="kicker mono">07 · outro</p>

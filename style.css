@@ -352,6 +352,7 @@ h3 { font-size: 1.2rem; }
 .board {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
   width: min(58vh, 100%, 560px);
   aspect-ratio: 1;
   border: var(--border); border-radius: 8px; overflow: hidden;
@@ -362,8 +363,9 @@ h3 { font-size: 1.2rem; }
   display: flex; align-items: center; justify-content: center;
   font-size: clamp(1.3rem, 4.8vh, 2.4rem);
   cursor: pointer; position: relative;
-  line-height: 1;
+  line-height: 1; min-width: 0; min-height: 0;
 }
+.sq .pc-w, .sq .pc-b { display: block; height: 1em; line-height: 1; }
 .sq.light { background: #f6ecd4; }
 .sq.dark { background: #a8bf7e; }
 .sq.sel { outline: 3px solid var(--red); outline-offset: -3px; z-index: 1; }

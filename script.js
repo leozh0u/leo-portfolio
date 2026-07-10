@@ -1,51 +1,145 @@
 /* Leo Zhou — portfolio interactions */
 
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const desktop = () => matchMedia("(min-width: 901px)").matches;
 
-// ---------- nav background on scroll ----------
-const nav = document.getElementById("nav");
-addEventListener("scroll", () => {
-  nav.classList.toggle("scrolled", scrollY > 40);
-}, { passive: true });
+/* ============================================================
+   World navigation — horizontal rooms
+   ============================================================ */
+const world = document.getElementById("world");
+const rooms = [...document.querySelectorAll(".room")];
+const progressBar = document.getElementById("progress-bar");
+const navLinks = [...document.querySelectorAll(".nav-links a")];
 
-// ---------- typewriter ----------
-const roles = [
-  "real-time booking engines",
-  "71 KB neural networks",
-  "bare-metal firmware",
-  "iOS apps with camera superpowers",
-  "wafer maps that retired Excel",
-  "things that survive load tests",
-];
-const typeEl = document.getElementById("typewriter");
-let roleIdx = 0, charIdx = 0, deleting = false;
-function typeTick() {
-  const word = roles[roleIdx];
-  charIdx += deleting ? -1 : 1;
-  typeEl.textContent = word.slice(0, charIdx);
-  let delay = deleting ? 32 : 62;
-  if (!deleting && charIdx === word.length) { delay = 1700; deleting = true; }
-  else if (deleting && charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; delay = 350; }
-  setTimeout(typeTick, delay);
+const dotsBox = document.getElementById("dots");
+rooms.forEach((room, i) => {
+  const d = document.createElement("button");
+  d.className = "dot";
+  d.setAttribute("aria-label", room.id);
+  d.addEventListener("click", () => goRoom(i));
+  dotsBox.appendChild(d);
+});
+const dots = [...dotsBox.children];
+
+function goRoom(i) {
+  i = Math.max(0, Math.min(rooms.length - 1, i));
+  if (desktop()) {
+    world.scrollTo({ left: i * world.clientWidth, behavior: reducedMotion ? "auto" : "smooth" });
+  } else {
+    rooms[i].scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+  }
 }
-if (reducedMotion) typeEl.textContent = roles[0];
-else typeTick();
+function curRoom() {
+  return Math.round(world.scrollLeft / world.clientWidth);
+}
+function paintNav() {
+  const i = desktop() ? curRoom() : 0;
+  dots.forEach((d, j) => d.classList.toggle("active", j === i));
+  const id = rooms[i]?.id;
+  navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+  if (desktop()) {
+    const max = world.scrollWidth - world.clientWidth;
+    progressBar.style.width = max ? (world.scrollLeft / max) * 100 + "%" : "0";
+  }
+}
+world.addEventListener("scroll", paintNav, { passive: true });
+paintNav();
 
-// ---------- hero: sticker parallax ----------
-const stickers = document.querySelectorAll(".sticker");
-if (!reducedMotion && matchMedia("(pointer: fine)").matches) {
-  document.querySelector(".hero").addEventListener("pointermove", e => {
-    const dx = e.clientX / innerWidth - 0.5;
-    const dy = e.clientY / innerHeight - 0.5;
-    stickers.forEach(s => {
-      const d = +s.dataset.depth;
-      s.style.marginLeft = `${dx * d * -10}px`;
-      s.style.marginTop = `${dy * d * -10}px`;
-    });
+// nav links + in-page anchors jump between rooms
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const target = document.getElementById(a.getAttribute("href").slice(1));
+    const idx = rooms.indexOf(target);
+    if (idx !== -1) { e.preventDefault(); goRoom(idx); }
   });
+});
+
+// vertical wheel = next/previous room (unless the room itself can scroll)
+let wheelLock = 0;
+addEventListener("wheel", e => {
+  if (!desktop()) return;
+  if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // native horizontal pan
+  const room = e.target.closest(".room");
+  if (room) {
+    const down = e.deltaY > 0;
+    const canScroll = down
+      ? room.scrollTop + room.clientHeight < room.scrollHeight - 1
+      : room.scrollTop > 0;
+    if (canScroll) return; // let the room scroll vertically
+  }
+  e.preventDefault();
+  const now = Date.now();
+  if (now - wheelLock < 650 || Math.abs(e.deltaY) < 12) return;
+  wheelLock = now;
+  goRoom(curRoom() + (e.deltaY > 0 ? 1 : -1));
+}, { passive: false });
+
+addEventListener("keydown", e => {
+  if (/input|textarea/i.test(document.activeElement?.tagName || "")) return;
+  if (e.key === "ArrowRight") goRoom(curRoom() + 1);
+  if (e.key === "ArrowLeft") goRoom(curRoom() - 1);
+});
+
+const roomVisible = id => {
+  const r = document.getElementById(id).getBoundingClientRect();
+  return r.left < innerWidth && r.right > 0 && r.top < innerHeight && r.bottom > 0;
+};
+
+/* ============================================================
+   Hero — cursor-reactive dot field + confetti + typewriter
+   ============================================================ */
+const field = document.getElementById("field");
+if (field && !reducedMotion) {
+  const ctx = field.getContext("2d");
+  let W, H, pts = [];
+  const GAP = 46;
+  function build() {
+    W = field.width = field.offsetWidth * devicePixelRatio;
+    H = field.height = field.offsetHeight * devicePixelRatio;
+    pts = [];
+    const g = GAP * devicePixelRatio;
+    for (let y = g / 2; y < H; y += g)
+      for (let x = g / 2; x < W; x += g)
+        pts.push({ x, y });
+  }
+  build();
+  addEventListener("resize", build);
+  let mx = -9999, my = -9999;
+  const hero = document.getElementById("hero");
+  hero.addEventListener("pointermove", e => {
+    const r = field.getBoundingClientRect();
+    mx = (e.clientX - r.left) * devicePixelRatio;
+    my = (e.clientY - r.top) * devicePixelRatio;
+  });
+  hero.addEventListener("pointerleave", () => { mx = my = -9999; });
+  let t = 0;
+  (function draw() {
+    t += 0.015;
+    ctx.clearRect(0, 0, W, H);
+    const R = 150 * devicePixelRatio;
+    for (const p of pts) {
+      const dx = p.x - mx, dy = p.y - my;
+      const d = Math.hypot(dx, dy);
+      let x = p.x + Math.sin(t + p.y * 0.01) * 2 * devicePixelRatio;
+      let y = p.y + Math.cos(t + p.x * 0.01) * 2 * devicePixelRatio;
+      let size = 1.6, alpha = 0.16, color = "34,28,20";
+      if (d < R) {
+        const k = 1 - d / R;
+        x += (dx / (d || 1)) * k * 26 * devicePixelRatio;
+        y += (dy / (d || 1)) * k * 26 * devicePixelRatio;
+        size = 1.6 + k * 2.6;
+        alpha = 0.16 + k * 0.5;
+        color = "230,57,47";
+      }
+      ctx.fillStyle = `rgba(${color},${alpha})`;
+      ctx.beginPath();
+      ctx.arc(x, y, size * devicePixelRatio, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  })();
 }
 
-// ---------- hero: confetti on name click ----------
 const CONFETTI_COLORS = ["#e6392f", "#2b6bd9", "#2e9e5b", "#f2b705", "#7b4bd8"];
 function confettiBurst(x, y, n = 60) {
   if (reducedMotion) return;
@@ -66,56 +160,52 @@ function confettiBurst(x, y, n = 60) {
     anim.onfinish = () => c.remove();
   }
 }
-const heroName = document.getElementById("hero-name");
-heroName.addEventListener("click", e => confettiBurst(e.clientX, e.clientY));
+document.getElementById("hero-name").addEventListener("click", e => confettiBurst(e.clientX, e.clientY));
 
-// ---------- scroll reveal ----------
-const revealObserver = new IntersectionObserver(entries => {
-  for (const e of entries) {
-    if (e.isIntersecting) {
-      e.target.classList.add("in");
-      revealObserver.unobserve(e.target);
-    }
-  }
-}, { threshold: 0.15 });
-document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+const roles = ["real-time backends", "71 KB neural nets", "bare-metal firmware", "iOS apps"];
+const typeEl = document.getElementById("typewriter");
+let roleIdx = 0, charIdx = 0, deleting = false;
+function typeTick() {
+  const word = roles[roleIdx];
+  charIdx += deleting ? -1 : 1;
+  typeEl.textContent = word.slice(0, charIdx);
+  let delay = deleting ? 32 : 62;
+  if (!deleting && charIdx === word.length) { delay = 1700; deleting = true; }
+  else if (deleting && charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; delay = 350; }
+  setTimeout(typeTick, delay);
+}
+if (reducedMotion) typeEl.textContent = roles[0];
+else typeTick();
 
-// ---------- animated counters ----------
+/* ============================================================
+   Counters + geo map
+   ============================================================ */
 function animateCount(el) {
   const target = +el.dataset.count;
   const t0 = performance.now();
   function step(t) {
     const k = Math.min((t - t0) / 1400, 1);
-    const eased = 1 - Math.pow(1 - k, 3);
-    el.textContent = Math.round(target * eased).toLocaleString();
+    el.textContent = Math.round(target * (1 - Math.pow(1 - k, 3))).toLocaleString();
     if (k < 1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
 }
 const countObserver = new IntersectionObserver(entries => {
-  for (const e of entries) {
-    if (e.isIntersecting) {
-      animateCount(e.target);
-      countObserver.unobserve(e.target);
-    }
-  }
-}, { threshold: 0.6 });
+  for (const e of entries) if (e.isIntersecting) { animateCount(e.target); countObserver.unobserve(e.target); }
+}, { threshold: 0.5 });
 document.querySelectorAll("[data-count]").forEach(el => countObserver.observe(el));
 
-// ---------- geoguessr map: grid + plane along the arc ----------
 const grid = document.querySelector(".geo-grid");
 if (grid) {
   const NS = "http://www.w3.org/2000/svg";
   for (let x = 0; x <= 800; x += 80) {
     const l = document.createElementNS(NS, "line");
-    l.setAttribute("x1", x); l.setAttribute("y1", 0);
-    l.setAttribute("x2", x); l.setAttribute("y2", 400);
+    l.setAttribute("x1", x); l.setAttribute("y1", 0); l.setAttribute("x2", x); l.setAttribute("y2", 400);
     grid.appendChild(l);
   }
   for (let y = 0; y <= 400; y += 80) {
     const l = document.createElementNS(NS, "line");
-    l.setAttribute("x1", 0); l.setAttribute("y1", y);
-    l.setAttribute("x2", 800); l.setAttribute("y2", y);
+    l.setAttribute("x1", 0); l.setAttribute("y1", y); l.setAttribute("x2", 800); l.setAttribute("y2", y);
     grid.appendChild(l);
   }
 }
@@ -123,23 +213,301 @@ const arc = document.getElementById("flight-arc");
 const plane = document.querySelector(".geo-plane");
 if (arc && plane && !reducedMotion) {
   const total = arc.getTotalLength();
-  let t = 0;
+  let ft = 0;
   (function fly() {
-    t = (t + 0.0012) % 1;
-    const p = arc.getPointAtLength(t * total);
-    const p2 = arc.getPointAtLength(Math.min(t + 0.01, 1) * total);
+    ft = (ft + 0.0012) % 1;
+    const p = arc.getPointAtLength(ft * total);
+    const p2 = arc.getPointAtLength(Math.min(ft + 0.01, 1) * total);
     const angle = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
     plane.setAttribute("transform", `translate(${p.x},${p.y}) rotate(${angle})`);
-    plane.setAttribute("x", 0); plane.setAttribute("y", 0);
     requestAnimationFrame(fly);
   })();
 }
 
-// ---------- snow in the ski section ----------
+/* ============================================================
+   Chess — playable board, every white piece is a skill
+   ============================================================ */
+const GLYPH = { k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟" };
+const VAL = { p: 1, n: 3, b: 3, r: 5, q: 9, k: 99 };
+const KN = [[1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1], [-2, 1], [-1, 2]];
+const DIAG = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
+const ORTH = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+const PIECE_LINES = {
+  k: "if this falls, the game is over.",
+  q: "goes everywhere, does everything.",
+  r: "straight lines, heavy lifting.",
+  b: "works the long diagonals.",
+  n: "moves in ways nothing else can.",
+  p: "small, forward-only, promotes.",
+};
+const PIECE_NAMES = { k: "King", q: "Queen", r: "Rook", b: "Bishop", n: "Knight", p: "Pawn" };
+
+let board, whiteTurn, rights, gameOver, lastMove, sel, targets, caps;
+
+function newGame() {
+  const back = ["r", "n", "b", "q", "k", "b", "n", "r"];
+  const backSkills = ["C/C++", "STM32 · FreeRTOS", "PyTorch", "Python", "Git", "React", "Swift · SwiftUI", "TypeScript"];
+  const pawnSkills = ["Docker", "PostgreSQL", "Redis", "FastAPI", "WebSockets", "SQL", "CI/CD", "Sentry"];
+  board = Array.from({ length: 8 }, () => Array(8).fill(null));
+  for (let c = 0; c < 8; c++) {
+    board[0][c] = { t: back[c], w: false };
+    board[1][c] = { t: "p", w: false };
+    board[6][c] = { t: "p", w: true, skill: pawnSkills[c] };
+    board[7][c] = { t: back[c], w: true, skill: backSkills[c] };
+  }
+  whiteTurn = true;
+  rights = { w: { k: true, q: true }, b: { k: true, q: true } };
+  gameOver = false;
+  lastMove = null; sel = null; targets = [];
+  caps = { w: [], b: [] };
+}
+const inB = (r, c) => r >= 0 && r < 8 && c >= 0 && c < 8;
+
+function isAttacked(B, r, c, byWhite) {
+  const pr = byWhite ? r + 1 : r - 1;
+  for (const dc of [-1, 1]) {
+    if (inB(pr, c + dc)) {
+      const p = B[pr][c + dc];
+      if (p && p.w === byWhite && p.t === "p") return true;
+    }
+  }
+  for (const [dr, dc] of KN) {
+    const r2 = r + dr, c2 = c + dc;
+    if (inB(r2, c2)) {
+      const p = B[r2][c2];
+      if (p && p.w === byWhite && p.t === "n") return true;
+    }
+  }
+  for (const dirs of [DIAG, ORTH]) {
+    const sliders = dirs === DIAG ? ["b", "q"] : ["r", "q"];
+    for (const [dr, dc] of dirs) {
+      let r2 = r + dr, c2 = c + dc, dist = 1;
+      while (inB(r2, c2)) {
+        const p = B[r2][c2];
+        if (p) {
+          if (p.w === byWhite && (sliders.includes(p.t) || (p.t === "k" && dist === 1))) return true;
+          break;
+        }
+        r2 += dr; c2 += dc; dist++;
+      }
+    }
+  }
+  return false;
+}
+
+function pseudo(B, r, c, rt) {
+  const p = B[r][c], out = [];
+  const slide = dirs => {
+    for (const [dr, dc] of dirs) {
+      let r2 = r + dr, c2 = c + dc;
+      while (inB(r2, c2)) {
+        const q = B[r2][c2];
+        if (!q) out.push([r2, c2]);
+        else { if (q.w !== p.w) out.push([r2, c2]); break; }
+        r2 += dr; c2 += dc;
+      }
+    }
+  };
+  if (p.t === "p") {
+    const d = p.w ? -1 : 1, start = p.w ? 6 : 1;
+    if (inB(r + d, c) && !B[r + d][c]) {
+      out.push([r + d, c]);
+      if (r === start && !B[r + 2 * d][c]) out.push([r + 2 * d, c]);
+    }
+    for (const dc of [-1, 1]) {
+      const r2 = r + d, c2 = c + dc;
+      if (inB(r2, c2) && B[r2][c2] && B[r2][c2].w !== p.w) out.push([r2, c2]);
+    }
+  } else if (p.t === "n") {
+    for (const [dr, dc] of KN) {
+      const r2 = r + dr, c2 = c + dc;
+      if (inB(r2, c2) && (!B[r2][c2] || B[r2][c2].w !== p.w)) out.push([r2, c2]);
+    }
+  } else if (p.t === "k") {
+    for (const [dr, dc] of [...DIAG, ...ORTH]) {
+      const r2 = r + dr, c2 = c + dc;
+      if (inB(r2, c2) && (!B[r2][c2] || B[r2][c2].w !== p.w)) out.push([r2, c2]);
+    }
+    const rank = p.w ? 7 : 0, side = p.w ? rt.w : rt.b;
+    if (r === rank && c === 4 && !isAttacked(B, rank, 4, !p.w)) {
+      if (side.k && !B[rank][5] && !B[rank][6] &&
+          B[rank][7]?.t === "r" && B[rank][7].w === p.w &&
+          !isAttacked(B, rank, 5, !p.w) && !isAttacked(B, rank, 6, !p.w)) out.push([rank, 6]);
+      if (side.q && !B[rank][3] && !B[rank][2] && !B[rank][1] &&
+          B[rank][0]?.t === "r" && B[rank][0].w === p.w &&
+          !isAttacked(B, rank, 3, !p.w) && !isAttacked(B, rank, 2, !p.w)) out.push([rank, 2]);
+    }
+  } else {
+    slide(p.t === "b" ? DIAG : p.t === "r" ? ORTH : [...DIAG, ...ORTH]);
+  }
+  return out;
+}
+
+const cloneB = B => B.map(row => row.map(p => (p ? { ...p } : null)));
+
+function applyMove(B, from, to) {
+  const p = B[from[0]][from[1]];
+  B[to[0]][to[1]] = p;
+  B[from[0]][from[1]] = null;
+  if (p.t === "k" && Math.abs(to[1] - from[1]) === 2) {
+    const rank = from[0];
+    if (to[1] === 6) { B[rank][5] = B[rank][7]; B[rank][7] = null; }
+    else { B[rank][3] = B[rank][0]; B[rank][0] = null; }
+  }
+  if (p.t === "p" && (to[0] === 0 || to[0] === 7)) p.t = "q";
+}
+
+function legalFrom(B, r, c, rt) {
+  const p = B[r][c], out = [];
+  for (const m of pseudo(B, r, c, rt)) {
+    const B2 = cloneB(B);
+    applyMove(B2, [r, c], m);
+    let kr, kc;
+    outer: for (let i = 0; i < 8; i++)
+      for (let j = 0; j < 8; j++)
+        if (B2[i][j]?.t === "k" && B2[i][j].w === p.w) { kr = i; kc = j; break outer; }
+    if (!isAttacked(B2, kr, kc, !p.w)) out.push(m);
+  }
+  return out;
+}
+
+function allLegal(B, white, rt) {
+  const out = [];
+  for (let r = 0; r < 8; r++)
+    for (let c = 0; c < 8; c++)
+      if (B[r][c] && B[r][c].w === white)
+        for (const m of legalFrom(B, r, c, rt)) out.push({ from: [r, c], to: m });
+  return out;
+}
+
+function inCheck(B, white) {
+  for (let r = 0; r < 8; r++)
+    for (let c = 0; c < 8; c++)
+      if (B[r][c]?.t === "k" && B[r][c].w === white)
+        return isAttacked(B, r, c, !white);
+  return false;
+}
+
+// --- chess UI ---
+const boardEl = document.getElementById("board");
+const statusEl = document.getElementById("chess-status");
+const dosPiece = document.getElementById("dossier-piece");
+const dosName = document.getElementById("dossier-name");
+const dosLine = document.getElementById("dossier-line");
+const capsEl = document.getElementById("captures");
+const sqEls = [];
+if (boardEl) {
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      const d = document.createElement("div");
+      d.className = "sq " + ((r + c) % 2 ? "dark" : "light");
+      d.addEventListener("click", () => onSquare(r, c));
+      boardEl.appendChild(d);
+      sqEls.push(d);
+    }
+  }
+  newGame();
+  render();
+  document.getElementById("chess-reset").addEventListener("click", () => {
+    newGame(); render(); setStatus("your move");
+    dosPiece.textContent = "♟"; dosName.textContent = "Pick a piece";
+    dosLine.textContent = "every piece on your side is a skill";
+  });
+}
+
+function setStatus(s) { statusEl.textContent = s; }
+
+function render() {
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      const el = sqEls[r * 8 + c], p = board[r][c];
+      el.innerHTML = p ? `<span class="${p.w ? "pc-w" : "pc-b"}">${GLYPH[p.t]}</span>` : "";
+      el.classList.toggle("sel", !!sel && sel[0] === r && sel[1] === c);
+      const isTgt = targets.some(t => t[0] === r && t[1] === c);
+      el.classList.toggle("tgt", isTgt);
+      el.classList.toggle("cap", isTgt && !!p);
+      el.classList.toggle("last", !!lastMove && ((lastMove.from[0] === r && lastMove.from[1] === c) || (lastMove.to[0] === r && lastMove.to[1] === c)));
+    }
+  }
+  capsEl.textContent = caps.w.map(t => GLYPH[t]).join(" ");
+}
+
+function updateRights(from, to) {
+  const p = board[to[0]][to[1]];
+  if (p.t === "k" || (p.t === "q" && p.skill === "Git")) { /* king moved (may be promoted glyph) */ }
+  if (p.t === "k") rights[p.w ? "w" : "b"] = { k: false, q: false };
+  const corners = [[7, 0, "w", "q"], [7, 7, "w", "k"], [0, 0, "b", "q"], [0, 7, "b", "k"]];
+  for (const [r, c, side, wing] of corners) {
+    if ((from[0] === r && from[1] === c) || (to[0] === r && to[1] === c)) rights[side][wing] = false;
+  }
+}
+
+function afterMove() {
+  const oppWhite = whiteTurn;
+  const moves = allLegal(board, oppWhite, rights);
+  if (moves.length === 0) {
+    gameOver = true;
+    if (inCheck(board, oppWhite)) setStatus(oppWhite ? "checkmate — rematch?" : "checkmate — gg");
+    else setStatus("stalemate");
+    return;
+  }
+  if (inCheck(board, oppWhite)) setStatus("check!");
+  else setStatus(oppWhite ? "your move" : "thinking…");
+}
+
+function doMove(from, to) {
+  const victim = board[to[0]][to[1]];
+  if (victim) caps[victim.w ? "b" : "w"].push(victim.t);
+  applyMove(board, from, to);
+  updateRights(from, to);
+  lastMove = { from, to };
+  whiteTurn = !whiteTurn;
+  afterMove();
+}
+
+function onSquare(r, c) {
+  if (gameOver || !whiteTurn) return;
+  const p = board[r][c];
+  if (sel && targets.some(t => t[0] === r && t[1] === c)) {
+    doMove(sel, [r, c]);
+    sel = null; targets = [];
+    render();
+    if (!gameOver) setTimeout(botMove, 420 + Math.random() * 300);
+    return;
+  }
+  if (p && p.w) {
+    sel = [r, c];
+    targets = legalFrom(board, r, c, rights);
+    dosPiece.innerHTML = `<span class="pc-b">${GLYPH[p.t]}</span>`;
+    dosName.textContent = p.skill || PIECE_NAMES[p.t];
+    dosLine.textContent = PIECE_LINES[p.t] + (p.skill && p.t === "q" && p.skill !== "Python" ? " (promoted.)" : "");
+  } else {
+    sel = null; targets = [];
+  }
+  render();
+}
+
+function botMove() {
+  if (gameOver) return;
+  const moves = allLegal(board, false, rights);
+  if (!moves.length) return;
+  let best = null, bestScore = -1;
+  for (const m of moves) {
+    const victim = board[m.to[0]][m.to[1]];
+    const score = (victim ? VAL[victim.t] * 10 : 0) + Math.random() * 4;
+    if (score > bestScore) { bestScore = score; best = m; }
+  }
+  doMove(best.from, best.to);
+  render();
+}
+
+/* ============================================================
+   Ski room — snow
+   ============================================================ */
 const snowBox = document.querySelector(".snow");
 if (snowBox && !reducedMotion) {
   const glyphs = ["❄", "❅", "•"];
-  for (let i = 0; i < 36; i++) {
+  for (let i = 0; i < 30; i++) {
     const f = document.createElement("span");
     f.className = "flake";
     f.textContent = glyphs[i % glyphs.length];
@@ -152,7 +520,9 @@ if (snowBox && !reducedMotion) {
   }
 }
 
-// ---------- card tilt ----------
+/* ============================================================
+   Tilt cards
+   ============================================================ */
 if (!reducedMotion && matchMedia("(pointer: fine)").matches) {
   document.querySelectorAll("[data-tilt]").forEach(card => {
     card.addEventListener("pointermove", e => {
@@ -165,25 +535,71 @@ if (!reducedMotion && matchMedia("(pointer: fine)").matches) {
   });
 }
 
-// ---------- scoreboard easter egg: 14-14, la belle ----------
+/* ============================================================
+   Deck — deploys
+   ============================================================ */
+const arena = document.getElementById("deck");
+const deployLine = document.getElementById("deploy-line");
+const TETRA_COLORS = ["#00f0f0", "#f0f000", "#a000f0", "#00f000", "#f00000", "#0000f0", "#f0a000"];
+let deployTimer = null;
+document.querySelectorAll(".cr-card").forEach(card => {
+  card.addEventListener("click", () => {
+    deployLine.textContent = card.dataset.cry;
+    clearTimeout(deployTimer);
+    deployTimer = setTimeout(() => { deployLine.innerHTML = "&nbsp;"; }, 2400);
+    if (reducedMotion) return;
+    if (card.dataset.deploy === "tetris") {
+      for (let i = 0; i < 16; i++) {
+        const b = document.createElement("div");
+        b.className = "tetromino";
+        const s = 16 + Math.random() * 18;
+        b.style.width = b.style.height = s + "px";
+        b.style.left = Math.random() * 96 + "%";
+        b.style.background = TETRA_COLORS[i % TETRA_COLORS.length];
+        arena.appendChild(b);
+        const anim = b.animate([
+          { transform: "translateY(0) rotate(0)" },
+          { transform: `translateY(${arena.offsetHeight + 120}px) rotate(${(Math.random() - 0.5) * 720}deg)` },
+        ], { duration: 1400 + Math.random() * 1400, easing: "cubic-bezier(0.4, 0, 0.9, 0.6)", delay: Math.random() * 500 });
+        anim.onfinish = () => b.remove();
+      }
+      return;
+    }
+    const runner = document.createElement("span");
+    runner.className = "runner";
+    runner.textContent = card.dataset.deploy;
+    arena.appendChild(runner);
+    const dist = arena.offsetWidth + 160;
+    const anim = runner.animate([
+      { transform: "translateX(0) scaleX(-1)" },
+      { transform: `translateX(${dist * 0.5}px) translateY(-30px) scaleX(-1)`, offset: 0.5 },
+      { transform: `translateX(${dist}px) scaleX(-1)` },
+    ], { duration: 1700, easing: "linear" });
+    anim.onfinish = () => runner.remove();
+  });
+});
+
+/* ============================================================
+   Scoreboard easter egg
+   ============================================================ */
 const scoreLeft = document.getElementById("score-left");
 if (scoreLeft) {
-  const board = scoreLeft.closest(".scoreboard");
-  board.title = "la belle";
-  board.addEventListener("click", e => {
+  const sb = scoreLeft.closest(".scoreboard");
+  sb.addEventListener("click", e => {
     scoreLeft.textContent = "15";
-    board.querySelector(".score-time").textContent = "TOUCHÉ";
-    const lamp = board.querySelector(".lamp-red");
+    sb.querySelector(".score-time").textContent = "TOUCHÉ";
+    const lamp = sb.querySelector(".lamp-red");
     lamp.style.animation = "none";
     lamp.style.opacity = "1";
-    const r = board.getBoundingClientRect();
-    confettiBurst(e.clientX || r.left + r.width / 2, e.clientY || r.top, 40);
+    confettiBurst(e.clientX, e.clientY, 40);
   }, { once: true });
 }
 
-// ---------- playable drum kit (WebAudio, no samples) ----------
+/* ============================================================
+   Drums (WebAudio) + Minecraft hotbar
+   ============================================================ */
 let audioCtx = null;
-function ctx() {
+function actx() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   if (audioCtx.state === "suspended") audioCtx.resume();
   return audioCtx;
@@ -241,38 +657,14 @@ const drums = {
 function hitDrum(name) {
   const btn = document.querySelector(`.drum[data-drum="${name}"]`);
   if (!btn) return;
-  drums[name](ctx());
+  drums[name](actx());
   btn.classList.add("hit");
   setTimeout(() => btn.classList.remove("hit"), 90);
 }
 document.querySelectorAll(".drum").forEach(btn => {
   btn.addEventListener("pointerdown", () => hitDrum(btn.dataset.drum));
 });
-// ---------- battle deck: deploy a card ----------
-const arena = document.querySelector(".sec-arena");
-const deployLine = document.getElementById("deploy-line");
-let deployTimer = null;
-document.querySelectorAll(".gcard").forEach(card => {
-  card.addEventListener("click", () => {
-    deployLine.textContent = card.dataset.cry;
-    clearTimeout(deployTimer);
-    deployTimer = setTimeout(() => { deployLine.innerHTML = "&nbsp;"; }, 2600);
-    if (reducedMotion) return;
-    const runner = document.createElement("span");
-    runner.className = "runner";
-    runner.textContent = card.dataset.deploy;
-    arena.appendChild(runner);
-    const dist = arena.offsetWidth + 160;
-    const anim = runner.animate([
-      { transform: "translateX(0) scaleX(-1)" },
-      { transform: `translateX(${dist * 0.5}px) translateY(-30px) scaleX(-1)`, offset: 0.5 },
-      { transform: `translateX(${dist}px) scaleX(-1)` },
-    ], { duration: 1800, easing: "linear" });
-    anim.onfinish = () => runner.remove();
-  });
-});
 
-// ---------- minecraft hotbar ----------
 const slots = [...document.querySelectorAll(".slot")];
 const itemName = document.getElementById("item-name");
 let itemNameTimer = null;
@@ -289,11 +681,7 @@ const drumKeys = { k: "kick", s: "snare", h: "hat", c: "crash" };
 addEventListener("keydown", e => {
   if (e.repeat || e.metaKey || e.ctrlKey || e.altKey) return;
   if (/input|textarea/i.test(document.activeElement?.tagName || "")) return;
-  // both easter eggs only fire while the contact section is on screen,
-  // so typing elsewhere stays quiet
-  const contact = document.getElementById("contact").getBoundingClientRect();
-  const onScreen = contact.top < innerHeight && contact.bottom > 0;
-  if (!onScreen) return;
+  if (!roomVisible("contact")) return;
   const name = drumKeys[e.key.toLowerCase()];
   if (name) hitDrum(name);
   const digit = +e.key;

@@ -15,9 +15,9 @@ Works as-is on GitHub Pages, Netlify, or Vercel — just serve the folder.
 
 ## Structure
 
-- `index.html` — all content lives here (sections: origin, fencing, skills, experience, projects, games, contact)
+- `index.html` — all content, as 8 full-screen "rooms" navigated horizontally (hero, origin, fencing, chess, work, projects, deck, contact); stacks vertically under 900px
 - `style.css` — theme + animations
-- `script.js` — sparks canvas, typewriter, scroll reveals, counters, tilt cards
+- `script.js` — room navigation (wheel/keys/dots), cursor-reactive dot field, a full playable chess engine (each white piece is a skill), Clash Royale deck deploys, WebAudio drums, Minecraft hotbar
 - `LeoZhou_resume.pdf` — linked from the contact section
 
 ## Updating projects

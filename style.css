@@ -200,7 +200,7 @@ h3 { font-size: 1.25rem; font-weight: 600; }
 .piste-stripes {
   position: absolute; inset: 0; pointer-events: none; opacity: 0.55;
   background:
-    linear-gradient(90deg, transparent 0 6%, var(--red) 6% 6.6%, transparent 6.6% 93.4%, var(--red) 93.4% 94%, transparent 94%),
+    linear-gradient(90deg, transparent 0 1.4%, var(--red) 1.4% 1.9%, transparent 1.9% 98.1%, var(--red) 98.1% 98.6%, transparent 98.6%),
     repeating-linear-gradient(0deg, transparent 0 120px, rgba(230,57,47,0.06) 120px 240px);
 }
 .fencing-stats {
@@ -477,6 +477,7 @@ h3 { font-size: 1.25rem; font-weight: 600; }
   .slalom-line { display: none; }
   .scoreboard { font-size: 0.85rem; padding: 0.8rem 1rem; }
   .sticker { font-size: 1.7rem; }
+  .piste-stripes { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

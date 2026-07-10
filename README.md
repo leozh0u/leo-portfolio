@@ -2,6 +2,8 @@
 
 Personal portfolio site. Static HTML/CSS/JS.
 
+https://leozh0u.github.io/leo-portfolio/
+
 ## Run locally
 
 ```sh

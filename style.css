@@ -799,6 +799,13 @@ h3 { font-size: 1.2rem; }
   transform: translateX(46%);
   animation: spin 3s linear infinite;
 }
+/* right-side sleeve: mirrored, vinyl slides out to the left */
+.np-r {
+  left: auto; right: clamp(1rem, 4vw, 4.5rem);
+  transform: rotate(3deg);
+}
+.np-r .np-vinyl { left: -4%; }
+.np-r:hover .np-vinyl { transform: translateX(-46%); }
 .np figcaption {
   margin-top: 0.55rem; font-size: 0.62rem; font-weight: 700;
   color: var(--stage-ink); opacity: 0.85;

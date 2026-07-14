@@ -539,7 +539,7 @@ h3 { font-size: 1.2rem; }
 
 /* ---------- deck / arena ---------- */
 .r-arena {
-  background: url("photos/coc-base.jpg") center 35% / cover no-repeat #3e7d3a;
+  background: url("photos/coc-base.jpg") left 38% / cover no-repeat #3e7d3a;
   color: #fdf7ea;
 }
 .r-arena::before {
@@ -560,7 +560,8 @@ h3 { font-size: 1.2rem; }
   border: 4px solid #5f3c1c; border-radius: 16px;
   box-shadow: inset 0 3px 0 rgba(255,255,255,0.18), inset 0 -4px 0 rgba(0,0,0,0.25), 0 8px 0 rgba(0,0,0,0.35);
   padding: 0.9rem;
-  width: min(880px, 94vw, calc((100svh - 385px) * 1.45));
+  width: min(820px, 94vw, calc((100svh - 385px) * 1.32));
+  margin-left: auto;
 }
 .cr-tabs { display: flex; gap: 0.6rem; justify-content: center; margin: -0.9rem -0.9rem 0.7rem; padding: 0 1rem; }
 .cr-tab {
@@ -788,13 +789,15 @@ h3 { font-size: 1.2rem; }
   position: absolute; z-index: 1; top: 4%; left: 12%;
   width: 92%; aspect-ratio: 1; border-radius: 50%;
   background:
-    radial-gradient(circle, #d8b46a 0 13%, #16110a 13% 15%, #221a10 15% 16.5%, #16110a 16.5% 100%),
-    repeating-radial-gradient(circle, #16110a 0 2px, #241c11 2px 3px);
+    radial-gradient(circle, #d8b46a 0 13%, transparent 13%),
+    conic-gradient(from 40deg, rgba(255,255,255,0.14) 0 22deg, transparent 22deg 158deg, rgba(255,255,255,0.1) 158deg 200deg, transparent 200deg),
+    radial-gradient(circle, #1a140c 0 32%, #241c11 32% 34%, #1a140c 34% 52%, #241c11 52% 54%, #1a140c 54% 72%, #241c11 72% 74%, #1a140c 74% 100%);
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.3, 1);
+  will-change: transform, rotate;
 }
 .np:hover .np-vinyl {
   transform: translateX(46%);
-  animation: spin 2.2s linear infinite;
+  animation: spin 3s linear infinite;
 }
 .np figcaption {
   margin-top: 0.55rem; font-size: 0.62rem; font-weight: 700;

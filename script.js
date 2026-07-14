@@ -39,7 +39,8 @@ function goRoom(i) {
   i = Math.max(0, Math.min(rooms.length - 1, i));
   cur = i;
   if (desktop()) {
-    track.style.transform = `translateX(${-i * 100}vw)`;
+    // px, not vw: keeps the shift exactly in sync with real room widths
+    track.style.transform = `translateX(${-i * document.documentElement.clientWidth}px)`;
   } else {
     rooms[i].scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
   }
@@ -93,7 +94,7 @@ addEventListener("keydown", e => {
 });
 
 addEventListener("resize", () => {
-  if (desktop()) track.style.transform = `translateX(${-cur * 100}vw)`;
+  if (desktop()) track.style.transform = `translateX(${-cur * document.documentElement.clientWidth}px)`;
   else track.style.transform = "";
 });
 

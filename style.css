@@ -422,6 +422,8 @@ h3 { font-size: 1.2rem; }
   width: 88%; height: 88%; background: transparent;
   border: 4px solid rgba(230,57,47,0.75);
 }
+.chess-xlink { color: var(--blue); font-weight: 700; text-decoration-thickness: 2px; }
+.chess-xlink:hover { color: var(--red); }
 .dossier { display: flex; flex-direction: column; gap: 0.9rem; }
 .dossier-status { font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
 .dossier-card {
@@ -502,7 +504,7 @@ h3 { font-size: 1.2rem; }
   background: rgba(255, 253, 245, 0.55);
 }
 .workbench-label { font-weight: 700; margin-bottom: 0.7rem; }
-.wip-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; }
+.wip-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
 .wip {
   background: #fffdf5; border: 2px solid var(--ink); border-radius: 10px;
   padding: 0.8rem 0.9rem; box-shadow: 3px 3px 0 var(--ink);
@@ -675,13 +677,19 @@ h3 { font-size: 1.2rem; }
 .n-jay { background: #2b6bd9; color: #fff; }
 .n-zane { background: #eef7ff; color: #1d3b5c; }
 .n-kai { background: #e6392f; color: #fff; }
-.n-lloyd {
+.n-lloyd { background: #3fae4c; color: #fff; }
+.n-cole { background: #2b2620; color: #f0e6d2; }
+.n-wu {
   position: static; margin-left: 0.7rem;
-  background: #3fae4c; color: #fff;
+  background: #f5efdf; color: #6b5b2e;
   display: inline-block;
 }
 .lego-white { border-top-color: #dfe8ee; }
 .lego-white .lego-studs span { background: #dfe8ee; }
+.lego-green { border-top-color: #3fae4c; }
+.lego-green .lego-studs span { background: #3fae4c; }
+.lego-black { border-top-color: #2b2620; }
+.lego-black .lego-studs span { background: #4a4238; }
 .runner {
   position: absolute; font-size: 2.6rem; bottom: 12%; left: -80px;
   pointer-events: none; z-index: 5;

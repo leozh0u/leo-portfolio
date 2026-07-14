@@ -191,7 +191,7 @@ function confettiBurst(x, y, n = 60) {
 }
 document.getElementById("hero-name").addEventListener("click", e => confettiBurst(e.clientX, e.clientY));
 
-const roles = ["real-time backends", "71 KB neural nets", "bare-metal firmware", "iOS apps"];
+const roles = ["real-time backends", "71 KB neural nets", "self-training chess engines", "bare-metal firmware", "leakage-tested backtests", "iOS apps"];
 const typeEl = document.getElementById("typewriter");
 let roleIdx = 0, charIdx = 0, deleting = false;
 function typeTick() {

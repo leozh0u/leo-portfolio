@@ -334,6 +334,14 @@ h3 { font-size: 1.2rem; }
 .map-tip .tick { color: #7fe0a7; }
 .geo-text p { margin-bottom: 0.9rem; font-size: 0.98rem; }
 .geo-facts { list-style: none; display: grid; gap: 0.35rem; margin-top: 0.9rem; font-weight: 700; }
+.bollard-card {
+  margin: 1.1rem 0 0; max-width: 340px;
+  background: #fffdf5; border: var(--border); border-radius: 10px;
+  box-shadow: 4px 4px 0 var(--ink); padding: 8px 8px 0;
+  transform: rotate(-1.2deg);
+}
+.bollard-card img { width: 100%; display: block; border: 2px solid var(--ink); border-radius: 6px; }
+.bollard-card figcaption { padding: 0.4rem 0.2rem 0.5rem; font-weight: 700; font-size: 0.68rem; }
 
 /* ---------- fencing ---------- */
 .r-piste { background: var(--piste-bg); }
@@ -497,6 +505,18 @@ h3 { font-size: 1.2rem; }
 .lego-card > p:not(.lego-sub):not(.lego-tags) { font-size: 0.88rem; }
 .lego-tags { margin-top: 0.7rem; color: var(--blue); font-weight: 700; }
 
+.council-photo {
+  margin: 0; align-self: stretch;
+  background: #fffdf5; border: 2px solid var(--ink); border-radius: 10px;
+  box-shadow: 3px 3px 0 var(--ink); padding: 7px 7px 0;
+  transform: rotate(1.6deg);
+  transition: transform 0.2s ease;
+  display: flex; flex-direction: column;
+}
+.council-photo:hover { transform: rotate(0deg) scale(1.03); }
+.council-photo img { width: 100%; flex: 1; object-fit: cover; display: block; border: 2px solid var(--ink); border-radius: 6px; min-height: 0; }
+.council-photo figcaption { text-align: center; padding: 0.3rem 0 0.35rem; font-weight: 700; font-size: 0.6rem; }
+
 .workbench {
   margin-top: 1.6rem;
   border: 3px dashed var(--ink); border-radius: var(--radius);
@@ -504,7 +524,7 @@ h3 { font-size: 1.2rem; }
   background: rgba(255, 253, 245, 0.55);
 }
 .workbench-label { font-weight: 700; margin-bottom: 0.7rem; }
-.wip-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
+.wip-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; }
 .wip {
   background: #fffdf5; border: 2px solid var(--ink); border-radius: 10px;
   padding: 0.8rem 0.9rem; box-shadow: 3px 3px 0 var(--ink);
@@ -518,8 +538,15 @@ h3 { font-size: 1.2rem; }
 .workbench-quote { margin-top: 0.7rem; opacity: 0.5; font-style: italic; }
 
 /* ---------- deck / arena ---------- */
-.r-arena { background: #3e7d3a; color: #fdf7ea; }
-.showdown-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.r-arena {
+  background: url("photos/coc-base.jpg") center 35% / cover no-repeat #3e7d3a;
+  color: #fdf7ea;
+}
+.r-arena::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 26, 10, 0.62) 0%, rgba(10, 26, 10, 0.3) 40%, rgba(10, 26, 10, 0.55) 100%);
+}
 .r-arena h2 {
   font-family: var(--font-cr); font-weight: 400; letter-spacing: 0.02em;
   color: #fff;
@@ -744,6 +771,37 @@ h3 { font-size: 1.2rem; }
 .drum:hover { background: rgba(255,233,201,0.18); }
 .drum.hit { transform: scale(0.88); background: rgba(255,233,201,0.35); }
 
+/* now playing — vinyl */
+.np {
+  position: absolute; z-index: 3;
+  left: clamp(1rem, 4vw, 4.5rem); bottom: clamp(1.5rem, 6vh, 4rem);
+  width: clamp(150px, 14vw, 210px); margin: 0;
+  transform: rotate(-3deg);
+}
+.np-cover {
+  position: relative; z-index: 2;
+  width: 100%; display: block;
+  border: 3px solid var(--stage-ink); border-radius: 4px;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.45);
+}
+.np-vinyl {
+  position: absolute; z-index: 1; top: 4%; left: 12%;
+  width: 92%; aspect-ratio: 1; border-radius: 50%;
+  background:
+    radial-gradient(circle, #d8b46a 0 13%, #16110a 13% 15%, #221a10 15% 16.5%, #16110a 16.5% 100%),
+    repeating-radial-gradient(circle, #16110a 0 2px, #241c11 2px 3px);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.np:hover .np-vinyl {
+  transform: translateX(46%);
+  animation: spin 2.2s linear infinite;
+}
+.np figcaption {
+  margin-top: 0.55rem; font-size: 0.62rem; font-weight: 700;
+  color: var(--stage-ink); opacity: 0.85;
+}
+@keyframes spin { to { rotate: 360deg; } }
+
 .hotbar-wrap { margin: 1.6rem 0 0.4rem; }
 .item-name {
   font-family: "Press Start 2P", var(--font-mono);
@@ -775,6 +833,7 @@ h3 { font-size: 1.2rem; }
 .contact-inner .btn-solid { border-color: var(--stage-ink); box-shadow: 4px 4px 0 rgba(255,233,201,0.35); }
 
 .footer { margin-top: 2.2rem; opacity: 0.7; }
+.footer-fine { font-size: 0.62rem; opacity: 0.65; margin-top: 0.25rem; }
 .footer-quote { margin-top: 0.3rem; font-style: italic; }
 
 /* ---------- confetti ---------- */
@@ -793,6 +852,7 @@ h3 { font-size: 1.2rem; }
 /* ---------- responsive: stack vertically on small screens ---------- */
 @media (max-width: 1250px) {
   .hero-photo { display: none; }
+  .np { position: static; margin: 1.4rem auto 0; transform: rotate(-2deg); }
 }
 @media (max-width: 1150px) {
   .chess-layout { grid-template-columns: 1fr; }

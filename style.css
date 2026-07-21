@@ -713,6 +713,7 @@ h3 { font-size: 1.2rem; }
 .n-kai { background: #e6392f; color: #fff; }
 .n-lloyd { background: #3fae4c; color: #fff; }
 .n-cole { background: #2b2620; color: #f0e6d2; }
+.n-nya { background: #1f9ea8; color: #fff; }
 .n-wu {
   position: static; margin-left: 0.7rem;
   background: #f5efdf; color: #6b5b2e;
@@ -722,6 +723,17 @@ h3 { font-size: 1.2rem; }
 .lego-white .lego-studs span { background: #dfe8ee; }
 .lego-green { border-top-color: #3fae4c; }
 .lego-green .lego-studs span { background: #3fae4c; }
+.lego-teal { border-top-color: #1f9ea8; }
+.lego-teal .lego-studs span { background: #1f9ea8; }
+
+.shelf-label { margin: 1.4rem 0 0.6rem; font-weight: 700; opacity: 0.7; }
+.lego-grid-sm { gap: 1rem; }
+.lego-card.compact { padding: 1.4rem 1.1rem 1rem; }
+.lego-card.compact h3 { font-size: 1.05rem; }
+.lego-card.compact .lego-sub { margin-bottom: 0.4rem; font-size: 0.68rem; }
+.lego-card.compact > p:not(.lego-sub):not(.lego-tags) { font-size: 0.82rem; }
+.lego-card.compact .lego-tags { font-size: 0.68rem; margin-top: 0.5rem; }
+.lego-card.compact .ninja { font-size: 0.58rem; top: 0.7rem; right: 0.7rem; }
 .lego-black { border-top-color: #2b2620; }
 .lego-black .lego-studs span { background: #4a4238; }
 .runner {

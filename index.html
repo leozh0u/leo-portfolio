@@ -249,13 +249,6 @@
           <p class="gate-tags mono">Python · FastAPI · PostgreSQL · React</p>
         </article>
         <article class="gate">
-          <p class="gate-date mono">May 2026 → now</p>
-          <h3>ABC Reads · Founder</h3>
-          <p class="gate-loc mono">iOS</p>
-          <p>Camera app for heritage Chinese speakers — overlays pinyin only on characters you don't know yet, driven by a per-user model and a 120,000-entry offline dictionary I compiled myself.</p>
-          <p class="gate-tags mono">Swift · SwiftUI · Vision OCR · SQLite</p>
-        </article>
-        <article class="gate">
           <p class="gate-date mono">Oct 2025 → Apr 2026</p>
           <h3>Rice Wind Energy · Firmware</h3>
           <p class="gate-loc mono">Houston</p>
@@ -286,53 +279,60 @@
         <article class="lego-card lego-green" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <span class="ninja n-lloyd mono" title="Lloyd · the green ninja">🐉 LLOYD</span>
+          <h3><a href="https://github.com/leozh0u/blundernet-arena" target="_blank" rel="noopener">BlunderNet Arena ↗</a></h3>
+          <p class="lego-sub mono">serving the engine at scale</p>
+          <p>A Go platform that puts BlunderNet online: stateless API fleet behind an ALB, inference decoupled onto an SQS-fed ONNX worker fleet that autoscales on queue depth. p99 move latency stays under <strong>250 ms</strong>, and killing an API task mid-game is invisible to players. Load-tested to <strong>4,000+ req/s with zero errors</strong>; the whole VPC/ECS/ALB/RDS/SQS stack is Terraform, running under $5/month.</p>
+          <p class="lego-tags mono">Go · AWS · Terraform · Redis · ONNX · k6</p>
+        </article>
+        <article class="lego-card lego-white" data-tilt>
+          <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+          <span class="ninja n-zane mono" title="Zane · the nindroid">❄ ZANE</span>
           <h3><a href="https://github.com/leozh0u/blundernet" target="_blank" rel="noopener">BlunderNet ↗</a></h3>
           <p class="lego-sub mono">self-training chess engine</p>
-          <p>AlphaZero-style engine — residual CNN with policy and value heads, PUCT Monte-Carlo tree search in C++ (1.8× faster via virtual-loss batching). Retrains itself daily on fresh Lichess games through scheduled GitHub Actions. Currently ~1000 Elo against Stockfish, and climbing.</p>
+          <p>AlphaZero-style engine — residual CNN with policy and value heads, PUCT Monte-Carlo tree search in C++ (<strong>1.8× faster</strong> via virtual-loss batching). Retrains itself daily on fresh Lichess games through scheduled GitHub Actions, tracked against a 1,200-puzzle tactics suite and daily Elo runs versus Stockfish.</p>
           <p class="lego-tags mono">PyTorch · C++ · pybind11 · GitHub Actions</p>
-        </article>
-        <article class="lego-card lego-black" data-tilt>
-          <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <span class="ninja n-cole mono" title="Cole · master of earth">🪨 COLE</span>
-          <h3><a href="https://github.com/leozh0u/quant-signals" target="_blank" rel="noopener">Quant-Signals ↗</a></h3>
-          <p class="lego-sub mono">falsification-first market research</p>
-          <p>Signal research platform with pre-registered hypotheses and kill criteria. Leakage-tested backtester with a 10 bps cost model and random-signal null baselines — falsified 20-day momentum (gross Sharpe −0.49) and showed tuned parameters lose out-of-sample. 26 years of data, 15,000+ embedded headlines.</p>
-          <p class="lego-tags mono">Python · DuckDB · GitHub Actions</p>
         </article>
         <article class="lego-card lego-blue" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <span class="ninja n-jay mono" title="Jay · master of lightning">⚡ JAY</span>
           <h3><a href="https://github.com/leozh0u/seat-booking" target="_blank" rel="noopener">SeatLive ↗</a></h3>
-          <p class="lego-sub mono">real-time booking engine</p>
-          <p>Stops double-booked seats under real concurrency — atomic conditional <code>UPDATE</code>s with Redis TTL holds, idempotency keys, live seat maps over WebSockets. CI fires 50 simultaneous requests at one seat; exactly one wins.</p>
+          <p class="lego-sub mono">concurrency-safe booking engine</p>
+          <p>Stops double-booked seats under real concurrency — atomic conditional <code>UPDATE</code>s with Redis TTL holds, idempotency keys on confirmation, live seat maps over WebSockets. CI fires 50 simultaneous requests at one seat and proves exactly one wins; Locust served <strong>4,459 requests with zero failures</strong>.</p>
           <p class="lego-tags mono">FastAPI · PostgreSQL · Redis · React · Docker · Sentry</p>
         </article>
-        <article class="lego-card lego-white" data-tilt>
+      </div>
+
+      <p class="shelf-label mono">also on the shelf</p>
+      <div class="lego-grid lego-grid-sm">
+        <article class="lego-card lego-black compact" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <span class="ninja n-zane mono" title="Zane · the nindroid">❄ ZANE</span>
+          <span class="ninja n-cole mono" title="Cole · master of earth">🪨 COLE</span>
           <h3><a href="https://github.com/leozh0u/edgeML-audio-compression-benchmark" target="_blank" rel="noopener">Edge-ML audio ↗</a></h3>
           <p class="lego-sub mono">55× smaller, still listening</p>
-          <p>A 3.9 MB audio classifier compressed to 71 KB (only 6.7 pts of accuracy lost) — distillation, INT8 quantization, pruning — running on a $5 microcontroller at ~300 ms per inference, with a React dashboard streaming live on-device results.</p>
-          <p class="lego-tags mono">PyTorch · TFLite Micro · C++ · ESP32-S3</p>
+          <p>3.9 MB classifier down to 71 KB via distillation, INT8 quantization and pruning — ~300 ms inference on a $5 microcontroller.</p>
+          <p class="lego-tags mono">PyTorch · TFLite Micro · ESP32-S3</p>
         </article>
-        <article class="lego-card lego-red" data-tilt>
+        <article class="lego-card lego-red compact" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <span class="ninja n-kai mono" title="Kai · master of fire">🔥 KAI</span>
           <h3><a href="https://github.com/leozh0u/stm32-bldc-motor-controller" target="_blank" rel="noopener">STM32 controller ↗</a></h3>
           <p class="lego-sub mono">bare metal, no HAL</p>
-          <p>Every driver from scratch — GPIO, UART, SPI, I2C, timers. Closed-loop PID speed control under 2% steady-state error, ported to FreeRTOS with live telemetry.</p>
-          <p class="lego-tags mono">Embedded C · STM32 · FreeRTOS · PID</p>
+          <p>Every driver written from scratch. Closed-loop PID speed control under 2% steady-state error, ported onto FreeRTOS.</p>
+          <p class="lego-tags mono">Embedded C · STM32 · FreeRTOS</p>
+        </article>
+        <article class="lego-card lego-teal compact" data-tilt>
+          <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+          <span class="ninja n-nya mono" title="Nya · master of water">🌊 NYA</span>
+          <h3><a href="https://github.com/leozh0u/quant-signals" target="_blank" rel="noopener">Quant-Signals ↗</a></h3>
+          <p class="lego-sub mono">falsification-first research</p>
+          <p>Pre-registered hypotheses and kill criteria. Falsified 20-day momentum (gross Sharpe −0.49) with a cost-aware, leakage-tested backtester.</p>
+          <p class="lego-tags mono">Python · DuckDB · GitHub Actions</p>
         </article>
       </div>
 
       <div class="workbench">
         <p class="workbench-label mono">🔧 on the workbench <span class="ninja n-wu mono" title="Sensei Wu · patience">🍵 SENSEI WU — patience</span></p>
         <div class="wip-row">
-          <article class="wip">
-            <span class="wip-icon">🏟️</span>
-            <h3><a href="https://github.com/leozh0u/blundernet-arena" target="_blank" rel="noopener">BlunderNet Arena ↗</a></h3>
-            <p class="mono">play BlunderNet online — Go API fleet, queued inference workers, Terraform on AWS</p>
-          </article>
           <article class="wip">
             <span class="wip-icon">🦀</span>
             <h3>Rust × AWS</h3>

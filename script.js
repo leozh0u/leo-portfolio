@@ -192,7 +192,7 @@ function confettiBurst(x, y, n = 60) {
 }
 document.getElementById("hero-name").addEventListener("click", e => confettiBurst(e.clientX, e.clientY));
 
-const roles = ["real-time backends", "71 KB neural nets", "self-training chess engines", "bare-metal firmware", "leakage-tested backtests", "iOS apps"];
+const roles = ["scalable Go backends", "self-training chess engines", "systems that survive load tests", "bare-metal firmware", "71 KB neural nets"];
 const typeEl = document.getElementById("typewriter");
 let roleIdx = 0, charIdx = 0, deleting = false;
 function typeTick() {
@@ -343,8 +343,8 @@ let board, whiteTurn, rights, gameOver, lastMove, sel, targets, caps;
 
 function newGame() {
   const back = ["r", "n", "b", "q", "k", "b", "n", "r"];
-  const backSkills = ["C/C++", "STM32 · FreeRTOS", "PyTorch", "Python", "Git", "React", "Swift · SwiftUI", "TypeScript"];
-  const pawnSkills = ["Docker", "PostgreSQL", "Redis", "FastAPI", "WebSockets", "SQL", "CI/CD", "Sentry"];
+  const backSkills = ["C/C++", "STM32 · FreeRTOS", "PyTorch", "Go", "Git", "React", "Terraform", "TypeScript"];
+  const pawnSkills = ["Docker", "PostgreSQL", "Redis", "FastAPI", "WebSockets", "AWS · ECS/SQS", "CI/CD", "k6"];
   board = Array.from({ length: 8 }, () => Array(8).fill(null));
   for (let c = 0; c < 8; c++) {
     board[0][c] = { t: back[c], w: false };

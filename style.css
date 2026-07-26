@@ -340,7 +340,10 @@ h3 { font-size: 1.2rem; }
   box-shadow: 4px 4px 0 var(--ink); padding: 8px 8px 0;
   transform: rotate(-1.2deg);
 }
-.bollard-card img { width: 100%; display: block; border: 2px solid var(--ink); border-radius: 6px; }
+.bollard-card img {
+  width: 100%; display: block; border: 2px solid var(--ink); border-radius: 6px;
+  max-height: clamp(80px, 13vh, 170px); object-fit: cover; object-position: center top;
+}
 .bollard-card figcaption { padding: 0.4rem 0.2rem 0.5rem; font-weight: 700; font-size: 0.68rem; }
 
 /* ---------- fencing ---------- */

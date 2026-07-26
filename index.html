@@ -141,18 +141,20 @@
           <p>
             Grew up in <strong>Auckland</strong>, spent most of my teens fencing for the national team —
             that's what most of those pins are. Now at <strong>Rice</strong> studying computer science,
-            on track to finish a semester early in Fall 2028, 3.92 GPA so far.
+            graduating May 2028, 3.92 GPA so far.
           </p>
           <p>
             I only switched into CS recently, after starting out in Electrical and Computer Engineering,
             so I've had a fair bit of catching up to do. The engineering background still shows in what
             I like to build: firmware, tiny ML models, real-time systems, and lately full products
-            people can actually use.
+            people can actually use. Off to the side I run Physics Pathfinders, a student-led
+            charity that has reached 600+ students across 22 schools.
           </p>
           <ul class="geo-facts mono">
             <li>🎓 CS @ Rice · 3.92</li>
             <li>🌏 English · Mandarin · Spanish</li>
             <li>✈️ 22 countries, 4 continents</li>
+            <li>🔭 Physics Pathfinders · president</li>
           </ul>
           <figure class="bollard-card">
             <img src="photos/NZ_Bollard.webp" alt="NZ roadside bollard, front and back" loading="lazy">
@@ -189,7 +191,7 @@
         </div>
         <div class="bout-card">
           <h3>🤝 Coaching</h3>
-          <p>Coached 100+ juniors and refereed hundreds of bouts across Oceania.</p>
+          <p>Coached 100+ juniors and refereed hundreds of bouts across Oceania. Still in it: I manage the Rice Fencing Club.</p>
         </div>
       </div>
       <div class="scoreboard mono" title="la belle">
@@ -249,8 +251,15 @@
           <p class="gate-tags mono">Python · FastAPI · PostgreSQL · React</p>
         </article>
         <article class="gate">
+          <p class="gate-date mono">May 2026 → now</p>
+          <h3>Inkstone Technologies · SWE</h3>
+          <p class="gate-loc mono">iOS</p>
+          <p>ABC Reads, a native Swift/SwiftUI reading app that adapts to each reader's known vocabulary. On-device Apple Vision OCR overlays pronunciation only on words you haven't learned yet. Underneath: a Python pipeline that frequency-ranks a 113,000-entry dictionary into indexed SQLite, and a local-first store on SQLite's raw C API driving spaced-repetition review and a WidgetKit widget.</p>
+          <p class="gate-tags mono">Swift · SwiftUI · Vision · SQLite · Python</p>
+        </article>
+        <article class="gate">
           <p class="gate-date mono">Oct 2025 → Apr 2026</p>
-          <h3>Rice Wind Energy · Firmware</h3>
+          <h3>Rice Wind Energy · Embedded</h3>
           <p class="gate-loc mono">Houston</p>
           <p>ESP32 firmware for a three-phase wind turbine controller: RPM, power and pitch sensing, a six-state safety state machine, and peak-power tracking.</p>
           <p class="gate-tags mono">C/C++ · ESP32 · control systems</p>
@@ -281,7 +290,7 @@
           <span class="ninja n-lloyd mono" title="Lloyd · the green ninja">🐉 LLOYD</span>
           <h3><a href="https://github.com/leozh0u/blundernet-arena" target="_blank" rel="noopener">BlunderNet Arena ↗</a></h3>
           <p class="lego-sub mono">serving the engine at scale</p>
-          <p>A Go platform that puts BlunderNet online: stateless API fleet behind an ALB, inference decoupled onto an SQS-fed ONNX worker fleet that autoscales on queue depth. p99 move latency stays under <strong>250 ms</strong>, and killing an API task mid-game is invisible to players. Load-tested to <strong>4,000+ req/s with zero errors</strong>; the whole VPC/ECS/ALB/RDS/SQS stack is Terraform, running under $5/month.</p>
+          <p>A Go platform that puts BlunderNet online, so anyone can play the engine: stateless API fleet behind an AWS load balancer, inference decoupled onto an SQS-fed ONNX worker fleet that autoscales on queue depth, so play stays responsive when traffic spikes. Moves stream to browsers over WebSockets, fanned out with Redis pub/sub across every API instance. k6 load tests over live WebSocket sessions came back with <strong>zero failed requests</strong> and API responses under <strong>30 ms at p99</strong>. The whole VPC/ECS/RDS/SQS environment is Terraform, rebuilt from one command.</p>
           <p class="lego-tags mono">Go · AWS · Terraform · Redis · ONNX · k6</p>
         </article>
         <article class="lego-card lego-white" data-tilt>
@@ -289,7 +298,7 @@
           <span class="ninja n-zane mono" title="Zane · the nindroid">❄ ZANE</span>
           <h3><a href="https://github.com/leozh0u/blundernet" target="_blank" rel="noopener">BlunderNet ↗</a></h3>
           <p class="lego-sub mono">self-training chess engine</p>
-          <p>AlphaZero-style engine — residual CNN with policy and value heads, PUCT Monte-Carlo tree search in C++ (<strong>1.8× faster</strong> via virtual-loss batching). Retrains itself daily on fresh Lichess games through scheduled GitHub Actions, tracked against a 1,200-puzzle tactics suite and daily Elo runs versus Stockfish.</p>
+          <p>AlphaZero-style engine: residual CNN with policy and value heads, PUCT Monte-Carlo tree search written in C++ and bridged to Python with pybind11 for a <strong>1.8× speedup</strong>. The self-play training loop runs on GitHub Actions end to end, from data generation through model evaluation. Strength gets checked against held-out move prediction, a 1,200-puzzle tactics suite, and matches versus Stockfish.</p>
           <p class="lego-tags mono">PyTorch · C++ · pybind11 · GitHub Actions</p>
         </article>
         <article class="lego-card lego-blue" data-tilt>

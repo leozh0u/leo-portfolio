@@ -222,6 +222,13 @@ h3 { font-size: 1.2rem; }
 .b-red { background: #ffd9d6; } .b-blue { background: #d6e4ff; }
 .b-green { background: #d8f3e0; } .b-yellow { background: #fff1c2; }
 .hero-actions { display: flex; gap: 0.9rem; margin-top: 1.7rem; flex-wrap: wrap; }
+.hero-contact {
+  display: flex; gap: 0.55rem; flex-wrap: wrap; align-items: center;
+  margin-top: 0.9rem; font-size: 0.82rem; font-weight: 700;
+}
+.hero-contact a { border-bottom: 2px solid transparent; transition: border-color 0.15s, opacity 0.15s; }
+.hero-contact a:hover { border-bottom-color: currentColor; }
+.hero-contact span { opacity: 0.45; }
 .hero-photo {
   position: absolute; z-index: 3;
   right: clamp(1.5rem, 6vw, 6rem); top: 50%;
@@ -377,6 +384,17 @@ h3 { font-size: 1.2rem; }
 .bout-card:hover { transform: translateY(-5px) rotate(-0.5deg); }
 .bout-card h3 { margin-bottom: 0.4rem; }
 .bout-card p { font-size: 0.92rem; }
+.offpiste-label { margin-top: 1.1rem; font-weight: 700; opacity: 0.6; font-size: 0.72rem; letter-spacing: 0.04em; }
+.offpiste-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; margin-top: 0.45rem; }
+.offpiste {
+  display: flex; gap: 0.7rem; align-items: flex-start;
+  background: rgba(255, 253, 245, 0.75); border: var(--border); border-radius: 12px;
+  padding: 0.7rem 0.85rem;
+}
+.offpiste-icon { font-size: 1.35rem; line-height: 1.2; }
+.offpiste h3 { font-size: 0.98rem; margin-bottom: 0.25rem; }
+.offpiste-role { display: block; font-size: 0.68rem; font-weight: 700; opacity: 0.55; }
+.offpiste p { font-size: 0.83rem; }
 .scoreboard {
   margin-top: 1.4rem; display: flex; justify-content: space-between; align-items: center;
   background: var(--ink); color: var(--paper); border-radius: var(--radius);
@@ -457,10 +475,10 @@ h3 { font-size: 1.2rem; }
   animation: fall linear infinite;
   text-shadow: 0 1px 2px rgba(50,90,120,0.25);
 }
-.gates { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+.gates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
 .gate {
   background: #fffdf8; border: var(--border); border-radius: var(--radius);
-  padding: 1.1rem 1.3rem; box-shadow: var(--shadow);
+  padding: 0.95rem 1.1rem; box-shadow: var(--shadow);
   transition: transform 0.2s ease;
 }
 .gate:hover { transform: translateY(-4px); }
@@ -468,8 +486,9 @@ h3 { font-size: 1.2rem; }
 .gate:nth-child(even) { transform: rotate(0.4deg); }
 .gate-date { color: var(--blue); font-weight: 700; margin-bottom: 0.2rem; }
 .gate-loc { opacity: 0.65; margin-bottom: 0.5rem; }
-.gate p { font-size: 0.9rem; }
-.gate-tags { margin-top: 0.6rem; color: var(--purple); font-weight: 700; }
+.gate p { font-size: 0.85rem; }
+.gate h3 { font-size: 1.02rem; }
+.gate-tags { margin-top: 0.5rem; color: var(--purple); font-weight: 700; }
 
 /* ---------- projects / lego ---------- */
 .r-lego { background: var(--lego-bg); }
@@ -902,6 +921,7 @@ h3 { font-size: 1.2rem; }
   .atlas-layout { grid-template-columns: 1fr; }
   .fencing-stats { grid-template-columns: repeat(2, 1fr); }
   .fencing-grid { grid-template-columns: 1fr; }
+  .offpiste-row { grid-template-columns: 1fr; }
   .gates { grid-template-columns: 1fr; }
   .lego-grid { grid-template-columns: 1fr; }
   .cr-grid { grid-template-columns: repeat(2, 1fr); }

@@ -53,7 +53,7 @@ function paintNav() {
   dots.forEach((d, j) => d.classList.toggle("active", j === cur));
   const id = rooms[cur].id;
   navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
-  progressBar.style.width = (cur / (rooms.length - 1)) * 100 + "%";
+  progressBar.style.transform = `scaleX(${cur / (rooms.length - 1)})`;
   edgeL.classList.toggle("off", cur === 0);
   edgeR.classList.toggle("off", cur === rooms.length - 1);
 }

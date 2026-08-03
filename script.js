@@ -26,6 +26,29 @@ rooms.forEach((room, i) => {
 });
 const dots = [...dotsBox.children];
 
+/* Rooms scroll vertically but their scrollbars are hidden, so the current room
+   flags any content still below the fold. One fixed cue, not one per room —
+   an absolutely positioned child would scroll away with the content. */
+const scrollCue = document.createElement("p");
+scrollCue.className = "scroll-cue mono";
+scrollCue.setAttribute("aria-hidden", "true");
+scrollCue.textContent = "↓ more";
+document.body.appendChild(scrollCue);
+
+function paintScrollCue() {
+  // measure the last real block, not scrollHeight — that counts bottom padding
+  // as "more to see" and would light the cue on rooms that actually fit
+  const room = rooms[cur];
+  const last = room && room.querySelector(".room-inner")?.lastElementChild;
+  if (!last || !desktop()) { scrollCue.classList.remove("show"); return; }
+  const clipped = last.getBoundingClientRect().bottom - room.getBoundingClientRect().bottom;
+  scrollCue.classList.toggle("show", clipped > 24);
+}
+rooms.forEach(room => room.addEventListener("scroll", paintScrollCue, { passive: true }));
+addEventListener("resize", paintScrollCue);
+addEventListener("load", paintScrollCue);
+paintScrollCue();
+
 function paintNav() {
   dots.forEach((d, j) => d.classList.toggle("active", j === cur));
   const id = rooms[cur].id;
@@ -46,6 +69,7 @@ function goRoom(i) {
   }
   history.replaceState(null, "", "#" + rooms[i].id);
   paintNav();
+  paintScrollCue();
 }
 
 edgeL.addEventListener("click", () => goRoom(cur - 1));

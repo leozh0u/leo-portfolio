@@ -81,6 +81,18 @@ h3 { font-size: 1.2rem; }
 }
 .room::-webkit-scrollbar { display: none; }
 
+/* shown only while a room still has content below the fold */
+.scroll-cue {
+  position: fixed; z-index: 6;
+  right: clamp(0.9rem, 3.5vw, 2.6rem); bottom: 1.15rem;
+  background: #fffdf5; border: var(--border); border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink);
+  padding: 0.34rem 0.8rem; font-size: 0.68rem; font-weight: 700;
+  opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+}
+.scroll-cue.show { opacity: 1; animation: cue-bob 1.7s ease-in-out infinite; }
+@keyframes cue-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
 .room-inner {
   position: relative; z-index: 2;
   min-height: 100%;
@@ -915,6 +927,7 @@ h3 { font-size: 1.2rem; }
   .world { width: auto; height: auto; overflow: visible; }
   .track { display: block; transform: none !important; }
   .room { height: auto; min-height: 100svh; overflow: visible; }
+  .scroll-cue { display: none; }
   .nav-links a:not(.nav-cta) { display: none; }
   .dots, .edge { display: none; }
   .hero-photo { display: block; position: static; transform: rotate(-2deg); margin: 1.6rem 0 0; width: 230px; }

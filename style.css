@@ -1,5 +1,5 @@
 /* ============================================================
-   Leo Zhou — portfolio
+   Leo Zhou · portfolio
    Horizontal rooms on a sliding track. One hobby per room.
    ============================================================ */
 
@@ -515,7 +515,9 @@ h3 { font-size: 1.2rem; }
   background-image: radial-gradient(circle at 50% 42%, rgba(34,28,20,0.10) 0 14px, rgba(255,255,255,0.18) 15px 17px, transparent 18px);
   background-size: 72px 72px;
 }
-.lego-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+/* auto-fit rather than a fixed 3, so the shelf still sits three across while
+   the main row stretches to fill whatever is on it. */
+.lego-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.3rem; }
 .lego-card {
   position: relative; border-radius: 12px; padding: 1.7rem 1.4rem 1.2rem;
   border: var(--border); background: #fffdf5; box-shadow: var(--shadow);
@@ -825,7 +827,7 @@ h3 { font-size: 1.2rem; }
 .drum:hover { background: rgba(255,233,201,0.18); }
 .drum.hit { transform: scale(0.88); background: rgba(255,233,201,0.35); }
 
-/* now playing — vinyl */
+/* now playing · vinyl */
 .np {
   position: absolute; z-index: 3;
   left: clamp(1rem, 4vw, 4.5rem); bottom: clamp(1.5rem, 6vh, 4rem);

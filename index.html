@@ -327,12 +327,11 @@
       <header class="room-head">
         <p class="kicker mono">05 · projects</p>
         <h2>Brick by brick</h2>
-        <p class="blurb">Shipped bricks on the shelf, fresh ones on the workbench. Each one gets a ninja, elements assigned by the ninja council.</p>
+        <p class="blurb">Shipped bricks on the shelf, fresh ones on the workbench.</p>
       </header>
       <div class="lego-grid">
         <article class="lego-card lego-green" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <span class="ninja n-lloyd mono" title="Lloyd · the green ninja">🐉 LLOYD</span>
           <h3><a href="https://github.com/leozh0u/blundernet" target="_blank" rel="noopener">BlunderNet ↗</a></h3>
           <p class="lego-sub mono">serving the engine at scale</p>
           <p>A Go platform that puts the engine online so anyone can play it: stateless API fleet behind an AWS load balancer, inference decoupled onto an SQS-fed ONNX worker fleet that autoscales on queue depth, so play stays responsive when traffic spikes. Moves stream to browsers over WebSockets, fanned out with Redis pub/sub across every API instance. Load-tested with k6 over live WebSocket sessions at <strong>zero failed requests</strong> and API responses under <strong>30 ms at p99</strong>. The whole VPC/ECS/RDS/SQS environment is Terraform, rebuilt from one command. It publishes the targets it holds itself to and a status page that says whether it is currently meeting them.</p>
@@ -340,7 +339,6 @@
         </article>
         <article class="lego-card lego-white" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <span class="ninja n-zane mono" title="Zane · the nindroid">❄ ZANE</span>
           <h3><a href="https://github.com/leozh0u/blundernet-engine" target="_blank" rel="noopener">BlunderNet Engine ↗</a></h3>
           <p class="lego-sub mono">the network and the search</p>
           <p>AlphaZero-style engine: residual CNN with policy and value heads, PUCT Monte-Carlo tree search written in C++ and bridged to Python with pybind11 for a <strong>1.8× speedup</strong>. A scheduled GitHub Actions pipeline runs the whole cycle without me, pulling fresh games from the top Lichess blitz players, retraining, and evaluating. Self-play feeds back in too, though the supervised stream is what does most of the work so far. Strength gets checked against held-out move prediction, a 1,200-puzzle tactics suite, and matches versus Stockfish.</p>
@@ -352,7 +350,6 @@
       <div class="lego-grid lego-grid-sm">
         <article class="lego-card lego-black compact" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <span class="ninja n-cole mono" title="Cole · master of earth">🪨 COLE</span>
           <h3><a href="https://github.com/leozh0u/edgeML-audio-compression-benchmark" target="_blank" rel="noopener">Edge-ML audio ↗</a></h3>
           <p class="lego-sub mono">55× smaller, still listening</p>
           <p>3.9 MB classifier down to 71 KB via distillation, INT8 quantization and pruning. Around 300 ms inference on a $5 microcontroller.</p>
@@ -360,7 +357,6 @@
         </article>
         <article class="lego-card lego-red compact" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <span class="ninja n-kai mono" title="Kai · master of fire">🔥 KAI</span>
           <h3><a href="https://github.com/leozh0u/stm32-bldc-motor-controller" target="_blank" rel="noopener">STM32 controller ↗</a></h3>
           <p class="lego-sub mono">bare metal, no HAL</p>
           <p>Every driver written from scratch. Closed-loop PID speed control under 2% steady-state error, ported onto FreeRTOS.</p>
@@ -368,7 +364,6 @@
         </article>
         <article class="lego-card lego-teal compact" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <span class="ninja n-nya mono" title="Nya · master of water">🌊 NYA</span>
           <h3><a href="https://github.com/leozh0u/quant-signals" target="_blank" rel="noopener">Quant-Signals ↗</a></h3>
           <p class="lego-sub mono">falsification-first research</p>
           <p>Pre-registered hypotheses and kill criteria. Falsified 20-day momentum (gross Sharpe −0.49) with a cost-aware, leakage-tested backtester.</p>
@@ -377,7 +372,7 @@
       </div>
 
       <div class="workbench">
-        <p class="workbench-label mono">🔧 on the workbench <span class="ninja n-wu mono" title="Sensei Wu · patience">🍵 SENSEI WU · patience</span></p>
+        <p class="workbench-label mono">🔧 on the workbench</p>
         <div class="wip-row">
           <article class="wip">
             <span class="wip-icon">🦀</span>
@@ -394,12 +389,8 @@
             <h3>Internship tracker</h3>
             <p class="mono">small tool, does one job</p>
           </article>
-          <figure class="council-photo">
-            <img src="photos/ninjago.jpeg" alt="the ninja council" loading="lazy">
-            <figcaption class="mono">the council, in session</figcaption>
-          </figure>
         </div>
-        <p class="workbench-quote mono">"I only work in black. And sometimes very, very dark grey." · ninja never quit.</p>
+        <p class="workbench-quote mono">"I only work in black. And sometimes very, very dark grey."</p>
       </div>
     </div>
   </section>

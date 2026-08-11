@@ -344,6 +344,13 @@
           <p>AlphaZero-style engine: residual CNN with policy and value heads, PUCT Monte-Carlo tree search written in C++ and bridged to Python with pybind11 for a <strong>1.8× speedup</strong>. A scheduled GitHub Actions pipeline runs the whole cycle without me, pulling fresh games from the top Lichess blitz players, retraining, and evaluating. Self-play feeds back in too, though the supervised stream is what does most of the work so far. Strength gets checked against held-out move prediction, a 1,200-puzzle tactics suite, and matches versus Stockfish.</p>
           <p class="lego-tags mono">PyTorch · C++ · pybind11 · GitHub Actions</p>
         </article>
+        <article class="lego-card lego-blue" data-tilt>
+          <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+          <h3><a href="https://github.com/leozh0u/seat-booking" target="_blank" rel="noopener">SeatLive ↗</a></h3>
+          <p class="lego-sub mono">two people, one seat, one winner</p>
+          <p>A ticket booking backend built around the case where two people tap the same seat at the same instant. Atomic conditional updates in Postgres with Redis holds that expire on their own, so a seat someone abandoned mid-checkout comes back without a cleanup job. Confirmation is idempotent on a client-supplied key, so a retry after a dropped connection returns the original booking instead of charging twice. CI proves it rather than claiming it: 50 concurrent requests fire at one seat every build and the test fails unless exactly one wins. Locust ran <strong>4,459 requests with zero failures</strong>, and seat maps update live over WebSockets with Redis pub/sub.</p>
+          <p class="lego-tags mono">FastAPI · PostgreSQL · Redis · React · Docker · Sentry</p>
+        </article>
       </div>
 
       <p class="shelf-label mono">also on the shelf</p>

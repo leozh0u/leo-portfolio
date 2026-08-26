@@ -216,7 +216,7 @@ function confettiBurst(x, y, n = 60) {
 }
 document.getElementById("hero-name").addEventListener("click", e => confettiBurst(e.clientX, e.clientY));
 
-const roles = ["scalable Go backends", "self-training chess engines", "native iOS apps", "systems that survive load tests", "bare-metal firmware", "71 KB neural nets"];
+const roles = ["a chess site with real users", "agents that cite their evidence", "scalable Go backends", "native iOS apps", "bare-metal firmware"];
 const typeEl = document.getElementById("typewriter");
 let roleIdx = 0, charIdx = 0, deleting = false;
 function typeTick() {

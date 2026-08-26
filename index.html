@@ -70,6 +70,12 @@
         <span class="badge b-green">♟ ~2000 chess.com</span>
         <span class="badge b-yellow">🧱 lego</span>
       </div>
+      <p class="hero-live mono">
+        <a href="https://blundernet.com" target="_blank" rel="noopener">
+          <span class="live-dot" aria-hidden="true"></span>blundernet.com is live ↗
+        </a>
+        <span class="hero-live-note">chess puzzles and bots, 120+ people playing</span>
+      </p>
       <div class="hero-actions">
         <a class="btn btn-solid" href="#projects">Projects</a>
         <a class="btn btn-ghost" href="#chess">Play me in chess</a>
@@ -171,6 +177,11 @@
             I like to build: firmware, tiny ML models, real-time systems, and lately full products
             people can actually use.
           </p>
+          <p class="geo-vestigo">
+            The bollard habit turned into a project. <a href="#projects">Vestigo</a> is an agent that
+            geolocates a photograph and has to cite the evidence for every claim it makes, which is
+            the same game with the guessing taken out.
+          </p>
           <ul class="geo-facts mono">
             <li>🎓 CS @ Rice · 3.92</li>
             <li>🌏 English · Mandarin · Spanish</li>
@@ -246,7 +257,7 @@
       <header class="room-head">
         <p class="kicker mono">03 · skills</p>
         <h2>Play me</h2>
-        <p class="blurb">Every white piece is something I work with. You're white, and the bot takes whatever&nbsp;it&nbsp;can. I also built a chess engine that retrains itself on a schedule: <a class="chess-xlink" href="#projects">BlunderNet</a>.</p>
+        <p class="blurb">Every white piece is something I work with. You're white, and the bot takes whatever&nbsp;it&nbsp;can. This one is a toy. The real engine is on <a class="chess-xlink" href="https://blundernet.com" target="_blank" rel="noopener">blundernet.com</a>, with 3.25 million puzzles and a bot ladder.</p>
       </header>
       <div class="chess-layout">
         <div class="board-wrap">
@@ -332,10 +343,11 @@
       <div class="lego-grid">
         <article class="lego-card lego-green" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <h3><a href="https://github.com/leozh0u/blundernet" target="_blank" rel="noopener">BlunderNet ↗</a></h3>
-          <p class="lego-sub mono">serving the engine at scale</p>
-          <p>A Go platform that puts the engine online so anyone can play it: stateless API fleet behind an AWS load balancer, inference decoupled onto an SQS-fed ONNX worker fleet that autoscales on queue depth, so play stays responsive when traffic spikes. Moves stream to browsers over WebSockets, fanned out with Redis pub/sub across every API instance. Load-tested with k6 over live WebSocket sessions at <strong>zero failed requests</strong> and API responses under <strong>30 ms at p99</strong>. The whole VPC/ECS/RDS/SQS environment is Terraform, rebuilt from one command. It publishes the targets it holds itself to and a status page that says whether it is currently meeting them.</p>
-          <p class="lego-tags mono">Go · AWS · Terraform · Redis · ONNX · k6</p>
+          <h3><a href="https://blundernet.com" target="_blank" rel="noopener">BlunderNet ↗</a></h3>
+          <p class="lego-sub mono">live at blundernet.com, 120+ players</p>
+          <p>I made LeetCode for chess. <strong>3.25 million puzzles</strong> you can filter by rating, theme, phase and length, plus a bot ladder to play against. Drawing a random puzzle from six million rows took 1.4 seconds with <code>ORDER BY random()</code>; a precomputed grid and a stored shuffle key took it to <strong>0.9 ms</strong>. The Go API holds no state, so live games sit in Redis and any instance can serve any game, and engine inference runs on SQS-fed ONNX workers that autoscale under backlog. When search got slow I traced it to cold disk reads at 92% utilisation and cut pages touched from 55,821 to 20,602. The whole AWS stack is Terraform, and the site publishes its own latency targets and whether it is currently meeting them.</p>
+          <p class="lego-tags mono">Go · AWS · Terraform · Postgres · Redis · ONNX · k6</p>
+          <p class="lego-links mono"><a href="https://blundernet.com" target="_blank" rel="noopener">play it ↗</a> · <a href="https://github.com/leozh0u/blundernet" target="_blank" rel="noopener">code ↗</a></p>
         </article>
         <article class="lego-card lego-white" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
@@ -346,15 +358,22 @@
         </article>
         <article class="lego-card lego-blue" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <h3><a href="https://github.com/leozh0u/seat-booking" target="_blank" rel="noopener">SeatLive ↗</a></h3>
-          <p class="lego-sub mono">two people, one seat, one winner</p>
-          <p>A ticket booking backend built around the case where two people tap the same seat at the same instant. Atomic conditional updates in Postgres with Redis holds that expire on their own, so a seat someone abandoned mid-checkout comes back without a cleanup job. Confirmation is idempotent on a client-supplied key, so a retry after a dropped connection returns the original booking instead of charging twice. CI proves it rather than claiming it: 50 concurrent requests fire at one seat every build and the test fails unless exactly one wins. Locust ran <strong>4,459 requests with zero failures</strong>, and seat maps update live over WebSockets with Redis pub/sub.</p>
-          <p class="lego-tags mono">FastAPI · PostgreSQL · Redis · React · Docker · Sentry</p>
+          <h3><a href="https://github.com/leozh0u/vestigo" target="_blank" rel="noopener">Vestigo ↗</a></h3>
+          <p class="lego-sub mono">where was this photo taken, and how do you know</p>
+          <p>An agent that works out where a photograph was taken, at the most specific level the evidence supports. Most systems return a point no matter how little they have to go on, so the metric here is calibration rather than distance: <strong>88 to 90% of claims are correct at the level claimed</strong>. I measured a plain model call first, before building anything, and it turned out to be good on landmarks (2.6 km median) and bad on rural roads (94.2 km), which is what the tools are for. A solar-position filter rules out 49% of the earth and cut the spread between reruns from 14,964 km to 537 km. Every claim has to cite evidence on the board, and one that cites something not there is rejected and the rejection reported.</p>
+          <p class="lego-tags mono">Python · LLM agents · tool calling · eval harness · pytest</p>
         </article>
       </div>
 
       <p class="shelf-label mono">also on the shelf</p>
       <div class="lego-grid lego-grid-sm">
+        <article class="lego-card lego-navy compact" data-tilt>
+          <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
+          <h3><a href="https://github.com/leozh0u/seat-booking" target="_blank" rel="noopener">SeatLive ↗</a></h3>
+          <p class="lego-sub mono">two people, one seat, one winner</p>
+          <p>Atomic conditional updates and Redis holds that expire on their own. CI fires 50 concurrent requests at one seat every build and fails unless exactly one wins.</p>
+          <p class="lego-tags mono">FastAPI · PostgreSQL · Redis · Docker</p>
+        </article>
         <article class="lego-card lego-black compact" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://github.com/leozh0u/edgeML-audio-compression-benchmark" target="_blank" rel="noopener">Edge-ML audio ↗</a></h3>
@@ -382,14 +401,14 @@
         <p class="workbench-label mono">🔧 on the workbench</p>
         <div class="wip-row">
           <article class="wip">
-            <span class="wip-icon">🦀</span>
-            <h3>Rust × AWS</h3>
-            <p class="mono">systems backend in Rust, deployed on AWS</p>
+            <span class="wip-icon">🗄️</span>
+            <h3>LSM storage engine</h3>
+            <p class="mono">memtable, WAL, SSTs, compaction, and a harness that kills the process mid-write to prove no acknowledged write is lost</p>
           </article>
           <article class="wip">
-            <span class="wip-icon">⏪</span>
-            <h3>Rewind</h3>
-            <p class="mono">iOS app · in progress</p>
+            <span class="wip-icon">🧭</span>
+            <h3>Vestigo, next</h3>
+            <p class="mono">more tools on the board: street furniture, signage language, road markings</p>
           </article>
           <article class="wip wip-small">
             <span class="wip-icon">📋</span>

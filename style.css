@@ -1078,3 +1078,106 @@ h3 { font-size: 1.2rem; }
 .r-stage .kbd-row {
   text-shadow: 0 2px 10px rgba(16, 9, 22, 0.95), 0 0 28px rgba(16, 9, 22, 0.7);
 }
+
+/* ============================================================
+   Terminal room
+   Replaces the card deck. A real prompt: room names navigate, the
+   project names open, and anything else is answered out of a written
+   knowledge base rather than pretending to be a model.
+   ============================================================ */
+
+.r-term {
+  background:
+    radial-gradient(120% 90% at 50% -10%, #23202c 0%, #16141d 55%, #100e16 100%);
+  color: #efe9dc;
+}
+.r-term .kicker { color: #8a8398; }
+.r-term h2 { color: #f6f1e6; }
+.term-inner { display: flex; flex-direction: column; }
+
+.term {
+  width: min(900px, 100%);
+  margin-top: 1.4rem;
+  border: 3px solid #0b0a10;
+  border-radius: 12px;
+  background: #fdfcf9;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55), 8px 8px 0 rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.term-bar {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(180deg, #f2ede2, #e3ddd0);
+  border-bottom: 2px solid #0b0a10;
+  user-select: none;
+}
+.term-lights { display: flex; gap: 6px; }
+.term-lights i { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.26); }
+.tl-r { background: #ff5f57; } .tl-y { background: #febc2e; } .tl-g { background: #28c840; }
+.term-title { flex: 1; text-align: center; font-size: 0.74rem; opacity: 0.6; color: #2b2620; }
+
+.term-body {
+  padding: 0.9rem 1.05rem 1.1rem;
+  height: min(46vh, 400px);
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #1d1a15;
+  cursor: text;
+}
+.term-out { white-space: pre-wrap; word-break: break-word; }
+.term-out p { margin: 0 0 0.35rem; }
+.term-out a { color: #1f66c9; }
+.t-dim { opacity: 0.58; }
+.t-key { color: #b3261e; font-weight: 700; }
+.t-ok  { color: #1c7c3f; }
+.t-echo { opacity: 0.8; }
+
+.term-line { display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.2rem; }
+.term-prompt { color: #1c7c3f; font-size: 0.85rem; white-space: nowrap; }
+.term-tilde { color: #1f66c9; }
+.term-in {
+  flex: 1; min-width: 0;
+  border: none; outline: none; background: none;
+  font: inherit; font-size: 0.85rem; color: inherit;
+  caret-color: #b3261e;
+}
+.term-in::placeholder { color: #1d1a15; opacity: 0.32; }
+
+@media (max-width: 900px) {
+  .term-body { height: 42vh; font-size: 0.8rem; }
+  .term-prompt { font-size: 0.8rem; }
+}
+
+/* The one joke. Loud on purpose, and skipped entirely under reduced motion. */
+.jumpscare {
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: #b3261e;
+  animation: jump-flash 620ms steps(2, end);
+  pointer-events: none;
+}
+.jumpscare span {
+  font-family: var(--font-mono);
+  font-size: clamp(6rem, 26vw, 20rem);
+  font-weight: 700;
+  color: #fff;
+}
+@keyframes jump-flash {
+  0%   { opacity: 0; }
+  8%   { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.jumpshake { animation: jump-shake 620ms cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+@keyframes jump-shake {
+  10%, 90% { transform: translate3d(-3px, 2px, 0) rotate(-0.4deg); }
+  20%, 80% { transform: translate3d(6px, -4px, 0) rotate(0.6deg); }
+  30%, 50%, 70% { transform: translate3d(-9px, 3px, 0) rotate(-0.7deg); }
+  40%, 60% { transform: translate3d(9px, -3px, 0) rotate(0.7deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jumpscare, .jumpshake { animation: none; }
+}

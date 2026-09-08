@@ -836,3 +836,204 @@ addEventListener("keydown", e => {
     wall.style.setProperty("--py", "0px");
   });
 })();
+
+/* ------------------------------------------------------------
+   Terminal room
+   Room names navigate, project names open, and anything else is
+   looked up in a written knowledge base. It is a lookup, not a model,
+   so when nothing matches it says it does not know rather than
+   inventing an answer.
+   ------------------------------------------------------------ */
+(() => {
+  const term = document.getElementById("term");
+  if (!term) return;
+  const out = document.getElementById("term-out");
+  const input = document.getElementById("term-in");
+  const body = document.getElementById("term-body");
+
+  const ROOMS = ["hero", "origin", "fencing", "chess", "work", "projects", "terminal", "contact"];
+  const LINKS = {
+    blundernet: ["https://blundernet.com", "the chess site"],
+    vestigo: ["https://vestigo.earth", "the geolocation agent"],
+    github: ["https://github.com/leozh0u", "the code"],
+    linkedin: ["https://linkedin.com/in/leozhou8", "the professional one"],
+  };
+
+  // Everything the prompt knows. Keys are what someone might type; the
+  // answers are Leo's own, kept to what is already public on the site,
+  // the resume or the repos.
+  const KB = [
+    [["who", "about", "yourself", "bio", "introduce"],
+     "Leo Zhou. CS at Rice, from Auckland, New Zealand.\nBackend and infrastructure mostly, in Go and Python. I fence, I drum, and I run a chess site."],
+    [["rice", "study", "school", "university", "major", "degree", "gpa", "course"],
+     "Computer Science at Rice, GPA 3.92. Coursework so far is data structures and algorithms, systems programming, discrete maths and linear algebra."],
+    [["switch", "ece", "electrical", "why cs"],
+     "I started in electrical and computer engineering and switched to CS. The embedded work on this site is left over from that, and I do not regret the detour: writing firmware against a reference manual taught me to check things rather than assume them."],
+    [["blundernet", "chess site", "puzzles"],
+     "blundernet.com, a free chess training site I built and run, around 120 users.\n3.25 million puzzles you can filter by rating, theme, opening, phase and solution length all at once, which no other site lets you do. There is a classroom mode where a coach pushes a position to a team and sees the answers grouped by move. Every position is written out for a screen reader.\nReact over stateless Go on ECS Fargate, Postgres, Redis, engine inference on SQS-autoscaled workers, all Terraform."],
+    [["sampler", "random", "slow", "postgres", "optimi"],
+     "The one I like. Drawing a random puzzle matching a filter took 1.4 seconds with ORDER BY random(), because it sorts the whole matching set to take one row. I gave every puzzle a stored shuffle key computed once at import and precomputed the filter grid into a summary table with counts. A search now draws a cell in proportion to its size and range scans from a random cursor. 0.9 milliseconds."],
+    [["engine", "neural", "alphazero", "mcts"],
+     "I trained the engine myself. An AlphaZero-style network guiding Monte-Carlo tree search with a C++ core, trained on games from the top-50 Lichess blitz players, retraining itself on a schedule with no human in the loop. It plays around 1000 Elo, which is bad at chess and about right for a network that size."],
+    [["review", "blunder", "brilliant", "centipawn"],
+     "Post-game review judges every move by how much it changed your chances of winning rather than by centipawns, because +9 to +6 is three hundred centipawns and means nothing while +0.2 to -0.8 is a hundred and is the whole game. Eight verdicts, brilliant down to blunder. It reads a game pasted from any site."],
+    [["vestigo", "geolocation", "photo"],
+     "vestigo.earth. An agent that works out where a photograph was taken, at the most specific level the evidence supports, and stops there. Every claim cites the tool result that produced it, so a claim about a street cannot rest on evidence that only reaches a country.\nThe part I care about is calibration. I trained a classifier on 65,300 street-level images with frozen CLIP and geocells clustered on the sphere, held out by location so near-duplicates cannot inflate the number, and its confidence tracks observed accuracy to within about three points."],
+    [["research", "xing", "lab", "ai infra"],
+     "I am an undergraduate research assistant with Professor Jiarong Xing at Rice, on AI infrastructure. So far: ended a forced daily re-login in a macOS usage-tracking app with OAuth token refresh in Swift, wrote a Keychain credential inspector once the documented token shape turned out to be incomplete, and surfaced usage from sessions run over SSH by discovering the hosts and mirroring their transcripts. Reading into LLM routing next."],
+    [["cansemi", "wafer", "semiconductor", "intern"],
+     "Software engineer intern at CanSemi over summer 2026. An event-driven Python parser over 500+ binary test equipment logs, a normalised Postgres schema loading 40 wafer lots in under two minutes, a FastAPI service on top, and a React wafer map that cut reporting time by about 75%."],
+    [["inkstone", "abc reads", "ios", "swift", "reading"],
+     "ABC Reads at Inkstone Technologies, spring and summer 2026. A native iOS reading app in Swift and SwiftUI that adapts to the words you already know. Apple Vision OCR over a live camera overlays pronunciation only on words you have not learned, backed by a 113,000-entry dictionary frequency-ranked into SQLite."],
+    [["wind", "turbine", "embedded", "esp32", "firmware"],
+     "Rice Wind Energy, embedded software. ESP32 firmware in C reading turbine speed, power output and blade pitch, a six-state safety machine with fault latching, and perturb-and-observe power tracking."],
+    [["fencing", "fence", "sabre", "epee", "foil"],
+     "The thing I have put the most into. I competed internationally for New Zealand at cadet, junior and senior level, including World Championships, World Cups and the Commonwealth Games. Roughly 30 to 40 titles across New Zealand and Oceania. I captained the junior and cadet national teams at the same time and led the team to an Oceania title."],
+    [["drum", "music", "band", "rock", "jazz"],
+     "I play the drums, mostly rock with some jazz. I made it to Grade 8 with a High Distinction and a Rockschool award. I have played since I was a kid, in many different groups and plays, and it is still the thing I will always do occasionally."],
+    [["piano"], "Played for a while. Competent, not great."],
+    [["hobby", "hobbies", "interest", "fun", "free time", "outside"],
+     "Fencing, drums, chess, and skiing. Minecraft and Supercell games, Tetris, basketball, tennis, ping pong, and drawing. Jack of all trades, master of one or two."],
+    [["education", "care", "why", "nonprofit", "charity", "pathfinders", "teaching"],
+     "I think education is the best way to solve problems like poverty and crime, because children are malleable and a good educator early on decides what somebody ends up caring about. I was lucky with mine.\nWhen I was young I went to a maths programme run by a nonprofit, and one teacher there made maths interesting in a way school never had. It was free, and somebody had decided to run it. That is most of the reason I ended up in STEM at all.\nBefore Rice I ran Physics Pathfinders, a charity taking hands-on physics into schools without much funding, reaching 600+ students across 22 schools."],
+    [["new zealand", "nz", "auckland", "home", "from", "kiwi"],
+     "Auckland, New Zealand. My school there had a week of camping in the curriculum every year, which I assumed was normal until I came to Rice."],
+    [["backend", "lane", "want to work", "looking for", "interested in", "goal"],
+     "Backend, cloud and distributed systems. That is where my strongest evidence is and what I want to keep doing. ML and embedded are real but they are one project and one club role each, so I do not lead with them."],
+    [["stack", "tech", "language", "tools", "know"],
+     "Go, Python, Swift, C and C++, JavaScript and React.\nPostgres, Redis, SQS, ONNX, Docker, Terraform, AWS."],
+    [["contact", "email", "hire", "reach", "talk", "message"],
+     "zhouleo2007@gmail.com. Or type contact to go to the room with every link on it."],
+  ];
+
+  const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const print = (html = "") => {
+    const d = document.createElement("div");
+    d.innerHTML = html;
+    out.appendChild(d);
+    body.scrollTop = 1e6;
+  };
+  const say = (text) => text.split("\n").forEach(l => print(esc(l)));
+
+  const hist = [];
+  let histAt = 0;
+
+  const CMDS = {
+    help() {
+      print('<span class="t-dim">rooms   </span>' + ROOMS.map(r => `<span class="t-key">${r}</span>`).join(" "));
+      print('<span class="t-dim">open    </span>' + Object.keys(LINKS).map(k => `<span class="t-key">${k}</span>`).join(" "));
+      print('<span class="t-dim">also    </span><span class="t-key">whoami</span> <span class="t-key">stack</span> <span class="t-key">resume</span> <span class="t-key">topics</span> <span class="t-key">clear</span>');
+      print('<span class="t-dim">or just ask: "what is blundernet", "do you fence", "what do you want to work on"</span>');
+    },
+    topics() {
+      print('<span class="t-dim">it knows about:</span>');
+      print(KB.map(k => `<span class="t-key">${k[0][0]}</span>`).join("  "));
+    },
+    whoami() { say(KB[0][1]); },
+    stack() { say(KB.find(k => k[0][0] === "stack")[1]); },
+    resume() {
+      print('<span class="t-ok">downloading</span> LeoZhou_resume.pdf');
+      const a = document.createElement("a");
+      a.href = "LeoZhou_resume.pdf"; a.download = "";
+      document.body.appendChild(a); a.click(); a.remove();
+    },
+    ls() { print(ROOMS.map(r => `<span class="t-key">${r}</span>`).join("  ")); },
+    clear() { out.innerHTML = ""; },
+    sudo() { print('<span class="t-dim">leo is not in the sudoers file. This incident will be reported.</span>'); },
+  };
+
+  function lookup(q) {
+    const t = q.toLowerCase();
+    let best = null, bestScore = 0;
+    for (const [keys, answer] of KB) {
+      for (const k of keys) {
+        if (t.includes(k) && k.length > bestScore) { best = answer; bestScore = k.length; }
+      }
+    }
+    return best;
+  }
+
+  function run(raw) {
+    const line = raw.trim();
+    print(`<span class="t-echo"><span class="term-prompt">leo@portfolio ~ %</span> ${esc(line)}</span>`);
+    if (!line) return;
+    hist.push(line); histAt = hist.length;
+
+    const lower = line.toLowerCase();
+    if (/\bclaude\b/.test(lower)) return jumpscare();
+
+    const [head, ...rest] = lower.split(/\s+/);
+    if ((head === "cd" || head === "go" || head === "open") && rest[0]) {
+      if (ROOMS.includes(rest[0])) return goto(rest[0]);
+      if (LINKS[rest[0]]) return follow(rest[0]);
+    }
+    if (ROOMS.includes(head) && rest.length === 0) return goto(head);
+    if (LINKS[head] && rest.length === 0) return follow(head);
+    if (CMDS[head] && rest.length === 0) return CMDS[head]();
+
+    const hit = lookup(line);
+    if (hit) return say(hit);
+    print('<span class="t-dim">I don\'t know.</span>');
+    print('<span class="t-dim">Try </span><span class="t-key">topics</span><span class="t-dim"> for what it does know, or </span><span class="t-key">help</span><span class="t-dim"> for commands.</span>');
+  }
+
+  function goto(room) {
+    print(`<span class="t-ok">→</span> ${room}`);
+    setTimeout(() => goRoom(ROOMS.indexOf(room)), 240);
+  }
+  function follow(key) {
+    const [url, note] = LINKS[key];
+    print(`<span class="t-ok">opening</span> <a href="${url}" target="_blank" rel="noopener">${url}</a> <span class="t-dim">${note}</span>`);
+    window.open(url, "_blank", "noopener");
+  }
+
+  /* The one joke in here. Reduced motion gets the punchline without the shock. */
+  function jumpscare() {
+    if (reducedMotion) {
+      print('<span class="t-dim">(a jumpscare would go here, but you asked for less motion)</span>');
+      return;
+    }
+    const veil = document.createElement("div");
+    veil.className = "jumpscare";
+    veil.innerHTML = '<span>&gt;_</span>';
+    document.body.appendChild(veil);
+    document.body.classList.add("jumpshake");
+    try {
+      const ac = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ac.createOscillator(), g = ac.createGain();
+      o.type = "sawtooth";
+      o.frequency.setValueAtTime(880, ac.currentTime);
+      o.frequency.exponentialRampToValueAtTime(60, ac.currentTime + 0.45);
+      g.gain.setValueAtTime(0.16, ac.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.5);
+      o.connect(g).connect(ac.destination);
+      o.start(); o.stop(ac.currentTime + 0.5);
+    } catch (e) { /* no audio, still get the flash */ }
+    setTimeout(() => {
+      veil.remove();
+      document.body.classList.remove("jumpshake");
+      print('<span class="t-dim">sorry. he helped with the CSS.</span>');
+    }, 620);
+  }
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { const v = input.value; input.value = ""; run(v); }
+    else if (e.key === "Tab") {
+      e.preventDefault();
+      const v = input.value.trim().toLowerCase();
+      if (!v) return;
+      const pool = [...ROOMS, ...Object.keys(LINKS), ...Object.keys(CMDS)];
+      const hits = pool.filter(c => c.startsWith(v));
+      if (hits.length === 1) input.value = hits[0];
+      else if (hits.length > 1) print(hits.map(h => `<span class="t-key">${h}</span>`).join("  "));
+    }
+    else if (e.key === "ArrowUp")   { if (histAt > 0) { input.value = hist[--histAt] || ""; } e.preventDefault(); }
+    else if (e.key === "ArrowDown") { if (histAt < hist.length) { input.value = hist[++histAt] || ""; } e.preventDefault(); }
+  });
+
+  body.addEventListener("click", () => input.focus());
+
+  print('<span class="t-dim">Leo Zhou · portfolio · built from scratch</span>');
+  print('<span class="t-dim">Ask a question, or type </span><span class="t-key">help</span><span class="t-dim">.</span>');
+  print("");
+})();

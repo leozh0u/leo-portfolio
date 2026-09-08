@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=Lilita+One&family=Shojumaru&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2026-09-08b">
+  <link rel="stylesheet" href="style.css?v=2026-09-08c">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🤺</text></svg>">
 </head>
 <body>
@@ -35,7 +35,7 @@
       <a href="#chess">chess</a>
       <a href="#work">work</a>
       <a href="#projects">projects</a>
-      <a href="#deck">deck</a>
+      <a href="#terminal">terminal</a>
       <a href="#contact" class="nav-cta">contact</a>
     </div>
     <div class="progress"><span id="progress-bar"></span></div>
@@ -433,74 +433,26 @@
   </section>
 
   <!-- ═══ 07 · DECK ═══ -->
-  <section id="deck" class="room r-arena">
-    <div class="room-inner">
+  <!-- ═══ 06 · TERMINAL ═══ -->
+  <section id="terminal" class="room r-term">
+    <div class="room-inner term-inner">
       <header class="room-head">
-        <p class="kicker mono">06 · off hours</p>
-        <h2>The battle deck</h2>
+        <p class="kicker mono">06 · terminal</p>
+        <h2>Ask me anything</h2>
       </header>
-      <div class="cr-deck">
-        <div class="cr-tabs">
-          <span class="cr-tab active">Battle Deck</span>
-          <span class="cr-tab">Personalize</span>
+      <div class="term" id="term">
+        <div class="term-bar" id="term-bar">
+          <span class="term-lights" aria-hidden="true"><i class="tl-r"></i><i class="tl-y"></i><i class="tl-g"></i></span>
+          <span class="term-title mono">leo@portfolio &mdash; zsh &mdash; 80&times;24</span>
         </div>
-        <div class="cr-toolbar">
-          <span class="cr-tool">👑</span>
-          <span class="cr-slots"><i>1</i><i>2</i><i class="on">3</i></span>
-          <span class="cr-tool">⚔️</span>
+        <div class="term-body" id="term-body">
+          <div class="term-out" id="term-out"></div>
+          <label class="term-line" for="term-in">
+            <span class="term-prompt mono">leo@portfolio <span class="term-tilde">~</span> %</span>
+            <input class="term-in mono" id="term-in" autocomplete="off" autocapitalize="off"
+                   spellcheck="false" placeholder="type a command, or just ask" aria-label="command">
+          </label>
         </div>
-        <div class="cr-grid">
-          <button class="cr-card rar-legendary" data-deploy="⛏️" data-cry="bedwars and speedruns">
-            <span class="cr-elixir">5</span>
-            <span class="cr-frame"><span class="cr-art">⛏️</span></span>
-            <span class="cr-plate"><span class="cr-name">Minecraft</span></span>
-            <span class="cr-up mono"><i>⬆</i> Lv 11 · 1/4</span>
-          </button>
-          <button class="cr-card rar-epic" data-deploy="👑" data-cry="clash royale and brawl stars">
-            <span class="cr-elixir">4</span>
-            <span class="cr-frame"><span class="cr-art">👑</span></span>
-            <span class="cr-plate"><span class="cr-name">Supercell</span></span>
-            <span class="cr-up mono"><i>⬆</i> Lv 13 · 22/50</span>
-          </button>
-          <button class="cr-card rar-rare" data-deploy="🏀" data-cry="pickup games">
-            <span class="cr-elixir">3</span>
-            <span class="cr-frame"><span class="cr-art">🏀</span></span>
-            <span class="cr-plate"><span class="cr-name">Basketball</span></span>
-            <span class="cr-up mono"><i>⬆</i> Lv 12 · 0/4</span>
-          </button>
-          <button class="cr-card rar-rare" data-deploy="🎾" data-cry="still learning">
-            <span class="cr-elixir">3</span>
-            <span class="cr-frame"><span class="cr-art">🎾</span></span>
-            <span class="cr-plate"><span class="cr-name">Tennis</span></span>
-            <span class="cr-up mono"><i>⬆</i> Lv 10 · 2/4</span>
-          </button>
-          <button class="cr-card rar-epic" data-deploy="⛷️" data-cry="every winter">
-            <span class="cr-elixir">3</span>
-            <span class="cr-frame"><span class="cr-art">⛷️</span></span>
-            <span class="cr-plate"><span class="cr-name">Skiing</span></span>
-            <span class="cr-up mono"><i>⬆</i> Lv 12 · 4/20</span>
-          </button>
-          <button class="cr-card rar-common" data-deploy="tetris" data-cry="back to back">
-            <span class="cr-elixir">2</span>
-            <span class="cr-frame"><span class="cr-art">🕹️</span></span>
-            <span class="cr-plate"><span class="cr-name">Tetris</span></span>
-            <span class="cr-up mono"><i>⬆</i> Lv 13 · 7/20</span>
-          </button>
-          <button class="cr-card rar-common" data-deploy="🎨" data-cry="on paper, badly">
-            <span class="cr-elixir">2</span>
-            <span class="cr-frame"><span class="cr-art">🎨</span></span>
-            <span class="cr-plate"><span class="cr-name">Drawing</span></span>
-            <span class="cr-up mono"><i>⬆</i> Lv 10 · 0/4</span>
-          </button>
-          <button class="cr-card rar-common" data-deploy="🏓" data-cry="spin wins">
-            <span class="cr-elixir">1</span>
-            <span class="cr-frame"><span class="cr-art">🏓</span></span>
-            <span class="cr-plate"><span class="cr-name">Ping Pong</span></span>
-            <span class="cr-up mono"><i>⬆</i> Lv 12 · 1/4</span>
-          </button>
-        </div>
-        <p class="cr-avg-line">Average Elixir cost: <b>2.9</b> <span class="cr-drop"></span></p>
-        <p class="mono cr-deploy" id="deploy-line">&nbsp;</p>
       </div>
     </div>
   </section>
@@ -588,6 +540,6 @@
   <button class="edge edge-r" id="edge-r" aria-label="next">›</button>
   <div class="dots" id="dots" aria-hidden="true"></div>
 
-  <script src="script.js?v=2026-09-08b"></script>
+  <script src="script.js?v=2026-09-08c"></script>
 </body>
 </html>

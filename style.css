@@ -499,7 +499,7 @@ h3 { font-size: 1.2rem; }
 .gate:nth-child(even) { transform: rotate(0.4deg); }
 .gate-date { color: var(--blue); font-weight: 700; margin-bottom: 0.2rem; }
 .gate-loc { opacity: 0.65; margin-bottom: 0.5rem; }
-.gate p { font-size: 0.85rem; }
+.gate p { font-size: 0.82rem; line-height: 1.45; }
 .gate h3 { font-size: 1.02rem; }
 .gate-tags { margin-top: 0.5rem; color: var(--purple); font-weight: 700; }
 
@@ -1194,4 +1194,77 @@ h3 { font-size: 1.2rem; }
     backdrop-filter: blur(14px) saturate(0.8);
     box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
   }
+}
+
+/* ============================================================
+   Work room · the run
+   Six roles read as a slalom descending left to right rather than as
+   a grid of identical cards. Gates alternate either side of the trail,
+   each marked with the pole pair a real course uses: red then blue.
+   ============================================================ */
+
+.r-ski .room-inner { position: relative; }
+
+/* The piste itself: a groomed band running down under the gates. */
+.gates::before {
+  content: "";
+  position: absolute; left: -6vw; right: -6vw; top: -1.5rem; bottom: -1.5rem;
+  background: linear-gradient(104deg, transparent 0 6%, rgba(255,255,255,0.92) 12% 88%, transparent 94%);
+  transform: rotate(2.6deg);
+  border-radius: 999px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* The run: a flex line, each gate dropped a little further down the hill. */
+.gates {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+  scroll-snap-type: x proximity;
+}
+.gate {
+  flex: 0 0 clamp(210px, 20vw, 250px);
+  scroll-snap-align: center;
+  position: relative;
+  padding-top: 1.6rem;
+}
+/* Each gate sits lower than the last, which is the whole point of a slope. */
+.gate:nth-child(1) { margin-top: 0; }
+.gate:nth-child(2) { margin-top: 1.6rem; }
+.gate:nth-child(3) { margin-top: 0.5rem; }
+.gate:nth-child(4) { margin-top: 2.7rem; }
+.gate:nth-child(5) { margin-top: 1.2rem; }
+.gate:nth-child(6) { margin-top: 3.5rem; }
+
+/* The pole pair. Red gate then blue, the way a course alternates. */
+.gate::before {
+  content: "";
+  position: absolute; top: 0; left: 1.15rem;
+  width: 10px; height: 22px;
+  background: var(--red);
+  clip-path: polygon(0 0, 100% 22%, 0 44%);
+  box-shadow: 26px 0 0 -1px var(--blue);
+}
+.gate:nth-child(even)::before { background: var(--blue); box-shadow: 26px 0 0 -1px var(--red); }
+.gate::after {
+  content: "";
+  position: absolute; top: 0; left: 1.15rem;
+  width: 2px; height: 1.5rem;
+  background: rgba(34, 28, 20, 0.45);
+  box-shadow: 26px 0 0 0 rgba(34, 28, 20, 0.45);
+}
+
+.gate:nth-child(odd)  { transform: rotate(-0.5deg); }
+.gate:nth-child(even) { transform: rotate(0.5deg); }
+.gate:hover { transform: translateY(-5px) rotate(0deg); z-index: 2; }
+
+@media (max-width: 900px) {
+  .piste-trail { display: none; }
+  .gates { display: grid; grid-template-columns: 1fr; overflow-x: visible; }
+  .gate { flex: none; margin-top: 0 !important; transform: none !important; padding-top: 1.5rem; }
 }

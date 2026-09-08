@@ -807,3 +807,32 @@ addEventListener("keydown", e => {
   const digit = +e.key;
   if (digit >= 1 && digit <= slots.length) selectSlot(digit - 1);
 });
+
+/* ------------------------------------------------------------
+   Record wall parallax
+   The sleeves lean away from the pointer. Depth is per-sleeve, so
+   the wall separates instead of sliding as one sheet. Written to a
+   custom property and read back in the transform, which keeps the
+   drift keyframe and the parallax from overwriting each other.
+   ------------------------------------------------------------ */
+(() => {
+  const wall = document.querySelector(".lp-wall");
+  if (!wall || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const room = wall.closest("section") || wall.parentElement;
+  let frame = null;
+  room.addEventListener("pointermove", (e) => {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = null;
+      const r = room.getBoundingClientRect();
+      const dx = (e.clientX - r.left) / r.width - 0.5;
+      const dy = (e.clientY - r.top) / r.height - 0.5;
+      wall.style.setProperty("--px", `${(-dx * 26).toFixed(1)}px`);
+      wall.style.setProperty("--py", `${(-dy * 20).toFixed(1)}px`);
+    });
+  });
+  room.addEventListener("pointerleave", () => {
+    wall.style.setProperty("--px", "0px");
+    wall.style.setProperty("--py", "0px");
+  });
+})();

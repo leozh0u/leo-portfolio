@@ -751,6 +751,9 @@ h3 { font-size: 1.2rem; }
 
 /* hero live badge */
 .hero-live { margin-top: 1.1rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+/* Two live sites stack, so the second sits tight under the first rather than
+   opening the same gap that separates it from the badges above. */
+.hero-live + .hero-live { margin-top: 0.5rem; }
 .hero-live > a {
   display: inline-flex; align-items: center; gap: 0.45rem;
   font-weight: 700; color: var(--ink); text-decoration: none;

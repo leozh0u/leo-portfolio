@@ -969,8 +969,8 @@ h3 { font-size: 1.2rem; }
 .lp-wall::before {
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 98;
   background:
-    radial-gradient(ellipse 40% 46% at 50% 46%, rgba(20, 12, 28, 0.97) 46%, rgba(20, 12, 28, 0) 82%),
-    linear-gradient(180deg, rgba(20, 12, 28, 0.72), rgba(20, 12, 28, 0.42) 26% 62%, rgba(20, 12, 28, 0.9));
+    radial-gradient(ellipse 78% 74% at 50% 48%, rgba(14, 9, 20, 0) 42%, rgba(14, 9, 20, 0.62) 100%),
+    linear-gradient(180deg, rgba(14, 9, 20, 0.45), rgba(14, 9, 20, 0) 22% 76%, rgba(14, 9, 20, 0.55));
 }
 
 /* Newsprint over the whole pile. Without it twenty four photographs
@@ -978,7 +978,7 @@ h3 { font-size: 1.2rem; }
 .lp-wall::after {
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 99;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-  opacity: 0.2; mix-blend-mode: overlay;
+  opacity: 0.11; mix-blend-mode: overlay;
 }
 
 .lp {
@@ -986,7 +986,7 @@ h3 { font-size: 1.2rem; }
   left: var(--x); top: var(--y);
   width: var(--w); aspect-ratio: 1;
   z-index: calc(var(--i) + 1);
-  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.6)) saturate(1.12) contrast(1.04);
   transform:
     translate3d(calc(var(--px) * var(--depth, 1)), calc(var(--py) * var(--depth, 1)), 0)
     rotate(var(--r));
@@ -1014,21 +1014,9 @@ h3 { font-size: 1.2rem; }
   clip-path: polygon(4% 0, 34% 5%, 62% 0, 96% 4%, 100% 31%, 95% 59%, 100% 92%,
                      67% 100%, 37% 95%, 6% 100%, 0 68%, 5% 37%, 0 8%);
 }
-/* Printed in one ink. */
-.lp--duo img { filter: grayscale(1) contrast(1.3) brightness(1.05); }
-.lp--duo::after {
-  content: ""; position: absolute; inset: 0;
-  background: #2f7fd0; mix-blend-mode: color; opacity: 0.72;
-}
-.lp:nth-child(7n) .lp--duo::after, .lp--duo:nth-child(5n)::after { background: #e0533c; }
-/* Screened, the way a photograph looks reprinted in a newspaper. */
-.lp--halftone img { filter: grayscale(1) contrast(1.5); }
-.lp--halftone::after {
-  content: ""; position: absolute; inset: 0;
-  background-image: radial-gradient(circle at center, #000 42%, transparent 44%);
-  background-size: 5px 5px;
-  mix-blend-mode: overlay; opacity: 0.75;
-}
+/* A light print bias on a couple of pieces, not a colour swap. */
+.lp--duo img { filter: saturate(1.25) contrast(1.1); }
+.lp--halftone img { filter: contrast(1.12); }
 
 @keyframes lp-drift {
   from { translate: 0 0; rotate: -0.5deg; }
@@ -1064,7 +1052,7 @@ h3 { font-size: 1.2rem; }
     -webkit-mask-image: radial-gradient(ellipse 66% 48% at 50% 48%, transparent 54%, #000 100%);
             mask-image: radial-gradient(ellipse 66% 48% at 50% 48%, transparent 54%, #000 100%);
   }
-  .lp-wall { opacity: 0.5; }
+  .lp-wall { opacity: 0.9; }
   .lp { width: calc(var(--w) * 1.5); }
 }
 
@@ -1180,4 +1168,30 @@ h3 { font-size: 1.2rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .jumpscare, .jumpshake { animation: none; }
+}
+
+/* The collage stays bright, so the words sit on their own surface rather than
+   on a dimmed wall. Same chunky border and hard shadow as the rest of the site. */
+.r-stage .contact-inner {
+  background: rgba(17, 10, 24, 0.7);
+  backdrop-filter: blur(10px) saturate(0.85);
+  border: 3px solid rgba(246, 241, 230, 0.92);
+  border-radius: 18px;
+  box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.5);
+  padding: 1.1rem 1.4rem 1.3rem;
+  width: min(560px, 100%);
+  margin-inline: auto;
+}
+@media (max-width: 900px) {
+  .r-stage .contact-inner {
+    padding: 1.1rem 1rem 1.4rem;
+    border-width: 2px;
+    border-radius: 14px;
+    /* Thinner here, because at this width the panel is the whole screen and an
+       opaque one hides the collage completely. Blur plus the text shadows do
+       the legibility work instead. */
+    background: rgba(17, 10, 24, 0.42);
+    backdrop-filter: blur(14px) saturate(0.8);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+  }
 }

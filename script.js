@@ -1036,6 +1036,11 @@ addEventListener("keydown", e => {
   const svg = document.querySelector(".run-svg");
   if (!run || !skier || !track || !svg) return;
 
+  // The page does not scroll on desktop: body is overflow hidden and each
+  // .room scrolls itself. So the scroll to follow is the room's, not the
+  // window's, and not the run's (which no longer scrolls at all).
+  const scroller = run.closest(".room") || document.scrollingElement;
+
   const len = track.getTotalLength();
   track.style.strokeDasharray = `${len}`;
   track.style.strokeDashoffset = `${len}`;
@@ -1059,17 +1064,14 @@ addEventListener("keydown", e => {
 
     const sx = box.width / 600, sy = box.height / 1576;
     const runBox = run.getBoundingClientRect();
+    const sBox = scroller.getBoundingClientRect();
     const originX = (run.clientWidth - box.width) / 2;
     const originY = box.top - runBox.top;
 
-    // One scroll now, so the skier is placed from where the run sits in the
-    // viewport: it rides the eye line while the run is on screen, and parks at
-    // either end of the path once the run has passed.
-    const eye = window.innerHeight * 0.45;
-    const contentY = Math.min(
-      Math.max(eye - runBox.top, 0),
-      runBox.height
-    );
+    // Hold the eye line inside whatever is scrolling, and clamp so the skier
+    // parks at either end of the path once the run has gone by.
+    const eye = sBox.top + scroller.clientHeight * 0.45;
+    const contentY = Math.min(Math.max(eye - runBox.top, 0), runBox.height);
 
     const at = atHeight((contentY - originY) / sy);
     const pt = track.getPointAtLength(at);
@@ -1082,8 +1084,8 @@ addEventListener("keydown", e => {
   }
 
   const onScroll = () => { if (!frame) frame = requestAnimationFrame(place); };
+  scroller.addEventListener("scroll", onScroll, { passive: true });
   addEventListener("scroll", onScroll, { passive: true });
-  run.addEventListener("scroll", onScroll, { passive: true });
   addEventListener("resize", onScroll);
   place();
 })();

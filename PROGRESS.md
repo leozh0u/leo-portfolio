@@ -16,8 +16,15 @@ Running log so a fresh tab can pick this up. Newest first.
 - **Cut copy** that read as performed: the sheep line, "Ten years behind a blade" → "Ten years fencing", the fencing blurb, "You're white, and the bot takes whatever it can. This one is a toy.", "Shipped bricks on the shelf, fresh ones on the workbench.", "Current rotation. Tap a card to deploy."
 - **Cache busting.** `style.css` and `script.js` carry `?v=` because GitHub Pages was serving stale assets. **Bump the string whenever either file changes.**
 
+## Verified vs not
+
+**How this site scrolls, which is easy to get wrong.** `body` is `overflow-y: hidden`, so the page never scrolls on desktop. Each `.room` is its own scroller (`#work` measured at scrollHeight 1766 / clientHeight 720). Anything that reacts to scroll must listen to the room, not to `window`. The skier got this wrong twice.
+
+**Not visually verified:** the skier following the run after it was rebound to the room's scroll. The diagnosis was measured while the preview rendered; the fix follows from it and the file parses, but the preview pane went headless (`innerHeight` 0) before it could be watched. **Someone should scroll the work room and confirm the skier tracks the path.**
+
 ## Open
 
+- **Scoreboard interaction was lost.** The old fencing scoreboard, removed as a duplicate, had a click easter egg: 14-14 with a running clock, click to score the winning touch, clock flips to TOUCHÉ, red lamp locks on, confetti fires. The new box is static at 15-14. The behaviour could be moved onto it.
 - **The rest of the site has not had the pass.** Contact, terminal and work are done. Untouched: hero, origin (GeoGuessr), fencing, chess, projects.
 - **Direction not settled.** Asked twice, no answer: does "as abstract as possible" mean (a) keep every room, push the treatment — grain, torn edges, duotone, heavier type, or (b) strip the literal props and let colour, shape and motion carry each room. (b) costs the working chess board and the drum kit.
 - **Copy still in the performed register**, flagged and not yet ruled on: the Minecraft hotbar item names in the contact room ("Épée of Smiting", "Debugger Pickaxe", "Gold Medal ×27"), SeatLive's "two people, one seat, one winner", Edge-ML's "55× smaller, still listening", and the workbench quote "I only work in black. And sometimes very, very dark grey."

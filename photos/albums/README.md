@@ -1,6 +1,6 @@
 # Album sleeves
 
-Twenty four covers, collaged behind the contact room. Each `<figure>` in
+Twenty six covers, collaged behind the contact room. Each `<figure>` in
 `index.html` names its file, and a missing file removes its whole figure, so the
 pile closes over any gap.
 
@@ -18,7 +18,7 @@ or left as it came. Newsprint grain sits over everything.
     comedown-machine        inside                  speak-now
     la-la-land              hamilton                flower-boy
     mbdtf                   the-new-abnormal        angles
-    sonderlust              arcane                  random-access-memories
+    sonderlust              arcane                  random-access-memories  like-all-before-you     the-bends
     doo-wops-and-hooligans  worst-album-covers      plastic-beach
 
 Square, 400x400 or larger. Cover art belongs to the labels, so it stays

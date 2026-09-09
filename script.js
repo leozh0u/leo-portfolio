@@ -1058,27 +1058,31 @@ addEventListener("keydown", e => {
     if (!box.width) return;                       // room not laid out yet
 
     const sx = box.width / 600, sy = box.height / 1576;
+    const runBox = run.getBoundingClientRect();
     const originX = (run.clientWidth - box.width) / 2;
-    const originY = parseFloat(getComputedStyle(run).paddingTop) || 0;
+    const originY = box.top - runBox.top;
 
-    // The skier holds station a little above the middle of what you can see
-    // and weaves as the run does, so it never scrolls out of view.
-    const eyeContentY = run.scrollTop + run.clientHeight * 0.42;
-    const at = atHeight((eyeContentY - originY) / sy);
+    // One scroll now, so the skier is placed from where the run sits in the
+    // viewport: it rides the eye line while the run is on screen, and parks at
+    // either end of the path once the run has passed.
+    const eye = window.innerHeight * 0.45;
+    const contentY = Math.min(
+      Math.max(eye - runBox.top, 0),
+      runBox.height
+    );
+
+    const at = atHeight((contentY - originY) / sy);
     const pt = track.getPointAtLength(at);
     const ahead = track.getPointAtLength(Math.min(len, at + 14));
     const angle = Math.atan2((ahead.y - pt.y) * sy, (ahead.x - pt.x) * sx) * 180 / Math.PI;
 
-    const x = originX + pt.x * sx;
     skier.style.transform =
-      `translate3d(${x - 17}px, ${eyeContentY - 17}px, 0) rotate(${angle - 90}deg)`;
-
-    const max = run.scrollHeight - run.clientHeight;
-    const p = max > 0 ? Math.min(1, Math.max(0, run.scrollTop / max)) : 0;
-    track.style.strokeDashoffset = `${len * (1 - Math.max(p, at / len))}`;
+      `translate3d(${originX + pt.x * sx - 18}px, ${contentY - 18}px, 0) rotate(${angle - 90}deg)`;
+    track.style.strokeDashoffset = `${len * (1 - at / len)}`;
   }
 
   const onScroll = () => { if (!frame) frame = requestAnimationFrame(place); };
+  addEventListener("scroll", onScroll, { passive: true });
   run.addEventListener("scroll", onScroll, { passive: true });
   addEventListener("resize", onScroll);
   place();

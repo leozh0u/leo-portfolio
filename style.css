@@ -1188,15 +1188,13 @@ h3 { font-size: 1.2rem; }
    down the path with their tracks cut in behind them.
    ============================================================ */
 
-.r-ski .room-inner { position: relative; display: flex; flex-direction: column; min-height: 0; }
+.r-ski .room-inner { position: relative; }
 
+/* No inner scroller. The run is part of the page, so there is one scroll
+   through the whole descent rather than a box inside a box. */
 .run {
   position: relative;
-  flex: 1; min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
   padding: 0.5rem 0 3rem;
-  scrollbar-width: thin;
 }
 /* The piste and the cut tracks share a path, so the skier is always on it. */
 .run-svg {
@@ -1212,7 +1210,7 @@ h3 { font-size: 1.2rem; }
 
 .skier {
   position: absolute; top: 0; left: 0;
-  font-size: 1.9rem; line-height: 1;
+  font-size: 2.1rem; line-height: 1;
   z-index: 3; pointer-events: none;
   filter: drop-shadow(0 4px 5px rgba(30, 50, 70, 0.35));
   transition: transform 120ms linear;

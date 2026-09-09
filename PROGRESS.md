@@ -4,6 +4,10 @@ Running log so a fresh tab can pick this up. Newest first.
 
 ## Done, pushed (8 Sept 2026)
 
+- **Work room rebuilt as a run you ski.** Vertical scroll inside the room, gates alternating left and right of a winding piste, and a skier that holds station about 40% down the view, weaves along the path and rotates to its heading while its tracks cut in behind. Replaced the earlier horizontal version, which was not the concept.
+- **Fencing scoreboard.** `ZHOU 15 - 14 DOUBT`, built in CSS rather than dropped in as an image so it stays sharp and themeable. Red lamp lit and pulsing, green unlit, since the last touch was his.
+- **Fixed a stray `}`** left by an earlier slice edit in `style.css`. It was silently killing every rule after it. If new CSS ever appears to do nothing, check brace balance first: `python3 -c "s=open('style.css').read();print(s.count('{')-s.count('}'))"` should print 0.
+
 - **Resume refreshed.** Site was serving an Aug 26 build missing the research role. Now the Sep 5 general (2028) build. Standing rule: refresh whenever this repo is touched.
 - **Work room is a slalom**, not a card grid. Six gates descending left to right down a piste band, red/blue pole pairs, horizontal scroll past the sixth, stacks on mobile. Research entry trimmed to stop the run overflowing.
 - **Deck room deleted, terminal room added** (`#terminal`, room 06). Commands + knowledge-base fallback, honest "I don't know", `claude` triggers a jumpscare (skipped under reduced motion). Deck's hobby list was deleted per decision, not moved.

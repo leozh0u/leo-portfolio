@@ -987,9 +987,9 @@ h3 { font-size: 1.2rem; }
 .lp:nth-child(3n+1) { --depth: 0.6; }
 
 /* Torn out of the magazine, white deckle left on. */
+/* No white backing: at these sizes the deckle read as holes punched in the
+   collage rather than as paper. The torn edge alone carries the cut. */
 .lp--paper {
-  background: #f7f3ea;
-  padding: 2.5% 2.5% 7%;
   clip-path: polygon(2% 3%, 21% 0, 44% 4%, 68% 0, 88% 3%, 100% 20%, 97% 44%,
                      100% 70%, 96% 95%, 74% 100%, 49% 96%, 26% 100%, 5% 97%,
                      0 74%, 3% 47%, 0 22%);
@@ -1199,7 +1199,7 @@ h3 { font-size: 1.2rem; }
 /* The piste and the cut tracks share a path, so the skier is always on it. */
 .run-svg {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: min(620px, 92%); height: 1576px;
+  width: min(620px, 92%); height: 100%;
   pointer-events: none; z-index: 0;
 }
 .run-piste { fill: none; stroke: #fff; stroke-width: 84; stroke-linecap: round; opacity: 0.95; }
@@ -1221,8 +1221,8 @@ h3 { font-size: 1.2rem; }
 .gates {
   position: relative; z-index: 1;
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 1.6rem 2.4rem;
-  padding: 5.5rem 0.5rem 2rem;
+  gap: 6rem 3rem;
+  padding: 6rem 0.5rem 5rem;
 }
 .gate {
   position: relative;
@@ -1232,8 +1232,8 @@ h3 { font-size: 1.2rem; }
 .gate:nth-child(odd)  { grid-column: 1; justify-self: end;   transform: rotate(-0.6deg); }
 .gate:nth-child(even) { grid-column: 2; justify-self: start; transform: rotate(0.6deg); }
 /* Drop every gate below the one before it so the run reads as a descent. */
-.gate:nth-child(even) { margin-top: 5.5rem; }
-.gate:nth-child(odd):not(:first-child) { margin-top: -3rem; }
+.gate:nth-child(even) { margin-top: 11rem; }
+.gate:nth-child(odd):not(:first-child) { margin-top: 1rem; }
 .gate:hover { transform: translateY(-5px) rotate(0deg); z-index: 4; }
 
 /* The pole pair: red gate then blue, the way a course alternates. */

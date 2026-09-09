@@ -67,13 +67,13 @@ h3 { font-size: 1.2rem; }
 /* ---------- world / track / rooms ---------- */
 .world { width: 100vw; height: 100svh; overflow: hidden; }
 .track {
-  display: flex; height: 100%;
+  display: flex; height: 100%; width: 100%;
   transition: transform 0.65s cubic-bezier(0.77, 0, 0.18, 1);
   will-change: transform;
 }
 .room {
   position: relative;
-  flex: 0 0 100vw;
+  flex: 0 0 100%;
   height: 100svh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -464,7 +464,12 @@ h3 { font-size: 1.2rem; }
 
 /* ---------- work / ski ---------- */
 .r-ski { background: linear-gradient(180deg, #b8dcf5 0%, var(--ski-bg) 45%, #eef7fd 100%); }
-.mountains { position: absolute; left: 0; right: 0; top: 0; width: 100%; height: 300px; z-index: 0; }
+.mountains {
+  position: absolute; left: 0; right: 0; top: 0; width: 100%; height: 300px; z-index: 0;
+  /* Was cut off on a hard line where the svg ended; this lands it on the snow. */
+  -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 99%);
+          mask-image: linear-gradient(180deg, #000 62%, transparent 99%);
+}
 .mtn-far { fill: #9ec9e8; }
 .mtn-near { fill: #7fb5dd; }
 .mtn-cap { fill: #fff; }
@@ -1221,6 +1226,7 @@ h3 { font-size: 1.2rem; }
 .gates {
   position: relative; z-index: 1;
   display: grid; grid-template-columns: 1fr 1fr;
+  align-items: start;          /* without this they stretch to the row and touch */
   gap: 6rem 3rem;
   padding: 6rem 0.5rem 5rem;
 }

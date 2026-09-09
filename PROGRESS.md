@@ -16,6 +16,11 @@ Running log so a fresh tab can pick this up. Newest first.
 - **Cut copy** that read as performed: the sheep line, "Ten years behind a blade" → "Ten years fencing", the fencing blurb, "You're white, and the bot takes whatever it can. This one is a toy.", "Shipped bricks on the shelf, fresh ones on the workbench.", "Current rotation. Tap a card to deploy."
 - **Cache busting.** `style.css` and `script.js` carry `?v=` because GitHub Pages was serving stale assets. **Bump the string whenever either file changes.**
 
+## Gotchas worth keeping
+
+- **Rooms are sized off the track, not `100vw`.** They used to be `flex: 0 0 100vw` while `goRoom` translated by `document.documentElement.clientWidth`. Those two differ by the scrollbar and by sub-pixel rounding under browser zoom, and the error compounded across eight rooms until a neighbour showed at the edge. Both now use the track's own width. If you touch either, keep them on the same measure.
+- **`.gates` needs `align-items: start`.** Grid items stretch to their row by default, which made the cards touch no matter what the gap said.
+
 ## Verified vs not
 
 **How this site scrolls, which is easy to get wrong.** `body` is `overflow-y: hidden`, so the page never scrolls on desktop. Each `.room` is its own scroller (`#work` measured at scrollHeight 1766 / clientHeight 720). Anything that reacts to scroll must listen to the room, not to `window`. The skier got this wrong twice.

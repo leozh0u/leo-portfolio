@@ -1279,4 +1279,58 @@ h3 { font-size: 1.2rem; }
     margin-top: 0 !important; transform: none !important; max-width: none;
   }
 }
+
+/* ============================================================
+   Fencing · the box
+   A scoring box, which is the thing you actually watch during a bout.
+   The red lamp is lit because the last touch was his; 15-14 is the
+   closest a bout can be won.
+   ============================================================ */
+
+.scorebox {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem;
+  width: min(680px, 100%);
+  margin: 1.2rem auto 1.6rem;
+  padding: 0.85rem 1.5rem;
+  background: #232019;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
 }
+.sb-side { display: flex; align-items: center; gap: 0.85rem; }
+.sb-away { flex-direction: row; }
+
+.sb-name {
+  color: #f4efe2; font-size: 0.92rem; font-weight: 700;
+  letter-spacing: 0.22em;
+}
+.sb-score {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+  font-weight: 800; line-height: 1;
+  color: var(--yellow);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The lamp. Lit on the left because that touch landed. */
+.sb-lamp { width: 22px; height: 22px; border-radius: 5px; flex: none; }
+.sb-red {
+  background: #ef4136;
+  box-shadow: 0 0 16px 3px rgba(239, 65, 54, 0.75), inset 0 0 6px rgba(255, 255, 255, 0.4);
+  animation: sb-pulse 2.4s ease-in-out infinite;
+}
+.sb-green { background: #1f3a2a; box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6); }
+
+@keyframes sb-pulse {
+  0%, 100% { box-shadow: 0 0 16px 3px rgba(239, 65, 54, 0.75), inset 0 0 6px rgba(255,255,255,0.4); }
+  50%      { box-shadow: 0 0 22px 6px rgba(239, 65, 54, 0.95), inset 0 0 6px rgba(255,255,255,0.55); }
+}
+
+@media (max-width: 700px) {
+  .scorebox { gap: 0.6rem; padding: 0.7rem 1rem; border-radius: 26px; }
+  .sb-side { gap: 0.5rem; }
+  .sb-name { font-size: 0.72rem; letter-spacing: 0.14em; }
+  .sb-lamp { width: 16px; height: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .sb-red { animation: none; } }

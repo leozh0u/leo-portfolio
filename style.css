@@ -1198,50 +1198,62 @@ h3 { font-size: 1.2rem; }
 
 /* ============================================================
    Work room · the run
-   Six roles read as a slalom descending left to right rather than as
-   a grid of identical cards. Gates alternate either side of the trail,
-   each marked with the pole pair a real course uses: red then blue.
+   A course you ski rather than a grid you read. The run descends,
+   gates alternate either side of it, and a skier tracks your scroll
+   down the path with their tracks cut in behind them.
    ============================================================ */
 
-.r-ski .room-inner { position: relative; }
+.r-ski .room-inner { position: relative; display: flex; flex-direction: column; min-height: 0; }
 
-/* The piste itself: a groomed band running down under the gates. */
-.gates::before {
-  content: "";
-  position: absolute; left: -6vw; right: -6vw; top: -1.5rem; bottom: -1.5rem;
-  background: linear-gradient(104deg, transparent 0 6%, rgba(255,255,255,0.92) 12% 88%, transparent 94%);
-  transform: rotate(2.6deg);
-  border-radius: 999px;
-  z-index: -1;
-  pointer-events: none;
+.run {
+  position: relative;
+  flex: 1; min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.5rem 0 3rem;
+  scrollbar-width: thin;
+}
+/* The piste and the cut tracks share a path, so the skier is always on it. */
+.run-svg {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(620px, 92%); height: 1576px;
+  pointer-events: none; z-index: 0;
+}
+.run-piste { fill: none; stroke: #fff; stroke-width: 84; stroke-linecap: round; opacity: 0.95; }
+.run-track {
+  fill: none; stroke: #8fb8dc; stroke-width: 3; stroke-linecap: round;
+  stroke-dasharray: 6 10; opacity: 0.85;
 }
 
-/* The run: a flex line, each gate dropped a little further down the hill. */
+.skier {
+  position: absolute; top: 0; left: 0;
+  font-size: 1.9rem; line-height: 1;
+  z-index: 3; pointer-events: none;
+  filter: drop-shadow(0 4px 5px rgba(30, 50, 70, 0.35));
+  transition: transform 120ms linear;
+  will-change: transform;
+}
+
+/* Gates alternate sides of the run, which is the zigzag you actually ski. */
 .gates {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  position: relative;
-  z-index: 1;
-  overflow-x: auto;
-  padding-bottom: 0.75rem;
-  scroll-snap-type: x proximity;
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.6rem 2.4rem;
+  padding: 5.5rem 0.5rem 2rem;
 }
 .gate {
-  flex: 0 0 clamp(210px, 20vw, 250px);
-  scroll-snap-align: center;
   position: relative;
-  padding-top: 1.6rem;
+  padding-top: 1.7rem;
+  max-width: 330px;
 }
-/* Each gate sits lower than the last, which is the whole point of a slope. */
-.gate:nth-child(1) { margin-top: 0; }
-.gate:nth-child(2) { margin-top: 1.6rem; }
-.gate:nth-child(3) { margin-top: 0.5rem; }
-.gate:nth-child(4) { margin-top: 2.7rem; }
-.gate:nth-child(5) { margin-top: 1.2rem; }
-.gate:nth-child(6) { margin-top: 3.5rem; }
+.gate:nth-child(odd)  { grid-column: 1; justify-self: end;   transform: rotate(-0.6deg); }
+.gate:nth-child(even) { grid-column: 2; justify-self: start; transform: rotate(0.6deg); }
+/* Drop every gate below the one before it so the run reads as a descent. */
+.gate:nth-child(even) { margin-top: 5.5rem; }
+.gate:nth-child(odd):not(:first-child) { margin-top: -3rem; }
+.gate:hover { transform: translateY(-5px) rotate(0deg); z-index: 4; }
 
-/* The pole pair. Red gate then blue, the way a course alternates. */
+/* The pole pair: red gate then blue, the way a course alternates. */
 .gate::before {
   content: "";
   position: absolute; top: 0; left: 1.15rem;
@@ -1259,12 +1271,12 @@ h3 { font-size: 1.2rem; }
   box-shadow: 26px 0 0 0 rgba(34, 28, 20, 0.45);
 }
 
-.gate:nth-child(odd)  { transform: rotate(-0.5deg); }
-.gate:nth-child(even) { transform: rotate(0.5deg); }
-.gate:hover { transform: translateY(-5px) rotate(0deg); z-index: 2; }
-
 @media (max-width: 900px) {
-  .piste-trail { display: none; }
-  .gates { display: grid; grid-template-columns: 1fr; overflow-x: visible; }
-  .gate { flex: none; margin-top: 0 !important; transform: none !important; padding-top: 1.5rem; }
+  .run-svg, .skier { display: none; }
+  .gates { grid-template-columns: 1fr; padding: 1rem 0 2rem; gap: 1rem; }
+  .gate {
+    grid-column: 1 !important; justify-self: stretch !important;
+    margin-top: 0 !important; transform: none !important; max-width: none;
+  }
+}
 }

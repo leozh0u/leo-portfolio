@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=Lilita+One&family=Shojumaru&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2026-09-08i">
+  <link rel="stylesheet" href="style.css?v=2026-09-08n">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🤺</text></svg>">
 </head>
 <body>
@@ -295,49 +295,56 @@
         <p class="kicker mono">04 · work</p>
         <h2>Gates cleared so far</h2>
       </header>
-      <div class="gates">
-        <article class="gate">
-          <p class="gate-date mono">Aug 2026 → present</p>
-          <h3>Rice University · Undergraduate Research Assistant</h3>
-          <p class="gate-loc mono">Houston · Prof. Jiarong Xing</p>
-          <p>AI infrastructure. On a macOS usage-tracking app I ended a forced daily re-login with OAuth token refresh in Swift, then wrote a Keychain credential inspector once the documented token shape proved incomplete. Sessions run over SSH were invisible to it, so usage now surfaces by discovering the hosts and mirroring their transcripts.</p>
-          <p class="gate-tags mono">Swift · macOS · OAuth · Keychain · LLM routing</p>
-        </article>
-        <article class="gate">
-          <p class="gate-date mono">Jun 2026 → Aug 2026</p>
-          <h3>CanSemi · SWE Intern</h3>
-          <p class="gate-loc mono">Guangzhou</p>
-          <p>Binary parser for 500+ chip-tester datalogs (used daily by 6 test engineers), a PostgreSQL pipeline loading ~12,000 die in under two minutes per lot, and a FastAPI backend + React wafer map that cut reporting time by ~75%.</p>
-          <p class="gate-tags mono">Python · FastAPI · PostgreSQL · React</p>
-        </article>
-        <article class="gate">
-          <p class="gate-date mono">Apr 2026 → Jul 2026</p>
-          <h3>Inkstone Technologies · SWE</h3>
-          <p class="gate-loc mono">iOS</p>
-          <p>ABC Reads, a native Swift/SwiftUI reading app that adapts to each reader's known vocabulary. On-device Apple Vision OCR overlays pronunciation only on words you haven't learned yet. Underneath: a Python pipeline that frequency-ranks a 113,000-entry dictionary into indexed SQLite, and a local-first store on SQLite's raw C API driving spaced-repetition review and a WidgetKit widget.</p>
-          <p class="gate-tags mono">Swift · SwiftUI · Vision · SQLite · Python</p>
-        </article>
-        <article class="gate">
-          <p class="gate-date mono">Oct 2025 → Apr 2026</p>
-          <h3>Rice Wind Energy · Embedded</h3>
-          <p class="gate-loc mono">Houston</p>
-          <p>ESP32 firmware for a three-phase wind turbine controller: RPM, power and pitch sensing, a six-state safety state machine, and peak-power tracking.</p>
-          <p class="gate-tags mono">C/C++ · ESP32 · control systems</p>
-        </article>
-        <article class="gate">
-          <p class="gate-date mono">Nov 2025 → Feb 2026</p>
-          <h3>A-Lab @ Rice · Research</h3>
-          <p class="gate-loc mono">Houston</p>
-          <p>COMSOL simulations for a solar thermal desalination project: parameter sweeps and analysis to push model efficiency.</p>
-          <p class="gate-tags mono">COMSOL · simulation</p>
-        </article>
-        <article class="gate">
-          <p class="gate-date mono">Jun 2025 → Jul 2025</p>
-          <h3>Epal Electrical · EE Intern</h3>
-          <p class="gate-loc mono">Auckland</p>
-          <p>First engineering job, on the design team for large commercial buildings. Load calculations, circuit sizing, wiring and conduit selection against AS/NZS 3000:2018, plus site inspections checking installed work against the plans. Working to a written standard was the useful part: every choice had to hold up against a specific clause, not against what felt reasonable.</p>
-          <p class="gate-tags mono">AS/NZS 3000 · load calcs · site work</p>
-        </article>
+      <div class="run" id="run">
+        <svg class="run-svg" viewBox="0 0 600 1576" preserveAspectRatio="none" aria-hidden="true">
+          <path class="run-piste" d="M300,40 C300,130 120,160 120,262 C120,372 480,372 480,482 C480,592 120,592 120,702 C120,812 480,812 480,922 C480,1032 120,1032 120,1142 C120,1252 480,1258 480,1368 C480,1458 300,1476 300,1536"/>
+          <path class="run-track" id="run-track" d="M300,40 C300,130 120,160 120,262 C120,372 480,372 480,482 C480,592 120,592 120,702 C120,812 480,812 480,922 C480,1032 120,1032 120,1142 C120,1252 480,1258 480,1368 C480,1458 300,1476 300,1536"/>
+        </svg>
+        <div class="skier" id="skier" aria-hidden="true">&#9975;</div>
+        <div class="gates">
+          <article class="gate">
+            <p class="gate-date mono">Aug 2026 → present</p>
+            <h3>Rice University · Undergraduate Research Assistant</h3>
+            <p class="gate-loc mono">Houston · Prof. Jiarong Xing</p>
+            <p>AI infrastructure. On a macOS usage-tracking app I ended a forced daily re-login with OAuth token refresh in Swift, then wrote a Keychain credential inspector once the documented token shape proved incomplete. Sessions run over SSH were invisible to it, so usage now surfaces by discovering the hosts and mirroring their transcripts.</p>
+            <p class="gate-tags mono">Swift · macOS · OAuth · Keychain · LLM routing</p>
+          </article>
+          <article class="gate">
+            <p class="gate-date mono">Jun 2026 → Aug 2026</p>
+            <h3>CanSemi · SWE Intern</h3>
+            <p class="gate-loc mono">Guangzhou</p>
+            <p>Binary parser for 500+ chip-tester datalogs (used daily by 6 test engineers), a PostgreSQL pipeline loading ~12,000 die in under two minutes per lot, and a FastAPI backend + React wafer map that cut reporting time by ~75%.</p>
+            <p class="gate-tags mono">Python · FastAPI · PostgreSQL · React</p>
+          </article>
+          <article class="gate">
+            <p class="gate-date mono">Apr 2026 → Jul 2026</p>
+            <h3>Inkstone Technologies · SWE</h3>
+            <p class="gate-loc mono">iOS</p>
+            <p>ABC Reads, a native Swift/SwiftUI reading app that adapts to each reader's known vocabulary. On-device Apple Vision OCR overlays pronunciation only on words you haven't learned yet. Underneath: a Python pipeline that frequency-ranks a 113,000-entry dictionary into indexed SQLite, and a local-first store on SQLite's raw C API driving spaced-repetition review and a WidgetKit widget.</p>
+            <p class="gate-tags mono">Swift · SwiftUI · Vision · SQLite · Python</p>
+          </article>
+          <article class="gate">
+            <p class="gate-date mono">Oct 2025 → Apr 2026</p>
+            <h3>Rice Wind Energy · Embedded</h3>
+            <p class="gate-loc mono">Houston</p>
+            <p>ESP32 firmware for a three-phase wind turbine controller: RPM, power and pitch sensing, a six-state safety state machine, and peak-power tracking.</p>
+            <p class="gate-tags mono">C/C++ · ESP32 · control systems</p>
+          </article>
+          <article class="gate">
+            <p class="gate-date mono">Nov 2025 → Feb 2026</p>
+            <h3>A-Lab @ Rice · Research</h3>
+            <p class="gate-loc mono">Houston</p>
+            <p>COMSOL simulations for a solar thermal desalination project: parameter sweeps and analysis to push model efficiency.</p>
+            <p class="gate-tags mono">COMSOL · simulation</p>
+          </article>
+          <article class="gate">
+            <p class="gate-date mono">Jun 2025 → Jul 2025</p>
+            <h3>Epal Electrical · EE Intern</h3>
+            <p class="gate-loc mono">Auckland</p>
+            <p>First engineering job, on the design team for large commercial buildings. Load calculations, circuit sizing, wiring and conduit selection against AS/NZS 3000:2018, plus site inspections checking installed work against the plans. Working to a written standard was the useful part: every choice had to hold up against a specific clause, not against what felt reasonable.</p>
+            <p class="gate-tags mono">AS/NZS 3000 · load calcs · site work</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -540,6 +547,6 @@
   <button class="edge edge-r" id="edge-r" aria-label="next">›</button>
   <div class="dots" id="dots" aria-hidden="true"></div>
 
-  <script src="script.js?v=2026-09-08i"></script>
+  <script src="script.js?v=2026-09-08n"></script>
 </body>
 </html>

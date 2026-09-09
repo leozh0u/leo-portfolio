@@ -1037,3 +1037,64 @@ addEventListener("keydown", e => {
   print('<span class="t-dim">Ask a question, or type </span><span class="t-key">help</span><span class="t-dim">.</span>');
   print("");
 })();
+
+/* ------------------------------------------------------------
+   Work room · the skier
+   Scroll position maps to distance along the run, so the skier sits on
+   the actual curve rather than sliding down a straight line beside it.
+   The tracks are the same path, revealed behind them with a dash offset.
+   ------------------------------------------------------------ */
+(() => {
+  const run = document.getElementById("run");
+  const skier = document.getElementById("skier");
+  const track = document.getElementById("run-track");
+  const svg = document.querySelector(".run-svg");
+  if (!run || !skier || !track || !svg) return;
+
+  const len = track.getTotalLength();
+  track.style.strokeDasharray = `${len}`;
+  track.style.strokeDashoffset = `${len}`;
+
+  // Path y is monotonic down the run, so the point level with a given height
+  // can be found by bisection. Cheaper and steadier than walking the length.
+  function atHeight(yTarget) {
+    let lo = 0, hi = len;
+    for (let i = 0; i < 18; i++) {
+      const mid = (lo + hi) / 2;
+      if (track.getPointAtLength(mid).y < yTarget) lo = mid; else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
+
+  let frame = null;
+  function place() {
+    frame = null;
+    const box = svg.getBoundingClientRect();
+    if (!box.width) return;                       // room not laid out yet
+
+    const sx = box.width / 600, sy = box.height / 1576;
+    const originX = (run.clientWidth - box.width) / 2;
+    const originY = parseFloat(getComputedStyle(run).paddingTop) || 0;
+
+    // The skier holds station a little above the middle of what you can see
+    // and weaves as the run does, so it never scrolls out of view.
+    const eyeContentY = run.scrollTop + run.clientHeight * 0.42;
+    const at = atHeight((eyeContentY - originY) / sy);
+    const pt = track.getPointAtLength(at);
+    const ahead = track.getPointAtLength(Math.min(len, at + 14));
+    const angle = Math.atan2((ahead.y - pt.y) * sy, (ahead.x - pt.x) * sx) * 180 / Math.PI;
+
+    const x = originX + pt.x * sx;
+    skier.style.transform =
+      `translate3d(${x - 17}px, ${eyeContentY - 17}px, 0) rotate(${angle - 90}deg)`;
+
+    const max = run.scrollHeight - run.clientHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, run.scrollTop / max)) : 0;
+    track.style.strokeDashoffset = `${len * (1 - Math.max(p, at / len))}`;
+  }
+
+  const onScroll = () => { if (!frame) frame = requestAnimationFrame(place); };
+  run.addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", onScroll);
+  place();
+})();

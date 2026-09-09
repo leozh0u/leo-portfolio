@@ -408,20 +408,6 @@ h3 { font-size: 1.2rem; }
 .offpiste h3 { font-size: 0.98rem; margin-bottom: 0.25rem; }
 .offpiste-role { display: block; font-size: 0.68rem; font-weight: 700; opacity: 0.55; }
 .offpiste p { font-size: 0.83rem; }
-.scoreboard {
-  margin-top: 1.4rem; display: flex; justify-content: space-between; align-items: center;
-  background: var(--ink); color: var(--paper); border-radius: var(--radius);
-  padding: 0.85rem 1.5rem; font-size: 1rem; max-width: 560px;
-  box-shadow: var(--shadow); border: var(--border); cursor: pointer;
-  position: relative; z-index: 2;
-}
-.score-side { display: flex; align-items: center; gap: 0.7rem; letter-spacing: 0.12em; }
-.score-pts { color: var(--yellow); font-size: 1.4rem; font-weight: 700; }
-.score-time { color: #ff7b72; font-size: 1.15rem; animation: blink 1s steps(1) infinite; }
-.lamp { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
-.lamp-red { background: var(--red); box-shadow: 0 0 12px var(--red); animation: lampFlash 3.2s ease infinite; }
-.lamp-green { background: var(--green); box-shadow: 0 0 12px var(--green); animation: lampFlash 3.2s 1.6s ease infinite; }
-
 /* ---------- chess (playable) ---------- */
 .r-chess {
   background:
@@ -909,7 +895,6 @@ h3 { font-size: 1.2rem; }
 /* ---------- animations ---------- */
 @keyframes blink { 50% { opacity: 0; } }
 @keyframes dashMove { to { stroke-dashoffset: -26; } }
-@keyframes lampFlash { 0%, 88%, 100% { opacity: 0.25; box-shadow: none; } 90%, 96% { opacity: 1; } }
 @keyframes fall { to { transform: translateY(110vh) rotate(340deg); } }
 @keyframes sweep { from { transform: rotate(-14deg); } to { transform: rotate(14deg); } }
 

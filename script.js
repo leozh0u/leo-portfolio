@@ -699,21 +699,6 @@ document.querySelectorAll(".cr-card").forEach(card => {
   });
 });
 
-/* ============================================================
-   Scoreboard easter egg
-   ============================================================ */
-const scoreLeft = document.getElementById("score-left");
-if (scoreLeft) {
-  const sb = scoreLeft.closest(".scoreboard");
-  sb.addEventListener("click", e => {
-    scoreLeft.textContent = "15";
-    sb.querySelector(".score-time").textContent = "TOUCHÉ";
-    const lamp = sb.querySelector(".lamp-red");
-    lamp.style.animation = "none";
-    lamp.style.opacity = "1";
-    confettiBurst(e.clientX, e.clientY, 40);
-  }, { once: true });
-}
 
 /* ============================================================
    Drums (WebAudio) + Minecraft hotbar

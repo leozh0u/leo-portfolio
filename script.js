@@ -1089,3 +1089,22 @@ addEventListener("keydown", e => {
   addEventListener("resize", onScroll);
   place();
 })();
+
+/* ------------------------------------------------------------
+   Fencing · the last touch
+   The board sits at 14-14 with the clock running, which is what
+   la belle actually is. Click it and the touch lands.
+   ------------------------------------------------------------ */
+(() => {
+  const box = document.getElementById("scorebox");
+  if (!box) return;
+  box.addEventListener("click", (e) => {
+    if (box.classList.contains("touched")) return;
+    box.classList.add("touched");
+    document.getElementById("sb-home").textContent = "15";
+    document.getElementById("sb-clock").textContent = "TOUCHÉ";
+    box.setAttribute("aria-label", "Fencing scoreboard. Zhou 15, Doubt 14. Touch scored.");
+    const r = box.getBoundingClientRect();
+    confettiBurst(e.clientX || r.left + r.width / 2, e.clientY || r.top + r.height / 2, 44);
+  });
+})();

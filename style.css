@@ -1446,3 +1446,11 @@ h3 { font-size: 1.2rem; }
 .scorebox:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 @keyframes sb-blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.25; } }
 @media (prefers-reduced-motion: reduce) { .sb-clock { animation: none; } }
+
+/* The collage is inset past the room's edges, and an absolutely positioned
+   child that overhangs still counts toward scroll height. Nothing in this room
+   is meant to scroll on desktop, so clip it. Mobile still scrolls, because
+   there the panel is genuinely taller than the screen. */
+@media (min-width: 901px) {
+  .r-stage { overflow-y: hidden; }
+}

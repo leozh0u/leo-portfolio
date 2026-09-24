@@ -871,7 +871,7 @@ addEventListener("keydown", e => {
     [["inkstone", "abc reads", "ios", "swift", "reading"],
      "ABC Reads at Inkstone Technologies, as a software engineer intern from April to June 2026. A native iOS reading app in Swift and SwiftUI that adapts to the words you already know. Apple Vision OCR over a live camera overlays pronunciation only on words you have not learned, backed by a 113,000-entry dictionary frequency-ranked into SQLite."],
     [["keww", "job", "current", "right now", "riceapps"],
-     "Starting in October as a part-time software developer at KEWW, on the software side of a Houston events and hospitality company. Alongside that I am a new developer at RiceApps this semester."],
+     "Part-time software developer at KEWW, the software side of a Houston events and hospitality company. I am building support, SEO and content agents that draft for a person to approve, on client email and event records indexed into Postgres with pgvector, plus a Kotlin launcher for the smartwatches staff wear at events. I am also a new developer at RiceApps this semester."],
     [["wind", "turbine", "embedded", "esp32", "firmware"],
      "Rice Wind Energy, embedded software. ESP32 firmware in C reading turbine speed, power output and blade pitch, a six-state safety machine with fault latching, and perturb-and-observe power tracking."],
     [["fencing", "fence", "sabre", "epee", "foil"],

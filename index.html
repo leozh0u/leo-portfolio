@@ -360,22 +360,29 @@
         <div class="skier" id="skier" aria-hidden="true">&#9975;</div>
         <div class="gates">
           <article class="gate">
+            <p class="gate-date mono">from Oct 2026</p>
+            <h3>KEWW · Software Developer</h3>
+            <p class="gate-loc mono">Houston · part-time</p>
+            <p>Starting in October on the software side of a Houston events and hospitality company.</p>
+            <p class="gate-tags mono">incoming</p>
+          </article>
+          <article class="gate">
             <p class="gate-date mono">Aug 2026 → present</p>
             <h3>Rice University · Undergraduate Research Assistant</h3>
             <p class="gate-loc mono">Houston · Prof. Jiarong Xing</p>
-            <p>AI infrastructure. On a macOS usage-tracking app I ended a forced daily re-login with OAuth token refresh in Swift, then wrote a Keychain credential inspector once the documented token shape proved incomplete. Sessions run over SSH were invisible to it, so usage now surfaces by discovering the hosts and mirroring their transcripts.</p>
-            <p class="gate-tags mono">Swift · macOS · OAuth · Keychain · LLM routing</p>
+            <p>AI infrastructure. On a macOS usage-tracking app I ended a forced daily re-login with OAuth token refresh in Swift, then wrote a Keychain credential inspector once the documented token shape proved incomplete. Sessions run over SSH were invisible to it, so usage now surfaces by discovering the hosts and mirroring their transcripts. Next up is agent security.</p>
+            <p class="gate-tags mono">Swift · macOS · OAuth · Keychain</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Jun 2026 → Aug 2026</p>
             <h3>CanSemi · SWE Intern</h3>
             <p class="gate-loc mono">Guangzhou</p>
-            <p>Binary parser for 500+ chip-tester datalogs (used daily by 6 test engineers), a PostgreSQL pipeline loading ~12,000 die in under two minutes per lot, and a FastAPI backend + React wafer map that cut reporting time by ~75%.</p>
+            <p>Binary parser for 500+ chip-tester datalogs (used daily by 6 test engineers), a PostgreSQL pipeline loading 40 wafer lots (~12,000 records) in under two minutes, and a FastAPI backend + React wafer map that cut reporting time by ~75%.</p>
             <p class="gate-tags mono">Python · FastAPI · PostgreSQL · React</p>
           </article>
           <article class="gate">
-            <p class="gate-date mono">Apr 2026 → Jul 2026</p>
-            <h3>Inkstone Technologies · SWE</h3>
+            <p class="gate-date mono">Apr 2026 → Jun 2026</p>
+            <h3>Inkstone Technologies · SWE Intern</h3>
             <p class="gate-loc mono">Remote</p>
             <p>ABC Reads, a native Swift/SwiftUI reading app that adapts to each reader's known vocabulary. On-device Apple Vision OCR overlays pronunciation only on words you haven't learned yet. Underneath: a Python pipeline that frequency-ranks a 113,000-entry dictionary into indexed SQLite, and a local-first store on SQLite's raw C API driving spaced-repetition review and a WidgetKit widget.</p>
             <p class="gate-tags mono">Swift · SwiftUI · Vision · SQLite · Python</p>
@@ -419,7 +426,7 @@
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://blundernet.com" target="_blank" rel="noopener">BlunderNet ↗</a></h3>
           <p class="lego-sub mono">live at blundernet.com, 120+ players</p>
-          <p>I made LeetCode for chess. <strong>3.25 million puzzles</strong> you can filter by rating, theme, phase and length, plus a bot ladder to play against. There is also a classroom mode, where a coach's board goes out live over a socket and the answers come back grouped by move with a count. A review judges every move by the winning chances it cost rather than by centipawns, brilliant down to blunder, on a game played there or pasted in from any site. Every position is written out for a screen reader too, and a blindfold toggle hides the pieces without taking them off the board. Drawing a random puzzle from six million rows took 1.4 seconds with <code>ORDER BY random()</code>; a precomputed grid and a stored shuffle key took it to <strong>0.9 ms</strong>. The Go API holds no state, so live games sit in Redis and any instance can serve any game, and engine inference runs on SQS-fed ONNX workers that autoscale under backlog. When search got slow I traced it to cold disk reads at 92% utilisation and cut pages touched from 55,821 to 20,602. The whole AWS stack is Terraform, and the site publishes its own latency targets and whether it is currently meeting them.</p>
+          <p>I made LeetCode for chess. <strong>3.25 million puzzles</strong> you can filter by rating, theme, phase and length, plus a bot ladder to play against. There is also a classroom mode, where a coach's board goes out live over a socket and the answers come back grouped by move with a count. A review judges every move by the winning chances it cost rather than by centipawns, brilliant down to blunder, on a game played there or pasted in from any site. Every position is written out for a screen reader too, and a blindfold toggle hides the pieces without taking them off the board. Drawing a random puzzle from six million rows took 1.4 seconds with <code>ORDER BY random()</code>; a precomputed grid and a stored shuffle key took it to <strong>0.9 ms</strong>. The Go API holds no state, so live games sit in Redis and any instance can serve any game, and engine inference runs on SQS-fed ONNX workers, which scaled from one to four under backlog in the load test. When search got slow I traced it to cold disk reads at 92% utilisation and cut pages touched from 55,821 to 20,602. The whole AWS stack is Terraform, and the site publishes its own latency targets and whether it is currently meeting them.</p>
           <p class="lego-tags mono">Go · AWS · Terraform · Postgres · Redis · ONNX · k6</p>
           <p class="lego-links mono"><a href="https://blundernet.com" target="_blank" rel="noopener">play it ↗</a> · <a href="https://github.com/leozh0u/blundernet" target="_blank" rel="noopener">code ↗</a></p>
         </article>
@@ -434,18 +441,18 @@
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://github.com/leozh0u/vestigo" target="_blank" rel="noopener">Vestigo ↗</a></h3>
           <p class="lego-sub mono">live at vestigo.earth, where was this photo taken and how do you know</p>
-          <p>An agent that works out where a photograph was taken, at the most specific level the evidence supports. Most systems return a point no matter how little they have to go on, so the metric here is calibration rather than distance. I measured a plain model call first, before building anything, so every later number has something to sit against: 2.6 km median on landmarks, 94 km on rural roads. Then seven evaluation runs, three samples per photograph, because run-to-run noise turned out to be a 40 km median with a 14,951 km tail and a single sample cannot tell an improvement from a reroll. The change that mattered was taking the grading of evidence away from the model: it could put 0.9 on &ldquo;dry scrub&rdquo; and push a street-level claim through, so evidence now carries the finest level it can justify and the most any citation of it is worth. <strong>Overclaiming fell from 29% to 16% with accuracy unmoved</strong>, which is the same answers stated at levels they can carry. I also trained the classifier that feeds it: 20,000 images, frozen CLIP, 236 geocells clustered on the sphere rather than gridded, and temperature scaling that takes <strong>calibration error from 10.7% to 1.4%</strong>, making it the only evidence source whose confidence is measured rather than asserted.</p>
-          <p class="lego-tags mono">Python · LLM agents · tool calling · PyTorch · CLIP · eval harness · pytest</p>
+          <p>An agent that works out where a photograph was taken, at the most specific level the evidence supports. Most systems return a point no matter how little they have to go on, so the metric here is calibration rather than distance. I measured a plain model call first, before building anything, so every later number has something to sit against: 2.6 km median on landmarks, 94 km on rural roads. Then eight evaluation runs, three samples per photograph, because run-to-run noise turned out to be a 40 km median with a 14,951 km tail and a single sample cannot tell an improvement from a reroll. The change that mattered was taking the grading of evidence away from the model: it could put 0.9 on &ldquo;dry scrub&rdquo; and push a street-level claim through, so evidence now carries the finest level it can justify and the most any citation of it is worth. <strong>Overclaiming fell from 29% to 16% with accuracy unmoved</strong>, which is the same answers stated at levels they can carry. I also trained the classifier that feeds it: about 65,000 images on a frozen encoder, 250 geocells clustered on the sphere rather than gridded. Swapping CLIP for SigLIP took its median error from 527 km to <strong>142 km</strong>, more than tripling the data had done, and temperature scaling holds <strong>calibration error at 3.7%</strong>, which makes it the only evidence source whose confidence is measured rather than asserted.</p>
+          <p class="lego-tags mono">Python · LLM agents · tool calling · PyTorch · CLIP/SigLIP · eval harness · pytest</p>
           <p class="lego-links mono"><a href="https://vestigo.earth" target="_blank" rel="noopener">see it ↗</a> · <a href="https://github.com/leozh0u/vestigo" target="_blank" rel="noopener">code ↗</a> · <a href="https://github.com/leozh0u/vestigo/blob/main/results/agent.md" target="_blank" rel="noopener">what it scores ↗</a></p>
         </article>
         <article class="lego-card lego-yellow" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <h3><a href="https://from-scratch-three.vercel.app" target="_blank" rel="noopener">From Scratch ↗</a></h3>
-          <p class="lego-sub mono">hackrice 16, three of us · 1,033 things, none of them invented</p>
-          <p>A crafting game where nothing in it is made up. You start with twelve raw materials and put two together, and there are <strong>1,033 things</strong> to make, every one of them a real industrial process with a citation behind it. We built it after asking four people to draw how something they own is made and finding that none of them could. A cotton t-shirt is 24 steps from the opening shelf, and you cannot pick the cotton until you have built the gin, which needs steel, which needs charcoal, which needs a fire you start by spinning wood against wood. The part I care about is the failure case, since <strong>over 99%</strong> of the pairs you can try produce nothing: a table of 36 rules answers locally in under a millisecond and says why those two do not react, and the model is only asked if you press <em>why</em>. There are hints too, and they come from the solver rather than from Gemini, because a hint is a claim about the recipe graph and the graph is the one thing the model is never given.</p>
-          <p>The whole graph ships to the browser as a single 514KB import, so once the page loads the game works offline and the only backend is two stateless functions holding the API key. Those endpoints receive two element names and an enum value, never an id and never free text, so the largest request ever sent was <strong>1,761 bytes</strong>, measured off the wire rather than asserted in a comment. Every one of the 1,024 cited URLs is fetched and checked against its page title on each build, a footprint figure is only allowed from a source a human actually read, and 963 of the icons are composed from 65 shared shapes so nobody had to draw a thousand sprites.</p>
+          <h3><a href="https://leozh0u.github.io/from-scratch/" target="_blank" rel="noopener">From Scratch ↗</a></h3>
+          <p class="lego-sub mono">hackrice 16, three of us · 1,047 things, each with a source</p>
+          <p>A crafting game where every recipe cites a source. You start with stone, wood and plant fibre and put two together, and there are <strong>1,047 things</strong> to make. We built it after asking four people to draw how something they own is made and finding that none of them could. The aluminium can traces twenty-two ancestors back to a stone and a stick, through a fire you start by spinning wood against wood. The part I care about is the failure case, since <strong>over 99%</strong> of the pairs you can try produce nothing: a table of 36 rules answers locally and says why those two do not react, and the model is only asked if you press <em>why</em>. There are hints too, and they come from the solver rather than from Gemini, because a hint is a claim about the recipe graph and the graph is the one thing the model is never given. Since the hackathon there are five planets too, small worlds that each ask you to make one kit from scratch.</p>
+          <p>The whole graph ships to the browser as a single import of about 520KB, so once the page loads the game works offline and the only backend is two stateless functions holding the API key. Those endpoints receive two element names and an enum value, never an id and never free text, and a request measured off the wire came to <strong>1,761 bytes</strong>. Every citation says how much checking it has had: 149 were read by a person, the other 1,948 were fetched and matched against the page title, and a footprint figure is only allowed from one a person read.</p>
           <p class="lego-tags mono">React · TypeScript · Vite · Vercel · Gemini · Playwright · k6</p>
-          <p class="lego-links mono"><a href="https://from-scratch-three.vercel.app" target="_blank" rel="noopener">play it ↗</a> · <a href="https://github.com/nrodriguezmendoza/from-scratch" target="_blank" rel="noopener">code ↗</a></p>
+          <p class="lego-links mono"><a href="https://leozh0u.github.io/from-scratch/" target="_blank" rel="noopener">play it ↗</a> · <a href="https://github.com/leozh0u/from-scratch" target="_blank" rel="noopener">code ↗</a></p>
         </article>
       </div>
 
@@ -453,7 +460,7 @@
       <div class="lego-grid lego-grid-sm">
         <article class="lego-card lego-navy compact" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
-          <h3><a href="https://github.com/leozh0u/seat-booking" target="_blank" rel="noopener">SeatLive ↗</a></h3>
+          <h3><a href="https://github.com/leozh0u/seatlive" target="_blank" rel="noopener">SeatLive ↗</a></h3>
           <p class="lego-sub mono">two people, one seat, one winner</p>
           <p>Atomic conditional updates and Redis holds that expire on their own. CI fires 50 concurrent requests at one seat every build and fails unless exactly one wins.</p>
           <p class="lego-tags mono">FastAPI · PostgreSQL · Redis · Docker</p>
@@ -462,15 +469,15 @@
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://github.com/leozh0u/edgeML-audio-compression-benchmark" target="_blank" rel="noopener">Edge-ML audio ↗</a></h3>
           <p class="lego-sub mono">55× smaller, still listening</p>
-          <p>3.9 MB classifier down to 71 KB via distillation, INT8 quantization and pruning. Around 300 ms inference on a $5 microcontroller.</p>
+          <p>3.9 MB classifier down to 71 KB via distillation, INT8 quantization and pruning. 416 ms inference on a $5 microcontroller.</p>
           <p class="lego-tags mono">PyTorch · TFLite Micro · ESP32-S3</p>
         </article>
         <article class="lego-card lego-red compact" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://github.com/leozh0u/stm32-bldc-motor-controller" target="_blank" rel="noopener">STM32 controller ↗</a></h3>
           <p class="lego-sub mono">bare metal, no HAL</p>
-          <p>Every driver written from scratch. Closed-loop PID speed control under 2% steady-state error, ported onto FreeRTOS.</p>
-          <p class="lego-tags mono">Embedded C · STM32 · FreeRTOS</p>
+          <p>Every driver written against the reference manual. PWM checked on a logic analyzer with the motor spinning both ways; encoder feedback, PID and binary UART telemetry are written and waiting on hardware bring-up.</p>
+          <p class="lego-tags mono">Embedded C · STM32 · bare metal</p>
         </article>
         <article class="lego-card lego-teal compact" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
@@ -492,12 +499,12 @@
           <article class="wip">
             <span class="wip-icon">🧭</span>
             <h3>Vestigo, next</h3>
-            <p class="mono">more tools on the board: street furniture, signage language, road markings</p>
+            <p class="mono">letting outside evidence move the answer, not only cap how precise it is</p>
           </article>
           <article class="wip wip-small">
-            <span class="wip-icon">📋</span>
-            <h3>Internship tracker</h3>
-            <p class="mono">small tool, does one job</p>
+            <span class="wip-icon">🦉</span>
+            <h3>RiceApps</h3>
+            <p class="mono">new developer this semester, building on a team to someone else's spec</p>
           </article>
         </div>
         <p class="workbench-quote mono">"I only work in black. And sometimes very, very dark grey."</p>
@@ -615,6 +622,6 @@
   <button class="edge edge-r" id="edge-r" aria-label="next">›</button>
   <div class="dots" id="dots" aria-hidden="true"></div>
 
-  <script src="script.js?v=2026-09-09h"></script>
+  <script src="script.js?v=2026-09-24a"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leo Zhou · CS @ Rice</title>
-  <meta name="description" content="Leo Zhou, CS at Rice University. I build backends, cloud infrastructure and iOS apps. Former captain of New Zealand's junior fencing team.">
+  <meta name="description" content="Leo Zhou, CS at Rice University. I build backend systems, cloud infrastructure, agents and the occasional strange chess project.">
   <link rel="canonical" href="https://leozh0u.github.io/leo-portfolio/">
   <meta name="theme-color" content="#ffe9b3">
 
@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://leozh0u.github.io/leo-portfolio/">
   <meta property="og:site_name" content="Leo Zhou">
   <meta property="og:title" content="Leo Zhou · CS @ Rice">
-  <meta property="og:description" content="I build backends, cloud infrastructure and iOS apps. Former captain of New Zealand's junior fencing team.">
+  <meta property="og:description" content="Backend systems, cloud infrastructure, agents and the occasional strange chess project.">
   <meta property="og:image" content="https://leozh0u.github.io/leo-portfolio/photos/og-card.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=Lilita+One&family=Shojumaru&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2026-09-09h">
+  <link rel="stylesheet" href="style.css?v=2026-09-28a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🤺</text></svg>">
 </head>
 <body>
@@ -75,7 +75,7 @@
         <a href="https://blundernet.com" target="_blank" rel="noopener">
           <span class="live-dot" aria-hidden="true"></span>blundernet.com is live ↗
         </a>
-        <span class="hero-live-note">chess puzzles and bots, 120+ people playing</span>
+        <span class="hero-live-note">chess puzzles and bots, roughly 200 people playing</span>
       </p>
       <p class="hero-live mono">
         <a href="https://vestigo.earth" target="_blank" rel="noopener">
@@ -361,17 +361,24 @@
         <div class="gates">
           <article class="gate">
             <p class="gate-date mono">Sep 2026 → present</p>
-            <h3>KEWW · Software Developer</h3>
+            <h3>KEWW · Software Engineer</h3>
             <p class="gate-loc mono">Houston · part-time</p>
-            <p>The software side of a Houston events and hospitality company. I'm building support, SEO and content agents that draft for a person to approve, on top of years of client email and event records indexed into Postgres with pgvector, with personal data redacted by Presidio. Alongside that, a Kotlin kiosk launcher for the smartwatches staff wear at events, taking tasks from the app over BLE, and work on the inherited Laravel platform: a shift double-booking race, then staging and CI.</p>
-            <p class="gate-tags mono">LLM agents · Postgres · pgvector · Kotlin · Laravel</p>
+            <p>The software side of a Houston events and hospitality company. I'm building Cashew, a Next.js and TypeScript platform for running event work without bouncing between a legacy planning system and a pile of documents. There are AI-assisted proposals, BEOs, invoices and tasting documents, but a person reviews the output before it goes anywhere.</p>
+            <p class="gate-tags mono">Next.js · TypeScript · Postgres · agents</p>
+          </article>
+          <article class="gate">
+            <p class="gate-date mono">Sep 2026 → present</p>
+            <h3>RiceApps · Software Developer</h3>
+            <p class="gate-loc mono">Rice Football Analytics</p>
+            <p>Building a shared data backend for Rice Football's analytics team, with the source kept beside every record. The plan is to give analysts R and Python access and let coaches request fresh reports without waiting for somebody to rerun a notebook by hand. It is the first sprint, so this one is still mostly architecture and sharp questions.</p>
+            <p class="gate-tags mono">Python · R · data pipelines · cloud reports</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Aug 2026 → present</p>
             <h3>Rice University · Undergraduate Research Assistant</h3>
             <p class="gate-loc mono">Houston · Prof. Jiarong Xing</p>
-            <p>AI infrastructure. On a macOS usage-tracking app I ended a forced daily re-login with OAuth token refresh in Swift, then wrote a Keychain credential inspector once the documented token shape proved incomplete. Sessions run over SSH were invisible to it, so usage now surfaces by discovering the hosts and mirroring their transcripts. Next up is agent security.</p>
-            <p class="gate-tags mono">Swift · macOS · OAuth · Keychain</p>
+            <p>Now investigating how collaborating AI agents can exceed access policies for a systems-security proposal. The first project was a macOS usage tracker: I ended a forced daily re-login with OAuth token refresh in Swift, fixed its Keychain permission loop and surfaced sessions run over SSH by mirroring their transcripts.</p>
+            <p class="gate-tags mono">agent security · Swift · OAuth · SSH</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Jun 2026 → Aug 2026</p>
@@ -425,7 +432,7 @@
         <article class="lego-card lego-green" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://blundernet.com" target="_blank" rel="noopener">BlunderNet ↗</a></h3>
-          <p class="lego-sub mono">live at blundernet.com, 120+ players</p>
+          <p class="lego-sub mono">live at blundernet.com, roughly 200 players</p>
           <p>I made LeetCode for chess. <strong>3.25 million puzzles</strong> you can filter by rating, theme, phase and length, plus a bot ladder to play against. There is also a classroom mode, where a coach's board goes out live over a socket and the answers come back grouped by move with a count. A review judges every move by the winning chances it cost rather than by centipawns, brilliant down to blunder, on a game played there or pasted in from any site. Every position is written out for a screen reader too, and a blindfold toggle hides the pieces without taking them off the board. Drawing a random puzzle from six million rows took 1.4 seconds with <code>ORDER BY random()</code>; a precomputed grid and a stored shuffle key took it to <strong>0.9 ms</strong>. The Go API holds no state, so live games sit in Redis and any instance can serve any game, and engine inference runs on SQS-fed ONNX workers, which scaled from one to four under backlog in the load test. When search got slow I traced it to cold disk reads at 92% utilisation and cut pages touched from 55,821 to 20,602. The whole AWS stack is Terraform, and the site publishes its own latency targets and whether it is currently meeting them.</p>
           <p class="lego-tags mono">Go · AWS · Terraform · Postgres · Redis · ONNX · k6</p>
           <p class="lego-links mono"><a href="https://blundernet.com" target="_blank" rel="noopener">play it ↗</a> · <a href="https://github.com/leozh0u/blundernet" target="_blank" rel="noopener">code ↗</a></p>
@@ -502,9 +509,9 @@
             <p class="mono">letting outside evidence move the answer, not only cap how precise it is</p>
           </article>
           <article class="wip wip-small">
-            <span class="wip-icon">🦉</span>
-            <h3>RiceApps</h3>
-            <p class="mono">new developer this semester, building on a team to someone else's spec</p>
+            <span class="wip-icon">🔐</span>
+            <h3>Agent security</h3>
+            <p class="mono">working out how a group of individually restricted agents can still exceed the policy between them</p>
           </article>
         </div>
         <p class="workbench-quote mono">"I only work in black. And sometimes very, very dark grey."</p>
@@ -622,6 +629,6 @@
   <button class="edge edge-r" id="edge-r" aria-label="next">›</button>
   <div class="dots" id="dots" aria-hidden="true"></div>
 
-  <script src="script.js?v=2026-09-24b"></script>
+  <script src="script.js?v=2026-09-28a"></script>
 </body>
 </html>

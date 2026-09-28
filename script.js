@@ -216,7 +216,7 @@ function confettiBurst(x, y, n = 60) {
 }
 document.getElementById("hero-name").addEventListener("click", e => confettiBurst(e.clientX, e.clientY));
 
-const roles = ["a chess site with real users", "agents that cite their evidence", "scalable Go backends", "native iOS apps", "bare-metal firmware"];
+const roles = ["a chess site with real users", "agents that cite their evidence", "data systems for football", "scalable Go backends", "native iOS apps"];
 const typeEl = document.getElementById("typewriter");
 let roleIdx = 0, charIdx = 0, deleting = false;
 function typeTick() {
@@ -855,7 +855,7 @@ addEventListener("keydown", e => {
     [["switch", "ece", "electrical", "why cs"],
      "I started in electrical and computer engineering and switched to CS. The embedded work on this site is left over from that, and I do not regret the detour: writing firmware against a reference manual taught me to check things rather than assume them."],
     [["blundernet", "chess site", "puzzles"],
-     "blundernet.com, a free chess training site I built and run, around 120 users.\n3.25 million puzzles you can filter by rating, theme, opening, phase and solution length all at once, which no other site lets you do. There is a classroom mode where a coach pushes a position to a team and sees the answers grouped by move. Every position is written out for a screen reader.\nReact over stateless Go, Postgres and Redis, with engine moves and Stockfish reviews on SQS-fed workers. The live site is one EC2 box; the Terraform stack it scales to, with ECS Fargate and autoscaled workers, is in the repo and was load-tested."],
+     "blundernet.com, a free chess training site I built and run, with roughly 200 users.\n3.25 million puzzles you can filter by rating, theme, opening, phase and solution length all at once, which no other site lets you do. There is a classroom mode where a coach pushes a position to a team and sees the answers grouped by move. Every position is written out for a screen reader.\nReact over stateless Go, Postgres and Redis, with engine moves and Stockfish reviews on SQS-fed workers. The live site is one EC2 box; the Terraform stack it scales to, with ECS Fargate and autoscaled workers, is in the repo and was load-tested."],
     [["sampler", "random", "slow", "postgres", "optimi"],
      "The one I like. Drawing a random puzzle matching a filter took 1.4 seconds with ORDER BY random(), because it sorts the whole matching set to take one row. I gave every puzzle a stored shuffle key computed once at import and precomputed the filter grid into a summary table with counts. A search now draws a cell in proportion to its size and range scans from a random cursor. 0.9 milliseconds."],
     [["engine", "neural", "alphazero", "mcts"],
@@ -864,14 +864,16 @@ addEventListener("keydown", e => {
      "Post-game review judges every move by how much it changed your chances of winning rather than by centipawns, because +9 to +6 is three hundred centipawns and means nothing while +0.2 to -0.8 is a hundred and is the whole game. Eight verdicts, brilliant down to blunder. It reads a game pasted from any site."],
     [["vestigo", "geolocation", "photo"],
      "vestigo.earth. An agent that works out where a photograph was taken, at the most specific level the evidence supports, and stops there. Every claim cites the tool result that produced it, so a claim about a street cannot rest on evidence that only reaches a country.\nThe part I care about is calibration. I trained a classifier on about 65,000 street-level images with a frozen SigLIP encoder and geocells clustered on the sphere, held out by location so near-duplicates cannot inflate the number. Median error is 142 km, and after temperature scaling its calibration error is 3.7%, so the confidence it reports means what it says."],
-    [["research", "xing", "lab", "ai infra"],
-     "I am an undergraduate research assistant with Professor Jiarong Xing at Rice, on AI infrastructure. So far: ended a forced daily re-login in a macOS usage-tracking app with OAuth token refresh in Swift, wrote a Keychain credential inspector once the documented token shape turned out to be incomplete, and surfaced usage from sessions run over SSH by discovering the hosts and mirroring their transcripts. Next up is agent security."],
+    [["research", "xing", "lab", "agent security"],
+     "I am an undergraduate research assistant with Professor Jiarong Xing at Rice. I am investigating how collaborating AI agents can exceed access policies for a systems-security proposal. Before that, I ended a forced daily re-login in a macOS usage tracker with OAuth token refresh in Swift, fixed its repeat Keychain permission prompts, and surfaced sessions run over SSH by mirroring their transcripts."],
     [["cansemi", "wafer", "semiconductor", "intern"],
      "Software engineer intern at CanSemi over summer 2026. An event-driven Python parser over 500+ binary test equipment logs, a normalised Postgres schema loading 40 wafer lots in under two minutes, a FastAPI service on top, and a React wafer map that cut reporting time by about 75%."],
     [["inkstone", "abc reads", "ios", "swift", "reading"],
      "ABC Reads at Inkstone Technologies, as a software engineer intern from April to June 2026. A native iOS reading app in Swift and SwiftUI that adapts to the words you already know. Apple Vision OCR over a live camera overlays pronunciation only on words you have not learned, backed by a 113,000-entry dictionary frequency-ranked into SQLite."],
-    [["keww", "job", "current", "right now", "riceapps"],
-     "Part-time software developer at KEWW, the software side of a Houston events and hospitality company. I am building support, SEO and content agents that draft for a person to approve, on client email and event records indexed into Postgres with pgvector, plus a Kotlin launcher for the smartwatches staff wear at events. I am also a new developer at RiceApps this semester."],
+    [["keww", "job", "current", "right now"],
+     "Part-time software engineer at KEWW, the software side of a Houston events and hospitality company. I am building Cashew, a Next.js and TypeScript platform for running event work without bouncing between a legacy planning system and a pile of documents. Its AI-assisted proposals, BEOs, invoices and tasting documents all go through a person before use."],
+    [["riceapps", "rice football", "football analytics"],
+     "Software developer with RiceApps on the Rice Football Analytics Platform. We are building a shared, source-tagged data backend, with R and Python access for analysts and cloud report runs for coaches. It is the first sprint, so I am still in the architecture and data-contract part of it."],
     [["wind", "turbine", "embedded", "esp32", "firmware"],
      "Rice Wind Energy, embedded software. ESP32 firmware in C reading turbine speed, power output and blade pitch, a six-state safety machine with fault latching, and perturb-and-observe power tracking."],
     [["fencing", "fence", "sabre", "epee", "foil"],
@@ -888,7 +890,7 @@ addEventListener("keydown", e => {
     [["backend", "lane", "want to work", "looking for", "interested in", "goal"],
      "Backend, cloud and distributed systems. That is where my strongest evidence is and what I want to keep doing. ML and embedded are real but they are one project and one club role each, so I do not lead with them."],
     [["stack", "tech", "language", "tools", "know"],
-     "Go, Python, Swift, C and C++, JavaScript and React.\nPostgres, Redis, SQS, ONNX, Docker, Terraform, AWS."],
+     "Python, Go, C and C++, Swift, Kotlin, TypeScript and JavaScript.\nReact, Next.js, Postgres, Redis, SQS, Docker, Terraform and AWS."],
     [["contact", "email", "hire", "reach", "talk", "message"],
      "zhouleo2007@gmail.com. Or type contact to go to the room with every link on it."],
   ];

@@ -1216,7 +1216,7 @@ h3 { font-size: 1.2rem; }
 .skier {
   position: absolute; top: 0; left: 0;
   font-size: 2.1rem; line-height: 1;
-  z-index: 3; pointer-events: none;
+  z-index: 0; pointer-events: none;
   filter: drop-shadow(0 4px 5px rgba(30, 50, 70, 0.35));
   transition: transform 120ms linear;
   will-change: transform;

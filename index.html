@@ -229,7 +229,7 @@
       <div class="fencing-stats">
         <div class="stat s-red"><span class="stat-num" data-count="27">0</span><span class="stat-label">national first places</span></div>
         <div class="stat s-blue"><span class="stat-num" data-count="30">0</span><span class="stat-label">+ NZ &amp; Oceania titles</span></div>
-        <div class="stat s-green"><span class="stat-num" data-count="100">0</span><span class="stat-label">+ juniors coached</span></div>
+        <div class="stat s-green"><span class="stat-num" data-count="30">0</span><span class="stat-label">+ young fencers coached</span></div>
         <div class="stat s-yellow"><span class="stat-num" data-count="2">0</span><span class="stat-label">national teams captained</span></div>
       </div>
       <div class="fencing-grid">
@@ -243,7 +243,7 @@
         </div>
         <div class="bout-card">
           <h3>🤝 Coaching</h3>
-          <p>Coached 100+ juniors and refereed hundreds of bouts across Oceania. Still in it: I manage the Rice Fencing Club.</p>
+          <p>Coached 30+ young fencers and refereed 50+ bouts. Still in it: I'm co-president, coach and website manager for the Rice Fencing Club.</p>
         </div>
       </div>
       <p class="offpiste-label mono">off the piste · back home in Auckland</p>
@@ -363,35 +363,35 @@
             <p class="gate-date mono">Sep 2026 → present</p>
             <h3>KEWW · Software Engineer</h3>
             <p class="gate-loc mono">Houston · part-time</p>
-            <p>The software side of a Houston events and hospitality company. I'm building Cashew, a Next.js and TypeScript platform for running event work without bouncing between a legacy planning system and a pile of documents. There are AI-assisted proposals, BEOs, invoices and tasting documents, but a person reviews the output before it goes anywhere.</p>
+            <p>Building Cashew at Westchase Hospitality Group: an event-document studio with 32 editable templates and six linked document types. Gemini extracts event details with source quotes for staff to review; code handles the prices, and issued documents keep their original figures after later edits. I'm also building a client portal so event details and tasting choices can come straight from the client. Historical email search and reviewed marketing agents are the next part.</p>
             <p class="gate-tags mono">Next.js · TypeScript · Postgres · agents</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Sep 2026 → present</p>
-            <h3>RiceApps · Software Developer</h3>
+            <h3>RiceApps × Rice Football · Software Developer</h3>
             <p class="gate-loc mono">Rice Football Analytics</p>
-            <p>Building a shared data backend for Rice Football's analytics team, with the source kept beside every record. The plan is to give analysts R and Python access and let coaches request fresh reports without waiting for somebody to rerun a notebook by hand. It is the first sprint, so this one is still mostly architecture and sharp questions.</p>
+            <p>Building a shared data backend for Rice Football's analytics team, with each record's source tracked. I'm working on Python and R access so analysts can reuse their analyses, and designing cloud report runs for coaches. The API foundation is in development; vendor ingestion and the reporting system are still ahead.</p>
             <p class="gate-tags mono">Python · R · data pipelines · cloud reports</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Aug 2026 → present</p>
             <h3>Rice University · Undergraduate Research Assistant</h3>
             <p class="gate-loc mono">Houston · Prof. Jiarong Xing</p>
-            <p>Now investigating how collaborating AI agents can exceed access policies for a systems-security proposal. The first project was a macOS usage tracker: I ended a forced daily re-login with OAuth token refresh in Swift, fixed its Keychain permission loop and surfaced sessions run over SSH by mirroring their transcripts.</p>
+            <p>Investigating how collaborating AI agents can exceed access policies for a systems-security proposal. Before that I worked on TokenGate, a Swift macOS usage tracker. OAuth refresh ended daily re-logins, SSH transcript sync brought remote sessions back into view, and stable app signing stopped repeat Keychain prompts. Its self-tests grew from 120 to 147 checks.</p>
             <p class="gate-tags mono">agent security · Swift · OAuth · SSH</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Jun 2026 → Aug 2026</p>
             <h3>CanSemi · SWE Intern</h3>
-            <p class="gate-loc mono">Guangzhou</p>
-            <p>Binary parser for 500+ chip-tester datalogs (used daily by 6 test engineers), a PostgreSQL pipeline loading 40 wafer lots (~12,000 records) in under two minutes, and a FastAPI backend + React wafer map that cut reporting time by ~75%.</p>
+            <p class="gate-loc mono">Test Engineering Team</p>
+            <p>Six test engineers used the Python/Postgres pipeline I built to replace manual log processing. It parsed 500+ binary test-equipment logs and loaded 40 wafer lots (roughly 12,000 records) in under two minutes. Eight FastAPI endpoints and a React/Canvas wafer map gave them searchable results and drill-downs, cutting report turnaround by about 75%.</p>
             <p class="gate-tags mono">Python · FastAPI · PostgreSQL · React</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Apr 2026 → Jun 2026</p>
             <h3>Inkstone Technologies · SWE Intern</h3>
             <p class="gate-loc mono">Remote</p>
-            <p>ABC Reads, a native Swift/SwiftUI reading app that adapts to each reader's known vocabulary. On-device Apple Vision OCR overlays pronunciation only on words you haven't learned yet. Underneath: a Python pipeline that frequency-ranks a 113,000-entry dictionary into indexed SQLite, and a local-first store on SQLite's raw C API driving spaced-repetition review and a WidgetKit widget.</p>
+            <p>ABC Reads, a native Swift/SwiftUI reading app that adapts to each reader's known vocabulary. On-device Apple Vision OCR overlays pronunciation only on Chinese characters you haven't learned yet. Underneath: a Python pipeline that frequency-ranks a 113,000-entry dictionary into indexed SQLite, and a local-first store on SQLite's raw C API driving spaced-repetition review and a WidgetKit widget.</p>
             <p class="gate-tags mono">Swift · SwiftUI · Vision · SQLite · Python</p>
           </article>
           <article class="gate">
@@ -433,7 +433,8 @@
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://blundernet.com" target="_blank" rel="noopener">BlunderNet ↗</a></h3>
           <p class="lego-sub mono">live at blundernet.com, roughly 200 players</p>
-          <p>I made LeetCode for chess. <strong>3.25 million puzzles</strong> you can filter by rating, theme, phase and length, plus a bot ladder to play against. There is also a classroom mode, where a coach's board goes out live over a socket and the answers come back grouped by move with a count. A review judges every move by the winning chances it cost rather than by centipawns, brilliant down to blunder, on a game played there or pasted in from any site. Every position is written out for a screen reader too, and a blindfold toggle hides the pieces without taking them off the board. Drawing a random puzzle from six million rows took 1.4 seconds with <code>ORDER BY random()</code>; a precomputed grid and a stored shuffle key took it to <strong>0.9 ms</strong>. The Go API holds no state, so live games sit in Redis and any instance can serve any game, and engine inference runs on SQS-fed ONNX workers, which scaled from one to four under backlog in the load test. When search got slow I traced it to cold disk reads at 92% utilisation and cut pages touched from 55,821 to 20,602. The whole AWS stack is Terraform, and the site publishes its own latency targets and whether it is currently meeting them.</p>
+          <p>I made LeetCode for chess. There are 3.25 million puzzles with five filters I can combine, a bot ladder, and a classroom mode where a coach sends a position and sees answers grouped by move. Stockfish review grades a move by the winning chances it cost. Every position is written out for a screen reader too.</p>
+          <p>The backend became a project of its own. Uniform puzzle selection went from <strong>1.4 s to 0.9 ms</strong> with indexed shuffle keys and size-weighted cells. The live site runs on one EC2 box. I also built a separate Terraform deployment with stateless Go APIs, Redis game state and SQS-fed ONNX workers: a steady load test returned 270/270 replies at 1.5 games/s, with 1.25 s p95. A separate queue test scaled workers from one to four and drained the backlog. Heavy puzzle filters still need attention; the latest live check missed their latency target.</p>
           <p class="lego-tags mono">Go · AWS · Terraform · Postgres · Redis · ONNX · k6</p>
           <p class="lego-links mono"><a href="https://blundernet.com" target="_blank" rel="noopener">play it ↗</a> · <a href="https://github.com/leozh0u/blundernet" target="_blank" rel="noopener">code ↗</a></p>
         </article>
@@ -448,7 +449,8 @@
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://github.com/leozh0u/vestigo" target="_blank" rel="noopener">Vestigo ↗</a></h3>
           <p class="lego-sub mono">live at vestigo.earth, where was this photo taken and how do you know</p>
-          <p>An agent that works out where a photograph was taken, at the most specific level the evidence supports. Most systems return a point no matter how little they have to go on, so the metric here is calibration rather than distance. I measured a plain model call first, before building anything, so every later number has something to sit against: 2.6 km median on landmarks, 94 km on rural roads. Then eight evaluation runs, three samples per photograph, because run-to-run noise turned out to be a 40 km median with a 14,951 km tail and a single sample cannot tell an improvement from a reroll. The change that mattered was taking the grading of evidence away from the model: it could put 0.9 on &ldquo;dry scrub&rdquo; and push a street-level claim through, so evidence now carries the finest level it can justify and the most any citation of it is worth. <strong>Overclaiming fell from 29% to 16% with accuracy unmoved</strong>, which is the same answers stated at levels they can carry. I also trained the classifier that feeds it: about 65,000 images on a frozen encoder, 250 geocells clustered on the sphere rather than gridded. Swapping CLIP for SigLIP took its median error from 527 km to <strong>142 km</strong>, more than tripling the data had done, and temperature scaling holds <strong>calibration error at 3.7%</strong>, which makes it the only evidence source whose confidence is measured rather than asserted.</p>
+          <p>An agent that tells me where a photo was taken and how much to believe it. Every claim cites evidence on its board, and a street-level answer needs street-level evidence. I care about whether its confidence matches its accuracy: being confidently wrong about a country is a fairly impressive way to lose GeoGuessr.</p>
+          <p>I trained its classifier on 64,865 street-level images, split by location so nearby photos cannot appear on both sides of the evaluation. Swapping CLIP ViT-L/14 for SigLIP reduced median error from 198 km to <strong>142 km</strong>, with 51.6% cell accuracy and <strong>3.7% calibration error</strong> after temperature scaling. The agent and classifier are evaluated separately; those are classifier results.</p>
           <p class="lego-tags mono">Python · LLM agents · tool calling · PyTorch · CLIP/SigLIP · eval harness · pytest</p>
           <p class="lego-links mono"><a href="https://vestigo.earth" target="_blank" rel="noopener">see it ↗</a> · <a href="https://github.com/leozh0u/vestigo" target="_blank" rel="noopener">code ↗</a> · <a href="https://github.com/leozh0u/vestigo/blob/main/results/agent.md" target="_blank" rel="noopener">what it scores ↗</a></p>
         </article>
@@ -629,6 +631,6 @@
   <button class="edge edge-r" id="edge-r" aria-label="next">›</button>
   <div class="dots" id="dots" aria-hidden="true"></div>
 
-  <script src="script.js?v=2026-09-28a"></script>
+  <script src="script.js?v=2026-10-07a"></script>
 </body>
 </html>

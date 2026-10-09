@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=Lilita+One&family=Shojumaru&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2026-09-28a">
+  <link rel="stylesheet" href="style.css?v=2026-10-09a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🤺</text></svg>">
 </head>
 <body>
@@ -57,6 +57,7 @@
       </g>
     </svg>
     <div class="room-inner hero-inner">
+    <div class="hero-copy">
       <p class="mono kicker">// en garde</p>
       <h1 class="hero-name" id="hero-name">
         <span>L</span><span>e</span><span>o</span>&nbsp;<span>Z</span><span>h</span><span>o</span><span>u</span>
@@ -100,6 +101,7 @@
       <img src="photos/leo-macau.webp" alt="Leo Zhou" loading="lazy">
       <figcaption class="mono">the Parisian · Macau 🇲🇴</figcaption>
     </figure>
+    </div>
   </section>
 
   <!-- ═══ 02 · ORIGIN · atlas ═══ -->
@@ -458,8 +460,8 @@
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://leozh0u.github.io/from-scratch/" target="_blank" rel="noopener">From Scratch ↗</a></h3>
           <p class="lego-sub mono">hackrice 16, three of us · 1,047 things, each with a source</p>
-          <p>A crafting game where every recipe cites a source. You start with stone, wood and plant fibre and put two together, and there are <strong>1,047 things</strong> to make. We built it after asking four people to draw how something they own is made and finding that none of them could. The aluminium can traces twenty-two ancestors back to a stone and a stick, through a fire you start by spinning wood against wood. The part I care about is the failure case, since <strong>over 99%</strong> of the pairs you can try produce nothing: a table of 36 rules answers locally and says why those two do not react, and the model is only asked if you press <em>why</em>. There are hints too, and they come from the solver rather than from Gemini, because a hint is a claim about the recipe graph and the graph is the one thing the model is never given. Since the hackathon there are five planets too, small worlds that each ask you to make one kit from scratch.</p>
-          <p>The whole graph ships to the browser as a single import of about 520KB, so once the page loads the game works offline and the only backend is two stateless functions holding the API key. Those endpoints receive two element names and an enum value, never an id and never free text, and a request measured off the wire came to <strong>1,761 bytes</strong>. Every citation says how much checking it has had: 149 were read by a person, the other 1,948 were fetched and matched against the page title, and a footprint figure is only allowed from one a person read.</p>
+          <p>A crafting game we built at HackRice 16. Start with stone, wood and plant fibre, combine two, and work towards <strong>1,047 things</strong>, each with a source. The aluminium can traces twenty-two ancestors back to a stone and a stick. There are five small worlds now, each with a kit to make from scratch.</p>
+          <p>The recipe graph runs offline in the browser. Rules explain failed combinations locally; Gemini is only called for extra explanations. Hints come from the graph's solver. Citations distinguish human review from automated checks, and environmental figures require a source someone has read.</p>
           <p class="lego-tags mono">React · TypeScript · Vite · Vercel · Gemini · Playwright · k6</p>
           <p class="lego-links mono"><a href="https://leozh0u.github.io/from-scratch/" target="_blank" rel="noopener">play it ↗</a> · <a href="https://github.com/leozh0u/from-scratch" target="_blank" rel="noopener">code ↗</a></p>
         </article>

@@ -210,10 +210,17 @@ h3 { font-size: 1.2rem; }
 /* ---------- hero ---------- */
 .r-hero { background: var(--hero-bg); }
 #field { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-inner { max-width: 1000px; }
+.hero-inner {
+  max-width: 1440px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: center;
+  gap: 4rem;
+}
+.hero-copy { min-width: 0; }
 .hero-name {
-  font-size: clamp(3.4rem, 12vw, 9.5rem);
-  font-weight: 800; letter-spacing: -0.04em;
+  font-size: 6rem;
+  font-weight: 800; letter-spacing: 0;
   cursor: pointer; user-select: none; line-height: 0.95;
 }
 .hero-name span { display: inline-block; transition: transform 0.18s ease, color 0.18s ease; }
@@ -243,10 +250,9 @@ h3 { font-size: 1.2rem; }
 .hero-contact a:hover { border-bottom-color: currentColor; }
 .hero-contact span { opacity: 0.45; }
 .hero-photo {
-  position: absolute; z-index: 3;
-  right: clamp(1.5rem, 6vw, 6rem); top: 50%;
-  transform: translateY(-50%) rotate(4deg);
-  width: clamp(210px, 21vw, 310px);
+  position: relative; z-index: 3;
+  transform: rotate(4deg);
+  width: 100%;
   background: #fffdf5; border: var(--border);
   box-shadow: var(--shadow); padding: 11px 11px 0;
   margin: 0;
@@ -506,10 +512,10 @@ h3 { font-size: 1.2rem; }
   background-image: radial-gradient(circle at 50% 42%, rgba(34,28,20,0.10) 0 14px, rgba(255,255,255,0.18) 15px 17px, transparent 18px);
   background-size: 72px 72px;
 }
-/* auto-fit rather than a fixed 3, so the shelf still sits three across while
-   the main row stretches to fill whatever is on it. */
 .lego-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.3rem; }
+.lego-grid:not(.lego-grid-sm) { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
 .lego-card {
+  min-width: 0;
   position: relative; border-radius: 12px; padding: 1.7rem 1.4rem 1.2rem;
   border: var(--border); background: #fffdf5; box-shadow: var(--shadow);
   border-top-width: 6px;
@@ -531,6 +537,7 @@ h3 { font-size: 1.2rem; }
 .lego-card h3 { font-size: 1.25rem; }
 .lego-sub { color: var(--red); font-weight: 700; margin-bottom: 0.6rem; }
 .lego-card > p:not(.lego-sub):not(.lego-tags) { font-size: 0.88rem; }
+.lego-card > p + p:not(.lego-tags):not(.lego-links) { margin-top: 0.65rem; }
 .lego-tags { margin-top: 0.7rem; color: var(--blue); font-weight: 700; }
 
 
@@ -905,7 +912,8 @@ h3 { font-size: 1.2rem; }
 
 /* ---------- responsive: stack vertically on small screens ---------- */
 @media (max-width: 1250px) {
-  .hero-photo { display: none; }
+  .hero-inner { grid-template-columns: minmax(0, 1fr) 240px; gap: 2rem; }
+  .hero-name { font-size: 4.5rem; }
   .np { position: static; margin: 1.4rem auto 0; transform: rotate(-2deg); }
 }
 @media (max-width: 1150px) {
@@ -922,13 +930,16 @@ h3 { font-size: 1.2rem; }
   .scroll-cue { display: none; }
   .nav-links a:not(.nav-cta) { display: none; }
   .dots, .edge { display: none; }
-  .hero-photo { display: block; position: static; transform: rotate(-2deg); margin: 1.6rem 0 0; width: 230px; }
+  .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+  .hero-name { font-size: 3.4rem; }
+  .hero-photo { transform: rotate(-2deg); margin: 0; width: 230px; max-width: 100%; }
   .atlas-layout { grid-template-columns: 1fr; }
   .fencing-stats { grid-template-columns: repeat(2, 1fr); }
   .fencing-grid { grid-template-columns: 1fr; }
   .offpiste-row { grid-template-columns: 1fr; }
   .gates { grid-template-columns: 1fr; }
   .lego-grid { grid-template-columns: 1fr; }
+  .lego-grid:not(.lego-grid-sm) { grid-template-columns: minmax(0, 1fr); }
   .cr-grid { grid-template-columns: repeat(2, 1fr); }
   .wip-row { grid-template-columns: 1fr 1fr; }
 }

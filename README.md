@@ -2,7 +2,7 @@
 
 Personal portfolio site. Static HTML, CSS and JS, no build step.
 
-https://leozh0u.github.io/leo-portfolio/
+https://leozhou.fyi/
 
 ## Run locally
 

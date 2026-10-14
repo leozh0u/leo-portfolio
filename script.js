@@ -848,11 +848,11 @@ addEventListener("keydown", e => {
   // answers are Leo's own, kept to what is already public on the site,
   // the resume or the repos.
   const KB = [
-    [["who", "about", "yourself", "bio", "introduce"],
+    [["who are you", "who is leo", "your name", "about", "yourself", "bio", "introduce"],
      "Leo Zhou. CS at Rice, from Auckland, New Zealand.\nBackend and infrastructure mostly, in Go and Python. I fence, I drum, and I run a chess site."],
     [["rice", "study", "school", "university", "major", "degree", "gpa", "course"],
      "Computer Science at Rice, GPA 3.92. Coursework so far is data structures and algorithms, systems programming, discrete maths and linear algebra."],
-    [["switch", "ece", "electrical", "why cs"],
+    [["switch", "ece", "electrical", "why cs", "why computer science"],
      "I started in electrical and computer engineering and switched to CS. The embedded work on this site is left over from that, and I do not regret the detour: writing firmware against a reference manual taught me to check things rather than assume them."],
     [["blundernet", "chess site", "puzzles"],
      "blundernet.com, a free chess training site I built and run, with roughly 200 users.\n3.25 million puzzles you can filter by rating, theme, opening, phase and solution length all at once, which no other site lets you do. There is a classroom mode where a coach pushes a position to a team and sees the answers grouped by move. Every position is written out for a screen reader.\nReact over stateless Go, Postgres and Redis, with engine moves and Stockfish reviews on SQS-fed workers. The live site is one EC2 box; the Terraform stack it scales to, with ECS Fargate and autoscaled workers, is in the repo and was load-tested."],
@@ -864,45 +864,48 @@ addEventListener("keydown", e => {
      "Post-game review judges every move by how much it changed your chances of winning rather than by centipawns, because +9 to +6 is three hundred centipawns and means nothing while +0.2 to -0.8 is a hundred and is the whole game. Eight verdicts, brilliant down to blunder. It reads a game pasted from any site."],
     [["vestigo", "geolocation", "photo"],
      "vestigo.earth. An agent that works out where a photograph was taken, at the most specific level the evidence supports, and stops there. Every claim cites the tool result that produced it, so a claim about a street cannot rest on evidence that only reaches a country.\nThe part I care about is calibration. I trained a classifier on about 65,000 street-level images with a frozen SigLIP encoder and geocells clustered on the sphere, held out by location so near-duplicates cannot inflate the number. Median error is 142 km, and after temperature scaling its calibration error is 3.7%, so the confidence it reports means what it says."],
+    [["from scratch", "crafting", "alchemy"],
+     "From Scratch is a crafting game where every recipe cites a source. You start with stone, wood and plant fibre, then work through the chains behind everyday objects. The recipe graph runs in the browser; a failed combination gets a local answer, and the model is only asked if you press why."],
     [["research", "xing", "lab", "agent security"],
      "I am an undergraduate research assistant with Professor Jiarong Xing at Rice. I am investigating how collaborating AI agents can exceed access policies for a systems-security proposal. Before that, I ended a forced daily re-login in a macOS usage tracker with OAuth token refresh in Swift, fixed its repeat Keychain permission prompts, and surfaced sessions run over SSH by mirroring their transcripts."],
-    [["cansemi", "wafer", "semiconductor", "intern"],
+    [["cansemi", "wafer", "semiconductor"],
      "Software engineer intern at CanSemi over summer 2026. An event-driven Python parser over 500+ binary test equipment logs, a normalised Postgres schema loading 40 wafer lots in under two minutes, a FastAPI service on top, and a React wafer map that cut reporting time by about 75%."],
     [["inkstone", "abc reads", "ios", "swift", "reading"],
      "ABC Reads at Inkstone Technologies, as a software engineer intern from April to June 2026. A native iOS reading app in Swift and SwiftUI that adapts to your known vocabulary. Apple Vision OCR over a live camera overlays pronunciation only on Chinese characters you have not learned, backed by a 113,000-entry dictionary frequency-ranked into SQLite."],
-    [["keww", "job", "current", "right now"],
-     "Software engineer at KEWW, part of Westchase Hospitality Group. I am building Cashew, a Next.js/TypeScript document studio with 32 templates and six linked event documents. Gemini extracts facts with source quotes for staff review; deterministic code handles pricing, and issued documents stay frozen. A client portal is in development. Historical email search and reviewed marketing agents are planned."],
+    [["keww", "cashew", "kasheww", "job", "current", "right now", "building", "working on"],
+     "I'm building Cashew at KEWW, part of Westchase Hospitality Group. It brings proposals, invoices and other event documents into one Next.js/TypeScript workspace. Gemini extracts facts with source quotes for staff to review; ordinary code handles pricing, and issued documents stay frozen.\nI'm also working with RiceApps on a data backend for Rice Football. There's more on both in the work section."],
     [["riceapps", "rice football", "football analytics"],
      "Software developer with RiceApps on the Rice Football Analytics Platform. We are building a shared, source-tagged data backend, with Python and R access for analysts and cloud report runs for coaches. The API foundation is in development; vendor ingestion and reporting are still ahead."],
     [["wind", "turbine", "embedded", "esp32", "firmware"],
      "Rice Wind Energy, embedded software. ESP32 firmware in C reading turbine speed, power output and blade pitch, a six-state safety machine with fault latching, and perturb-and-observe power tracking."],
     [["fencing", "fence", "sabre", "epee", "foil"],
      "The thing I have put the most into. I competed internationally for New Zealand at cadet, junior and senior level, including World Championships, World Cups and the Commonwealth Games. Roughly 30 to 40 titles across New Zealand and Oceania. I captained the junior and cadet national teams at the same time and led the team to an Oceania title."],
-    [["drum", "music", "band", "rock", "jazz"],
+    [["drum", "drums", "drumming", "music", "band", "rock", "jazz"],
      "I play the drums, mostly rock with some jazz. I made it to Grade 8 with a High Distinction and a Rockschool award. I have played since I was a kid, in many different groups and plays, and it is still the thing I will always do occasionally."],
     [["piano"], "Played for a while. Competent, not great."],
     [["hobby", "hobbies", "interest", "fun", "free time", "outside"],
      "Fencing, drums, chess, and skiing. Minecraft and Supercell games, Tetris, basketball, tennis, ping pong, and drawing. Jack of all trades, master of one or two."],
-    [["education", "care", "why", "nonprofit", "charity", "pathfinders", "teaching"],
+    [["education", "care", "nonprofit", "charity", "pathfinders", "teaching"],
      "I think education is the best way to solve problems like poverty and crime, because children are malleable and a good educator early on decides what somebody ends up caring about. I was lucky with mine.\nWhen I was young I went to a maths programme run by a nonprofit, and one teacher there made maths interesting in a way school never had. It was free, and somebody had decided to run it. That is most of the reason I ended up in STEM at all.\nBefore Rice I ran Physics Pathfinders, a charity taking hands-on physics into schools without much funding, reaching 600+ students across 22 schools."],
-    [["new zealand", "nz", "auckland", "home", "from", "kiwi"],
+    [["new zealand", "nz", "auckland", "home", "where are you from", "kiwi"],
      "Auckland, New Zealand. My school there had a week of camping in the curriculum every year, which I assumed was normal until I came to Rice."],
     [["backend", "lane", "want to work", "looking for", "interested in", "goal"],
      "Backend, cloud and distributed systems. That is where my strongest evidence is and what I want to keep doing. ML and embedded are real but they are one project and one club role each, so I do not lead with them."],
-    [["stack", "tech", "language", "tools", "know"],
+    [["stack", "tech", "language", "languages", "tools"],
      "Python, C++, Go, TypeScript and JavaScript, SQL, Swift and C.\nReact, Next.js, FastAPI, PyTorch, Postgres, Redis, SQS, Docker, Terraform and AWS."],
-    [["contact", "email", "hire", "reach", "talk", "message"],
+    [["contact", "email", "hire", "hiring", "internship", "reach", "talk", "message"],
      "zhouleo2007@gmail.com. Or type contact to go to the room with every link on it."],
   ];
 
   const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
   const print = (html = "") => {
     const d = document.createElement("div");
+    d.className = "term-response";
     d.innerHTML = html;
     out.appendChild(d);
     body.scrollTop = 1e6;
   };
-  const say = (text) => text.split("\n").forEach(l => print(esc(l)));
+  const say = (text) => print(text.split("\n").map(l => `<p>${esc(l)}</p>`).join(""));
 
   const hist = [];
   let histAt = 0;
@@ -927,43 +930,58 @@ addEventListener("keydown", e => {
       document.body.appendChild(a); a.click(); a.remove();
     },
     ls() { print(ROOMS.map(r => `<span class="t-key">${r}</span>`).join("  ")); },
-    clear() { out.innerHTML = ""; },
+    clear() { out.replaceChildren(); welcome(); },
     sudo() { print('<span class="t-dim">leo is not in the sudoers file. This incident will be reported.</span>'); },
   };
 
+  const normalize = (text) => text.toLowerCase().normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "").replace(/[’']/g, "")
+    .replace(/[^a-z0-9+#]+/g, " ").trim();
   function lookup(q) {
-    const t = q.toLowerCase();
-    let best = null, bestScore = 0;
-    for (const [keys, answer] of KB) {
-      for (const k of keys) {
-        if (t.includes(k) && k.length > bestScore) { best = answer; bestScore = k.length; }
-      }
-    }
-    return best;
+    const text = ` ${normalize(q)} `;
+    const matches = KB.map(([keys, answer]) => {
+      const hits = keys.filter(key => text.includes(` ${normalize(key)} `));
+      const score = hits.reduce((sum, key) => sum + normalize(key).split(" ").length * 10 + key.length, 0);
+      return { answer, score };
+    }).filter(hit => hit.score > 0).sort((a, b) => b.score - a.score);
+    if (!matches.length || (matches[1] && matches[0].score === matches[1].score)) return null;
+    return matches[0].answer;
   }
 
   function run(raw) {
     const line = raw.trim();
-    print(`<span class="t-echo"><span class="term-prompt">leo@portfolio ~ %</span> ${esc(line)}</span>`);
     if (!line) return;
+    print(`<span class="t-echo"><span class="term-prompt">&gt;</span> ${esc(line)}</span>`);
     hist.push(line); histAt = hist.length;
 
     const lower = line.toLowerCase();
-    if (/\bclaude\b/.test(lower)) return jumpscare();
+    const natural = normalize(line);
+    if (/^(hi|hello|hey|hiya|howdy|yo)( there| leo| again)?$/.test(natural)) {
+      return say("Hi! What would you like to know?");
+    }
+    if (/^(thanks|thank you|cheers|ty)( leo)?$/.test(natural)) return say("Thanks for stopping by!");
+    if (/^(how are you|hows it going|whats up|sup)$/.test(natural)) {
+      return say("Hi! For what I'm up to, ask about KEWW, RiceApps or my projects. For how my day is going, you'll have to ask me directly!");
+    }
+    if (/^(help|topics|whoami|stack|resume|ls|clear)$/.test(natural)) return CMDS[natural]();
+    if (natural === "claude") return jumpscare();
+    if (/\b(projects|portfolio)\b/.test(natural) && natural !== "projects" &&
+        !/\b(blundernet|vestigo|from scratch|keww|cashew|riceapps)\b/.test(natural)) {
+      return say("BlunderNet is my chess practice site: puzzles, an engine I trained, and the AWS backend serving it. Vestigo works out where a photo was taken and shows the evidence behind its answer. From Scratch is a crafting game where the recipes cite real sources. Which one would you like to hear about?");
+    }
 
     const [head, ...rest] = lower.split(/\s+/);
     if ((head === "cd" || head === "go" || head === "open") && rest[0]) {
       if (ROOMS.includes(rest[0])) return goto(rest[0]);
-      if (LINKS[rest[0]]) return follow(rest[0]);
+      if (Object.hasOwn(LINKS, rest[0])) return follow(rest[0]);
     }
     if (ROOMS.includes(head) && rest.length === 0) return goto(head);
-    if (LINKS[head] && rest.length === 0) return follow(head);
-    if (CMDS[head] && rest.length === 0) return CMDS[head]();
+    if (Object.hasOwn(LINKS, head) && rest.length === 0) return follow(head);
+    if (Object.hasOwn(CMDS, head) && rest.length === 0) return CMDS[head]();
 
     const hit = lookup(line);
     if (hit) return say(hit);
-    print('<span class="t-dim">I don\'t know.</span>');
-    print('<span class="t-dim">Try </span><span class="t-key">topics</span><span class="t-dim"> for what it does know, or </span><span class="t-key">help</span><span class="t-dim"> for commands.</span>');
+    print('I haven\'t written an answer for that one yet. Ask about a project, my studies or fencing, or <a href="mailto:zhouleo2007@gmail.com">ask me directly</a>.');
   }
 
   function goto(room) {
@@ -1005,9 +1023,12 @@ addEventListener("keydown", e => {
     }, 620);
   }
 
+  document.getElementById("term-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (input.value.trim()) { const value = input.value; input.value = ""; run(value); }
+  });
   input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") { const v = input.value; input.value = ""; run(v); }
-    else if (e.key === "Tab") {
+    if (e.key === "Tab") {
       e.preventDefault();
       const v = input.value.trim().toLowerCase();
       if (!v) return;
@@ -1020,11 +1041,14 @@ addEventListener("keydown", e => {
     else if (e.key === "ArrowDown") { if (histAt < hist.length) { input.value = hist[++histAt] || ""; } e.preventDefault(); }
   });
 
-  body.addEventListener("click", () => input.focus());
-
-  print('<span class="t-dim">Leo Zhou · portfolio · built from scratch</span>');
-  print('<span class="t-dim">Ask a question, or type </span><span class="t-key">help</span><span class="t-dim">.</span>');
-  print("");
+  document.querySelectorAll("[data-question]").forEach(button => {
+    button.addEventListener("click", () => { run(button.dataset.question); });
+  });
+  document.getElementById("term-clear").addEventListener("click", () => { CMDS.clear(); input.focus(); });
+  function welcome() {
+    print('<p class="term-greeting">Hi, I\'m Leo<span class="t-ok">.</span></p><p>CS at Rice, from Auckland. I build software, fence and play the drums.</p>');
+  }
+  welcome();
 })();
 
 /* ------------------------------------------------------------

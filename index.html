@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=Lilita+One&family=Shojumaru&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2026-10-09a">
+  <link rel="stylesheet" href="style.css?v=2026-10-14a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🤺</text></svg>">
 </head>
 <body>
@@ -529,21 +529,29 @@
     <div class="room-inner term-inner">
       <header class="room-head">
         <p class="kicker mono">06 · terminal</p>
-        <h2>Ask me anything</h2>
+        <h2>Say hello.</h2>
       </header>
       <div class="term" id="term">
         <div class="term-bar" id="term-bar">
           <span class="term-lights" aria-hidden="true"><i class="tl-r"></i><i class="tl-y"></i><i class="tl-g"></i></span>
-          <span class="term-title mono">leo@portfolio &mdash; zsh &mdash; 80&times;24</span>
+          <span class="term-title mono">leo@portfolio</span>
+          <button class="term-clear mono" type="button" id="term-clear">Clear</button>
         </div>
         <div class="term-body" id="term-body">
-          <div class="term-out" id="term-out"></div>
-          <label class="term-line" for="term-in">
-            <span class="term-prompt mono">leo@portfolio <span class="term-tilde">~</span> %</span>
-            <input class="term-in mono" id="term-in" autocomplete="off" autocapitalize="off"
-                   spellcheck="false" placeholder="type a command, or just ask" aria-label="command">
-          </label>
+          <div class="term-out" id="term-out" role="log" aria-label="Portfolio conversation" aria-live="polite" aria-relevant="additions"></div>
         </div>
+        <div class="term-questions" aria-label="Suggested questions">
+          <button type="button" data-question="What are you building?">What are you building?</button>
+          <button type="button" data-question="Why computer science?">Why computer science?</button>
+          <button type="button" data-question="What do you do outside of code?">Outside of code?</button>
+          <button type="button" data-question="How can I contact you?">Get in touch</button>
+        </div>
+        <form class="term-line" id="term-form">
+            <label class="term-prompt mono" for="term-in" aria-label="Your question">&gt;</label>
+            <input class="term-in mono" id="term-in" autocomplete="off" autocapitalize="off"
+                   spellcheck="false" maxlength="500" placeholder="Ask about me or a project..." aria-label="Ask about Leo">
+            <button class="term-send mono" type="submit">Send</button>
+        </form>
       </div>
     </div>
   </section>
@@ -633,6 +641,6 @@
   <button class="edge edge-r" id="edge-r" aria-label="next">›</button>
   <div class="dots" id="dots" aria-hidden="true"></div>
 
-  <script src="script.js?v=2026-10-07a"></script>
+  <script src="script.js?v=2026-10-14a"></script>
 </body>
 </html>

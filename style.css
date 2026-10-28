@@ -1075,6 +1075,8 @@ h3 { font-size: 1.2rem; }
    knowledge base rather than pretending to be a model.
    ============================================================ */
 
+.project-icon { float: right; width: 48px; height: 48px; object-fit: contain; margin: 0 0 0.5rem 0.65rem; }
+
 .r-term { background: #17161b; color: #efeee9; }
 .r-term .kicker { color: #a9a5b1; }
 .r-term h2 { color: #f6f1e6; font-size: 2.6rem; letter-spacing: 0; }

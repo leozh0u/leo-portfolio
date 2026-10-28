@@ -216,7 +216,7 @@ function confettiBurst(x, y, n = 60) {
 }
 document.getElementById("hero-name").addEventListener("click", e => confettiBurst(e.clientX, e.clientY));
 
-const roles = ["a chess site with real users", "agents that cite their evidence", "data systems for football", "scalable Go backends", "native iOS apps"];
+const roles = ["tools for event teams", "agents that cite their evidence", "a chess practice site", "Mac apps", "data tools for football"];
 const typeEl = document.getElementById("typewriter");
 let roleIdx = 0, charIdx = 0, deleting = false;
 function typeTick() {
@@ -840,6 +840,8 @@ addEventListener("keydown", e => {
   const LINKS = {
     blundernet: ["https://blundernet.com", "the chess site"],
     vestigo: ["https://vestigo.earth", "the geolocation agent"],
+    perch: ["https://github.com/leozh0u/perch", "the floating Mac video player"],
+    "notch-apple": ["https://github.com/leozh0u/notch-apple", "the Mac notch app"],
     github: ["https://github.com/leozh0u", "the code"],
     linkedin: ["https://linkedin.com/in/leozhou8", "the professional one"],
   };
@@ -849,9 +851,9 @@ addEventListener("keydown", e => {
   // the resume or the repos.
   const KB = [
     [["who are you", "who is leo", "your name", "about", "yourself", "bio", "introduce"],
-     "Leo Zhou. CS at Rice, from Auckland, New Zealand.\nBackend and infrastructure mostly, in Go and Python. I fence, I drum, and I run a chess site."],
+     "Leo Zhou. CS at Rice, from Auckland, New Zealand.\nI build full-stack software, with a focus on applied AI and backend systems. Outside coding, I fence, play the drums and run a chess site."],
     [["rice", "study", "school", "university", "major", "degree", "gpa", "course"],
-     "Computer Science at Rice, GPA 3.92. Coursework so far is data structures and algorithms, systems programming, discrete maths and linear algebra."],
+     "Computer Science at Rice, GPA 3.92. I switched from electrical and computer engineering. My current focus is full-stack software and applied AI, alongside research with Professor Jiarong Xing's group."],
     [["switch", "ece", "electrical", "why cs", "why computer science"],
      "I started in electrical and computer engineering and switched to CS. The embedded work on this site is left over from that, and I do not regret the detour: writing firmware against a reference manual taught me to check things rather than assume them."],
     [["blundernet", "chess site", "puzzles"],
@@ -866,16 +868,20 @@ addEventListener("keydown", e => {
      "vestigo.earth. An agent that works out where a photograph was taken, at the most specific level the evidence supports, and stops there. Every claim cites the tool result that produced it, so a claim about a street cannot rest on evidence that only reaches a country.\nThe part I care about is calibration. I trained a classifier on about 65,000 street-level images with a frozen SigLIP encoder and geocells clustered on the sphere, held out by location so near-duplicates cannot inflate the number. Median error is 142 km, and after temperature scaling its calibration error is 3.7%, so the confidence it reports means what it says."],
     [["from scratch", "crafting", "alchemy"],
      "From Scratch is a crafting game where every recipe cites a source. You start with stone, wood and plant fibre, then work through the chains behind everyday objects. The recipe graph runs in the browser; a failed combination gets a local answer, and the model is only asked if you press why."],
-    [["research", "xing", "lab", "agent security"],
-     "I am an undergraduate research assistant with Professor Jiarong Xing at Rice. I am investigating how collaborating AI agents can exceed access policies for a systems-security proposal. Before that, I ended a forced daily re-login in a macOS usage tracker with OAuth token refresh in Swift, fixed its repeat Keychain permission prompts, and surfaced sessions run over SSH by mirroring their transcripts."],
+    [["research", "xing", "lab", "routing", "agent security"],
+     "I work with Professor Jiarong Xing's group at Rice. I'm starting LLM routing experiments, looking at quality, cost and latency. The setup is still being worked out, so I don't have results to report yet.\nEarlier, I fixed OAuth refresh, repeat Keychain prompts and SSH usage tracking in TokenGate, a Swift macOS app, and explored access controls for a multi-agent security proposal."],
     [["cansemi", "wafer", "semiconductor"],
-     "Software engineer intern at CanSemi over summer 2026. An event-driven Python parser over 500+ binary test equipment logs, a normalised Postgres schema loading 40 wafer lots in under two minutes, a FastAPI service on top, and a React wafer map that cut reporting time by about 75%."],
+     "Software engineer intern at CanSemi over summer 2026. I automated imports of 500+ test-equipment logs in Python/Postgres, processing 40 wafer lots in under a minute. Eight FastAPI endpoints and a React wafer map replaced manual reporting, cutting turnaround by about 75% for six engineers."],
     [["inkstone", "abc reads", "ios", "swift", "reading"],
      "ABC Reads at Inkstone Technologies, as a software engineer intern from April to June 2026. A native iOS reading app in Swift and SwiftUI that adapts to your known vocabulary. Apple Vision OCR over a live camera overlays pronunciation only on Chinese characters you have not learned, backed by a 113,000-entry dictionary frequency-ranked into SQLite."],
     [["keww", "cashew", "kasheww", "job", "current", "right now", "building", "working on"],
-     "I'm building Cashew at KEWW, part of Westchase Hospitality Group. It brings proposals, invoices and other event documents into one Next.js/TypeScript workspace. Gemini extracts facts with source quotes for staff to review; ordinary code handles pricing, and issued documents stay frozen.\nI'm also working with RiceApps on a data backend for Rice Football. There's more on both in the work section."],
+     "I'm building Kasheww at KEWW for a hospitality team's event workflows. It has reviewed Gemini extraction, linked documents, deterministic pricing, a Postgres client portal and event-scoped permissions. Gmail and Calendar connections support staff workflows. It's in an AWS staff beta; a complete staff-operated event is still an acceptance step.\nI'm also working with RiceApps on the Rice Football analytics prototype."],
     [["riceapps", "rice football", "football analytics"],
-     "Software developer with RiceApps on the Rice Football Analytics Platform. We are building a shared, source-tagged data backend, with Python and R access for analysts and cloud report runs for coaches. The API foundation is in development; vendor ingestion and reporting are still ahead."],
+     "I'm co-developing a Rice Football analytics prototype with RiceApps. My four API routes and typed React preview are merged. The team also has a CFBD client and CSV/JSON validation. We're prototyping a report library for coaching reports and R/Python analyst scripts; cloud script execution is still planned."],
+    [["perch", "video player"],
+     "Perch is a floating video player for macOS. I built it while practising on Zetamac and wanting a video beside my work. It has a queue, keyboard controls, global shortcuts and an optional second player. It's built with Electron and JavaScript; the Apple Silicon preview is on GitHub."],
+    [["notch apple", "notch-apple", "spotify", "mac notch"],
+     "Notch Apple is my extension of Boring Notch. I added a native Spotify library browser with PKCE sign-in, Keychain token storage and playback targeted at this Mac, plus a focus dial and upcoming-calendar view. The upstream project's authorship and licence are preserved."],
     [["wind", "turbine", "embedded", "esp32", "firmware"],
      "Rice Wind Energy, embedded software. ESP32 firmware in C reading turbine speed, power output and blade pitch, a six-state safety machine with fault latching, and perturb-and-observe power tracking."],
     [["fencing", "fence", "sabre", "epee", "foil"],
@@ -890,9 +896,9 @@ addEventListener("keydown", e => {
     [["new zealand", "nz", "auckland", "home", "where are you from", "kiwi"],
      "Auckland, New Zealand. My school there had a week of camping in the curriculum every year, which I assumed was normal until I came to Rice."],
     [["backend", "lane", "want to work", "looking for", "interested in", "goal"],
-     "Backend, cloud and distributed systems. That is where my strongest evidence is and what I want to keep doing. ML and embedded are real but they are one project and one club role each, so I do not lead with them."],
+     "Full-stack applied AI with backend depth. I'm especially interested in document workflows, search and developer tools: using models where they're useful, evaluating their answers, and keeping permissions and important calculations in ordinary code. I'm looking for a Summer 2027 software engineering internship."],
     [["stack", "tech", "language", "languages", "tools"],
-     "Python, C++, Go, TypeScript and JavaScript, SQL, Swift and C.\nReact, Next.js, FastAPI, PyTorch, Postgres, Redis, SQS, Docker, Terraform and AWS."],
+     "Python, C++, Go, TypeScript and JavaScript, SQL and C.\nReact, Next.js, FastAPI, PyTorch, SwiftUI, Postgres, Redis, Docker, Terraform and AWS."],
     [["contact", "email", "hire", "hiring", "internship", "reach", "talk", "message"],
      "zhouleo2007@gmail.com. Or type contact to go to the room with every link on it."],
   ];
@@ -966,8 +972,8 @@ addEventListener("keydown", e => {
     if (/^(help|topics|whoami|stack|resume|ls|clear)$/.test(natural)) return CMDS[natural]();
     if (natural === "claude") return jumpscare();
     if (/\b(projects|portfolio)\b/.test(natural) && natural !== "projects" &&
-        !/\b(blundernet|vestigo|from scratch|keww|cashew|riceapps)\b/.test(natural)) {
-      return say("BlunderNet is my chess practice site: puzzles, an engine I trained, and the AWS backend serving it. Vestigo works out where a photo was taken and shows the evidence behind its answer. From Scratch is a crafting game where the recipes cite real sources. Which one would you like to hear about?");
+        !/\b(blundernet|vestigo|from scratch|keww|cashew|kasheww|riceapps|perch|notch apple)\b/.test(natural)) {
+      return say("BlunderNet is my chess practice site, and Vestigo works out where a photo was taken with evidence behind its answer. Perch is a floating Mac video player; Notch Apple extends Boring Notch with a Spotify browser and other additions. There's also From Scratch, a crafting game where the recipes cite sources. Which one would you like to hear about?");
     }
 
     const [head, ...rest] = lower.split(/\s+/);

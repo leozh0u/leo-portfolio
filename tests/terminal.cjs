@@ -5,7 +5,7 @@ const fs = require("node:fs");
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || "playwright");
 
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, channel: process.env.PLAYWRIGHT_CHANNEL || undefined });
   const folder = path.resolve(__dirname, "../.local/terminal-check");
   fs.mkdirSync(folder, { recursive: true });
   try {
@@ -33,9 +33,11 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || "playwright");
       await ask("What are you building?", /Kasheww/);
       await ask("What is Perch?", /floating video player/);
       await ask("Tell me about Notch Apple", /extension of Boring Notch/);
-      await ask("Tell me about your routing research", /don't have results/);
-      await ask("What are you interested in?", /Full-stack applied AI/);
-      await ask("Tell me about RiceApps", /four API routes.*merged/);
+      await ask("Tell me about your routing research", /don't have measured routing results/);
+      await ask("What are you interested in?", /workflow automation and applied AI/);
+      await ask("Tell me about RiceApps", /Hudl IQ.*merged/);
+      await ask("What have you done with pgvector?", /prototype/);
+      await ask("What have you built with LangGraph?", /supervised pilot/);
       await ask("Do you play drums?", /Grade 8/);
       await ask("Tell me about From Scratch", /crafting game/);
       await ask("Which languages do you use?", /Python/);

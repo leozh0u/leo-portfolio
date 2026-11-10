@@ -2,9 +2,13 @@
 
 Personal portfolio site. Static HTML, CSS and JS, no build step.
 
-Full-stack software and applied AI, with current KEWW/RiceApps work, research,
+Full-stack engineering, workflow automation and applied AI, with KEWW/RiceApps work, research,
 BlunderNet, Vestigo and a few smaller projects. Perch and Notch Apple join
 From Scratch and SeatLive; Notch Apple is credited as an extension of Boring Notch.
+
+Current work distinguishes Kasheww's invitation-only beta and reviewed operations,
+the local LangGraph video pilot, experimental pgvector retrieval, merged Hudl
+integration, PFF in review and ongoing external model-routing integration work.
 
 https://leozhou.fyi/
 
@@ -44,5 +48,6 @@ node tests/content.cjs
 ```
 
 Set `PLAYWRIGHT_MODULE` to an installed Playwright module path if it is outside this
-checkout. The test opens this static site directly, saves screenshots in ignored
-`.local/terminal-check/`, and closes its browser.
+checkout. Set `PLAYWRIGHT_CHANNEL=chrome` to use an installed Chrome instead of
+Playwright's bundled Chromium. The tests open this static site directly, save screenshots in ignored
+`.local/terminal-check/` and `.local/content-check/`, and close their browsers.

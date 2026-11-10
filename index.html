@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leo Zhou · CS @ Rice</title>
-  <meta name="description" content="Leo Zhou, CS at Rice University. Full-stack software, applied AI, a chess site and a few Mac apps.">
+  <meta name="description" content="Leo Zhou, CS at Rice University. Full-stack engineering, workflow automation and applied AI, with a chess site and a few Mac apps.">
   <link rel="canonical" href="https://leozhou.fyi/">
   <meta name="theme-color" content="#ffe9b3">
 
@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://leozhou.fyi/">
   <meta property="og:site_name" content="Leo Zhou">
   <meta property="og:title" content="Leo Zhou · CS @ Rice">
-  <meta property="og:description" content="Full-stack software, applied AI, a chess site and a few Mac apps.">
+  <meta property="og:description" content="Full-stack engineering, workflow automation and applied AI, with a chess site and a few Mac apps.">
   <meta property="og:image" content="https://leozhou.fyi/photos/og-card.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=Lilita+One&family=Shojumaru&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2026-10-28a">
+  <link rel="stylesheet" href="style.css?v=2026-11-09a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🤺</text></svg>">
 </head>
 <body>
@@ -63,7 +63,7 @@
         <span>L</span><span>e</span><span>o</span>&nbsp;<span>Z</span><span>h</span><span>o</span><span>u</span>
       </h1>
       <p class="hero-sub">
-        CS @ <strong>Rice</strong> · former captain, NZ junior fencing team.
+        CS @ <strong>Rice</strong> · full-stack software &amp; applied AI.
       </p>
       <p class="hero-build mono">I build <span id="typewriter" class="type"></span><span class="caret">▍</span></p>
       <div class="hero-badges mono">
@@ -365,22 +365,23 @@
             <p class="gate-date mono">Sep 2026 → present</p>
             <h3>KEWW · Software Engineer</h3>
             <p class="gate-loc mono">Houston · part-time</p>
-            <p>I'm building Kasheww at KEWW for a hospitality team's daily event work. Client notes become linked proposals, BEOs and invoices, with Gemini extraction that staff review and pricing handled in code. There's now a Postgres client portal, event-scoped permissions, Gmail and Calendar connections, and an AWS staff beta. Staff adoption and a complete event handover are still being tested.</p>
-            <p class="gate-tags mono">Next.js · TypeScript · Gemini · Postgres · AWS</p>
+            <p>I'm building Kasheww at KEWW / Westchase Hospitality Group, from client notes through proposals, kitchen preparation and invoicing. Reviewed PDF/text imports, equipment reservations and cost reporting now join the client portal and Gmail/Calendar workflows in an invitation-only AWS beta. Gemini suggests facts for review; code handles pricing and permissions. Staff-operated event acceptance is still ahead.</p>
+            <p>Alongside it, I built a LangGraph/FFmpeg video-review pilot with SQLite checkpoints and approval tied to each version. I'm also experimenting with Postgres/pgvector retrieval for event emails.</p>
+            <p class="gate-tags mono">Next.js · TypeScript · Gemini · Postgres · LangGraph · AWS</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Sep 2026 → present</p>
             <h3>RiceApps × Rice Football · Software Developer</h3>
             <p class="gate-loc mono">Rice Football Analytics</p>
-            <p>Co-developing an analytics prototype for Rice Football with RiceApps. My four API routes and typed React preview are merged. The team's work also includes a CFBD client and CSV/JSON import validation. We're prototyping a library for coaching reports and R/Python scripts; running those scripts in the cloud is still ahead.</p>
-            <p class="gate-tags mono">Next.js · TypeScript · React · CFBD · data validation</p>
+            <p>Co-developing Rice Football's analytics platform with RiceApps. My typed Hudl IQ GraphQL client for games, rosters, plays and tracking is merged. I also implemented a PFF client with JWT reuse and response validation; that pull request is still in review. The team's work includes CFBD access, Supabase-backed coaching Q&amp;A, a report-library prototype and a fixture-backed R package.</p>
+            <p class="gate-tags mono">Next.js · TypeScript · GraphQL · Supabase · vendor APIs</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Aug 2026 → present</p>
             <h3>Rice University · Undergraduate Research Assistant</h3>
             <p class="gate-loc mono">Houston · Prof. Jiarong Xing</p>
-            <p>I'm starting LLM routing experiments with Professor Jiarong Xing's group, looking at quality, cost and latency. No results to report yet. Earlier, I fixed OAuth refresh, repeat Keychain prompts and SSH usage tracking in TokenGate, a Swift macOS app. I also explored access controls for a multi-agent security proposal.</p>
-            <p class="gate-tags mono">LLM routing · evaluation · Swift · OAuth · SSH</p>
+            <p>Working with Professor Jiarong Xing's group on external model-routing integrations for Claude Code and Codex through a Python/FastAPI proxy. I'm comparing OpenRouter and Not Diamond interfaces, including model selection and tool-call compatibility. This is early integration work, with no measured routing results yet. Earlier, I fixed OAuth refresh, repeat Keychain prompts and SSH usage tracking in TokenGate.</p>
+            <p class="gate-tags mono">Python · FastAPI · model routing · OAuth · SSH</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Jun 2026 → Aug 2026</p>
@@ -436,7 +437,7 @@
           <h3><a href="https://blundernet.com" target="_blank" rel="noopener">BlunderNet ↗</a></h3>
           <p class="lego-sub mono">chess practice at blundernet.com</p>
           <p>I made LeetCode for chess. There are 3.25 million puzzles with five filters I can combine, a bot ladder, and a classroom mode where a coach sends a position and sees answers grouped by move. Stockfish review grades a move by the winning chances it cost. Every position is written out for a screen reader too.</p>
-          <p>The backend became a project of its own. Uniform puzzle selection went from <strong>1.4 s to 0.9 ms</strong> with indexed shuffle keys and size-weighted cells. The live site runs on one EC2 box. I also built a separate Terraform deployment with stateless Go APIs, Redis game state and SQS-fed ONNX workers: a steady load test returned 270/270 replies at 1.5 games/s, with 1.25 s p95. A separate queue test scaled workers from one to four and drained the backlog. Heavy puzzle filters still need attention; the latest live check missed their latency target.</p>
+          <p>The backend became a project of its own. Uniform puzzle selection went from <strong>1.4 s to 0.9 ms</strong> with indexed shuffle keys and size-weighted cells. The live site runs on one EC2 box. I also built a separate Terraform deployment with stateless Go APIs, Redis game state and SQS-fed ONNX workers: a steady load test returned 270/270 replies at 1.5 games/s, with 1.25 s p95. A separate queue test scaled workers from one to four and drained the backlog. An October live check missed the latency target for heavy puzzle filters.</p>
           <p class="lego-tags mono">Go · AWS · Terraform · Postgres · Redis · ONNX · k6</p>
           <p class="lego-links mono"><a href="https://blundernet.com" target="_blank" rel="noopener">play it ↗</a> · <a href="https://github.com/leozh0u/blundernet" target="_blank" rel="noopener">code ↗</a></p>
         </article>
@@ -450,7 +451,7 @@
         <article class="lego-card lego-blue" data-tilt>
           <div class="lego-studs"><span></span><span></span><span></span><span></span></div>
           <h3><a href="https://github.com/leozh0u/vestigo" target="_blank" rel="noopener">Vestigo ↗</a></h3>
-          <p class="lego-sub mono">live at vestigo.earth, where was this photo taken and how do you know</p>
+          <p class="lego-sub mono">recorded investigations at vestigo.earth</p>
           <p>An agent that tells me where a photo was taken and how much to believe it. Every claim cites evidence on its board, and a street-level answer needs street-level evidence. I care about whether its confidence matches its accuracy: being confidently wrong about a country is a fairly impressive way to lose GeoGuessr.</p>
           <p>I trained its classifier on 64,865 street-level images, split by location so nearby photos cannot appear on both sides of the evaluation. Swapping CLIP ViT-L/14 for SigLIP reduced median error from 198 km to <strong>142 km</strong>, with 51.6% cell accuracy and <strong>3.7% calibration error</strong> after temperature scaling. The agent and classifier are evaluated separately; those are classifier results.</p>
           <p class="lego-tags mono">Python · LLM agents · tool calling · PyTorch · CLIP/SigLIP · eval harness · pytest</p>
@@ -500,17 +501,17 @@
           <article class="wip">
             <span class="wip-icon">🗄️</span>
             <h3>Kasheww</h3>
-            <p class="mono">getting reviewed event documents, client requests and staff workflows through a guided beta</p>
+            <p class="mono">reviewed event imports and operations in beta, with Postgres/pgvector retrieval experiments alongside</p>
           </article>
           <article class="wip">
             <span class="wip-icon">🧭</span>
             <h3>LLM routing</h3>
-            <p class="mono">starting experiments on model choice, quality, cost and latency</p>
+            <p class="mono">developing external router API integrations for coding agents, starting with Python/FastAPI request handling</p>
           </article>
           <article class="wip wip-small">
             <span class="wip-icon">🔐</span>
             <h3>Rice Football</h3>
-            <p class="mono">a report-library prototype for coaching reports and R/Python analyst scripts</p>
+            <p class="mono">merged Hudl data access, a PFF client in review and the team's analyst/report tools</p>
           </article>
         </div>
         <p class="workbench-quote mono">"I only work in black. And sometimes very, very dark grey."</p>
@@ -636,6 +637,6 @@
   <button class="edge edge-r" id="edge-r" aria-label="next">›</button>
   <div class="dots" id="dots" aria-hidden="true"></div>
 
-  <script src="script.js?v=2026-10-28a"></script>
+  <script src="script.js?v=2026-11-09a"></script>
 </body>
 </html>

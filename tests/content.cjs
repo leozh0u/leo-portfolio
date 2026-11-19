@@ -27,13 +27,27 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || "playwright");
         if (room === "work") {
           const text = await section.innerText();
           assert.match(text, /invitation-only AWS beta/);
+          assert.match(text, /mock events/);
+          assert.match(text, /AI coding tools/);
+          assert.match(text, /264 synthetic events/);
           assert.match(text, /Hudl IQ.*merged/);
-          assert.match(text, /pull request is still in review/);
-          assert.match(text, /early integration work/);
-          assert.match(text, /experimenting with Postgres\/pgvector/);
+          assert.match(text, /importer is still open/);
+          assert.doesNotMatch(text, /still in review/);
+          assert.match(text, /OpenRouter/);
+          assert.match(text, /haven't measured routing quality/);
+          assert.doesNotMatch(text, /Not Diamond/);
+          assert.match(text, /Postgres\/pgvector/);
           assert.match(text, /LangGraph\/FFmpeg/);
           assert.doesNotMatch(text, /32 editable templates|under two minutes/);
-          assert.doesNotMatch(text, /Founding Engineer|200,000/);
+          assert.doesNotMatch(text, /200,000|\bPartner\b|equity/);
+          const gates = await section.locator(".gate h3").allInnerTexts();
+          const at = label => gates.findIndex(title => title.includes(label));
+          assert(at("Founding Engineer") === 0, "KEWW founding role leads the run");
+          assert(at("Westchase") > at("Research") && at("Westchase") < at("CanSemi"),
+            "Westchase sits after current roles and before older internships");
+          for (const href of ["pull/19", "pull/25"]) {
+            assert.equal(await section.locator('a[href$="rice-football/' + href + '"]').count(), 1);
+          }
         }
         if (room === "projects") {
           for (const filename of ["perch.webp", "notch-apple.webp"]) {

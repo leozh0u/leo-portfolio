@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&family=Lilita+One&family=Shojumaru&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2026-11-09a">
+  <link rel="stylesheet" href="style.css?v=2026-11-18a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🤺</text></svg>">
 </head>
 <body>
@@ -362,26 +362,33 @@
         <div class="skier" id="skier" aria-hidden="true">&#9975;</div>
         <div class="gates">
           <article class="gate">
-            <p class="gate-date mono">Sep 2026 → present</p>
-            <h3>KEWW · Software Engineer</h3>
+            <p class="gate-date mono">Nov 2026 → present</p>
+            <h3>KEWW · Founding Engineer</h3>
             <p class="gate-loc mono">Houston · part-time</p>
-            <p>I'm building Kasheww at KEWW / Westchase Hospitality Group, from client notes through proposals, kitchen preparation and invoicing. Reviewed PDF/text imports, equipment reservations and cost reporting now join the client portal and Gmail/Calendar workflows in an invitation-only AWS beta. Gemini suggests facts for review; code handles pricing and permissions. Staff-operated event acceptance is still ahead.</p>
-            <p>Alongside it, I built a LangGraph/FFmpeg video-review pilot with SQLite checkpoints and approval tied to each version. I'm also experimenting with Postgres/pgvector retrieval for event emails.</p>
-            <p class="gate-tags mono">Next.js · TypeScript · Gemini · Postgres · LangGraph · AWS</p>
+            <p>I lead product and engineering on Kasheww, using AI coding tools for implementation and reviewing the results. It takes event teams from reviewed intake to proposals, BEOs and invoices, with deterministic pricing, fixed issued versions and role-based access. The new interface is live in an invitation-only AWS beta on mock events; real-data migration and staff acceptance are next.</p>
+            <p>In local production-build tests with 264 synthetic events on an emulated 10 Mbps/100 ms connection, returning to Overview fell from 0.88 to 0.39 seconds. Across page returns, data fell from about 460 KB to 4 to 12 KB.</p>
+            <p class="gate-tags mono">Next.js · TypeScript · Gemini · Postgres · AWS</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Sep 2026 → present</p>
             <h3>RiceApps × Rice Football · Software Developer</h3>
             <p class="gate-loc mono">Rice Football Analytics</p>
-            <p>Co-developing Rice Football's analytics platform with RiceApps. My typed Hudl IQ GraphQL client for games, rosters, plays and tracking is merged. I also implemented a PFF client with JWT reuse and response validation; that pull request is still in review. The team's work includes CFBD access, Supabase-backed coaching Q&amp;A, a report-library prototype and a fixture-backed R package.</p>
+            <p>Co-developing Rice Football's analytics platform with RiceApps. My typed Hudl IQ GraphQL client for games, rosters, plays and tracking is merged, and so is my <a href="https://github.com/rice-apps/rice-football/pull/19" target="_blank" rel="noopener">PFF client</a> with JWT reuse and response validation. My <a href="https://github.com/rice-apps/rice-football/pull/25" target="_blank" rel="noopener">franchise importer</a> is still open: it loads 504 franchises into the team's development Supabase schema with repeatable upserts, keeps IDs and counts stable on a rerun, and has 34 offline tests. The team's work includes CFBD access, Supabase-backed coaching Q&amp;A, a report-library prototype and a fixture-backed R package.</p>
             <p class="gate-tags mono">Next.js · TypeScript · GraphQL · Supabase · vendor APIs</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Aug 2026 → present</p>
             <h3>Rice University · Undergraduate Research Assistant</h3>
             <p class="gate-loc mono">Houston · Prof. Jiarong Xing</p>
-            <p>Working with Professor Jiarong Xing's group on external model-routing integrations for Claude Code and Codex through a Python/FastAPI proxy. I'm comparing OpenRouter and Not Diamond interfaces, including model selection and tool-call compatibility. This is early integration work, with no measured routing results yet. Earlier, I fixed OAuth refresh, repeat Keychain prompts and SSH usage tracking in TokenGate.</p>
-            <p class="gate-tags mono">Python · FastAPI · model routing · OAuth · SSH</p>
+            <p>Working with Professor Jiarong Xing's group on model routing for Claude Code and Codex. I implemented OpenRouter's automatic routing through the group's existing Python/FastAPI proxy, and bounded live tool-call runs work with both CLIs. My pull request is ready for review. I haven't measured routing quality or cost yet. Earlier, I fixed OAuth refresh, repeat Keychain prompts and SSH usage tracking in TokenGate.</p>
+            <p class="gate-tags mono">Python · FastAPI · OpenRouter · OAuth · SSH</p>
+          </article>
+          <article class="gate">
+            <p class="gate-date mono">Sep 2026 → Nov 2026</p>
+            <h3>Westchase Hospitality Group · Software Engineer</h3>
+            <p class="gate-loc mono">Houston · part-time</p>
+            <p>Internal tools: event-intake work, and a local LangGraph/FFmpeg video-review pilot with SQLite checkpoints, where approval is tied to the exact version someone reviewed. It was a supervised pilot, not an autonomous marketing team. The email-retrieval work uses Postgres/pgvector and remains a prototype, without a full index or measured retrieval quality.</p>
+            <p class="gate-tags mono">Python · LangGraph · FFmpeg · SQLite · pgvector</p>
           </article>
           <article class="gate">
             <p class="gate-date mono">Jun 2026 → Aug 2026</p>
@@ -501,17 +508,17 @@
           <article class="wip">
             <span class="wip-icon">🗄️</span>
             <h3>Kasheww</h3>
-            <p class="mono">reviewed event imports and operations in beta, with Postgres/pgvector retrieval experiments alongside</p>
+            <p class="mono">new interface live in an invitation-only beta on mock events; real data and staff acceptance next</p>
           </article>
           <article class="wip">
             <span class="wip-icon">🧭</span>
             <h3>LLM routing</h3>
-            <p class="mono">developing external router API integrations for coding agents, starting with Python/FastAPI request handling</p>
+            <p class="mono">OpenRouter automatic routing working for Claude Code and Codex; pull request ready for review</p>
           </article>
           <article class="wip wip-small">
             <span class="wip-icon">🔐</span>
             <h3>Rice Football</h3>
-            <p class="mono">merged Hudl data access, a PFF client in review and the team's analyst/report tools</p>
+            <p class="mono">Hudl and PFF clients merged; franchise importer open for review</p>
           </article>
         </div>
         <p class="workbench-quote mono">"I only work in black. And sometimes very, very dark grey."</p>
@@ -637,6 +644,6 @@
   <button class="edge edge-r" id="edge-r" aria-label="next">›</button>
   <div class="dots" id="dots" aria-hidden="true"></div>
 
-  <script src="script.js?v=2026-11-09a"></script>
+  <script src="script.js?v=2026-11-18a"></script>
 </body>
 </html>

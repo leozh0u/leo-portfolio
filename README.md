@@ -2,13 +2,16 @@
 
 Personal portfolio site. Static HTML, CSS and JS, no build step.
 
-Full-stack engineering, workflow automation and applied AI, with KEWW/RiceApps work, research,
-BlunderNet, Vestigo and a few smaller projects. Perch and Notch Apple join
-From Scratch and SeatLive; Notch Apple is credited as an extension of Boring Notch.
+Full-stack engineering, workflow automation and applied AI, with KEWW, RiceApps and
+Westchase work, research, BlunderNet, Vestigo and a few smaller projects. Perch and
+Notch Apple join From Scratch and SeatLive; Notch Apple is credited as an extension
+of Boring Notch.
 
-Current work distinguishes Kasheww's invitation-only beta and reviewed operations,
-the local LangGraph video pilot, experimental pgvector retrieval, merged Hudl
-integration, PFF in review and ongoing external model-routing integration work.
+Work cards keep each role's own contributions apart: Kasheww at KEWW (invitation-only
+beta on mock events, built with AI coding tools under Leo's direction and review),
+Westchase internal tools (a supervised video pilot and a pgvector email-retrieval
+prototype), merged Hudl and PFF clients with an open RiceApps importer, and a working
+OpenRouter routing integration with an open pull request and no routing-quality results yet.
 
 https://leozhou.fyi/
 
